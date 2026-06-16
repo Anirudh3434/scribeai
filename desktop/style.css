@@ -1106,8 +1106,7 @@ kbd {
   align-items: center;
   gap: 12px;
   width: 240px;
-  margin-top: 24px;
-  margin-bottom: 4px;
+  margin: 24px auto 4px auto;
 }
 
 .divider-line {
@@ -1129,6 +1128,7 @@ kbd {
   color: var(--muted);
   opacity: 0.65;
   margin-bottom: 24px;
+  text-align: center;
 }
 
 /* Completed Stepper State */
