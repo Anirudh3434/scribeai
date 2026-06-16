@@ -5,6 +5,11 @@ const { autoUpdater } = require('electron-updater');
 // Configure autoUpdater logging to console
 autoUpdater.logger = console;
 
+if (!app.isPackaged) {
+  autoUpdater.updateConfigPath = path.join(__dirname, 'dev-app-update.yml');
+  autoUpdater.forceDevUpdateConfig = true;
+}
+
 // Disable Chromium sandboxing to prevent network blocks in translocated/sandboxed Gatekeeper contexts
 app.commandLine.appendSwitch('no-sandbox');
 app.commandLine.appendSwitch('disable-gpu-sandbox');
