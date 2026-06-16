@@ -1,5 +1,9 @@
 const { app, BrowserWindow, ipcMain, screen, clipboard } = require('electron');
 const path = require('path');
+const { autoUpdater } = require('electron-updater');
+
+// Configure autoUpdater logging to console
+autoUpdater.logger = console;
 
 // Disable Chromium sandboxing to prevent network blocks in translocated/sandboxed Gatekeeper contexts
 app.commandLine.appendSwitch('no-sandbox');
@@ -45,6 +49,11 @@ const { setupShortcut } = require('./setup-shortcut');
 app.whenReady().then(() => {
   setupShortcut();
   createWindow();
+
+  // Check for updates and notify the user natively
+  autoUpdater.checkForUpdatesAndNotify().catch((err) => {
+    console.error("Failed to check for updates:", err);
+  });
 
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();
