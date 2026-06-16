@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>ScribeAI - Welcome Onboarding</title>
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+    <!-- Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-fixed-variant": "#005236",
+                    "inverse-primary": "#c084fc",
+                    "secondary-container": "#6cf8bb",
+                    "primary-fixed-dim": "#c084fc",
+                    "on-tertiary": "#ffffff",
+                    "secondary-fixed": "#6ffbbe",
+                    "on-primary": "#ffffff",
+                    "on-surface": "#0f0b1a",
+                    "inverse-on-surface": "#faf5ff",
+                    "tertiary-container": "#7d4ce7",
+                    "primary": "#7c3aed",
+                    "primary-fixed": "#ddd6fe",
+                    "on-surface-variant": "#4d4460",
+                    "on-primary-fixed": "#2e1065",
+                    "surface-tint": "#7c3aed",
+                    "tertiary-fixed-dim": "#d0bcff",
+                    "on-background": "#0f0b1a",
+                    "outline-variant": "#ebd5ff",
+                    "surface-dim": "#ebd5ff",
+                    "inverse-surface": "#251b40",
+                    "background": "#fafafc",
+                    "outline": "#7c728e",
+                    "on-tertiary-container": "#f6edff",
+                    "on-primary-container": "#2e1065",
+                    "surface-container-highest": "#eeddff",
+                    "on-tertiary-fixed-variant": "#5516be",
+                    "primary-container": "#f5f3ff",
+                    "on-error": "#ffffff",
+                    "on-secondary-fixed": "#002113",
+                    "error-container": "#ffdad6",
+                    "on-error-container": "#93000a",
+                    "surface-container": "#faf5ff",
+                    "surface-bright": "#fafafc",
+                    "secondary": "#006c49",
+                    "surface-container-lowest": "#ffffff",
+                    "error": "#ba1a1a",
+                    "secondary-fixed-dim": "#4edea3",
+                    "on-secondary": "#ffffff",
+                    "surface": "#fafafc",
+                    "surface-variant": "#f3e8ff",
+                    "on-secondary-container": "#00714d",
+                    "surface-container-low": "#faf5ff",
+                    "surface-container-high": "#f3e8ff",
+                    "on-tertiary-fixed": "#23005c",
+                    "tertiary": "#632ecd",
+                    "on-primary-fixed-variant": "#6d28d9",
+                    "tertiary-fixed": "#e9ddff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-gap": "1rem",
+                    "section-margin": "1.25rem",
+                    "element-gap-sm": "0.5rem",
+                    "container-padding": "1.5rem"
+            },
+            "fontFamily": {
+                    "body-md": ["Inter"],
+                    "label-caps": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "mono-label": ["Inter"]
+            },
+            "fontSize": {
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                    "display-lg": ["28px", {"lineHeight": "34px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                    "mono-label": ["12px", {"lineHeight": "16px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+        .hero-glow {
+            filter: drop-shadow(0 0 30px rgba(124, 58, 237, 0.3)) drop-shadow(0 0 60px rgba(99, 46, 205, 0.1));
+        }
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        .bg-blob {
+            position: fixed;
+            z-index: -1;
+            filter: blur(100px);
+            opacity: 0.15;
+            border-radius: 9999px;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md overflow-x-hidden selection:bg-primary-fixed selection:text-on-primary-fixed">
+    <!-- Background Atmospheric Elements -->
+    <div class="bg-blob bg-primary w-[500px] h-[500px] -top-48 -left-24 animate-pulse"></div>
+    <div class="bg-blob bg-tertiary w-[600px] h-[600px] -bottom-48 -right-24 animate-pulse" style="animation-delay: 2s;"></div>
+    <!-- Top Navigation Bar -->
+    <header class="fixed top-0 left-0 w-full z-50 bg-surface/80 dark:bg-on-background/80 backdrop-blur-3xl shadow-sm flex justify-between items-center px-6 h-14">
+        <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-lg overflow-hidden flex items-center justify-center bg-on-surface">
+                <img alt="ScribeAI Logo" class="w-full h-full object-cover" src="icon.png"/>
+            </div>
+            <span class="font-display-lg text-headline-md tracking-tight text-primary dark:text-primary-fixed-dim">Scribe<span class="text-tertiary">AI</span></span>
+        </div>
+        <div class="flex items-center gap-6">
+            <nav class="hidden md:flex gap-8">
+                <a class="text-primary dark:text-primary-fixed-dim font-bold font-body-md text-body-md hover:bg-primary/10 transition-colors px-3 py-1 rounded-md" href="#">Onboarding</a>
+                <a class="text-on-surface-variant dark:text-outline-variant font-body-md text-body-md hover:bg-primary/10 transition-colors px-3 py-1 rounded-md" href="#">Features</a>
+                <a class="text-on-surface-variant dark:text-outline-variant font-body-md text-body-md hover:bg-primary/10 transition-colors px-3 py-1 rounded-md" href="#">Safety</a>
+            </nav>
+            <button id="skip-btn" class="text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md flex items-center gap-2">
+                Skip Setup
+                <span class="material-symbols-outlined text-[18px]">keyboard_double_arrow_right</span>
+            </button>
+        </div>
+    </header>
+    <!-- Main Content Canvas -->
+    <main class="relative pt-24 pb-20 min-h-screen flex flex-col items-center">
+        <!-- Stepper Component -->
+        <div class="flex items-center gap-4 mb-16 select-none" id="onboarding-stepper">
+            <div class="flex flex-col items-center gap-2" id="step-ind-1">
+                <div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center shadow-lg ring-4 ring-primary/10 step-circle">
+                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+                </div>
+                <span class="font-label-caps text-label-caps text-primary step-label">Welcome</span>
+            </div>
+            <div class="w-12 h-[2px] bg-outline-variant mb-6 step-line" id="step-line-1"></div>
+            
+            <div class="flex flex-col items-center gap-2 opacity-40" id="step-ind-2">
+                <div class="w-10 h-10 rounded-full bg-surface-container-highest text-on-surface flex items-center justify-center step-circle">
+                    <span class="material-symbols-outlined">person</span>
+                </div>
+                <span class="font-label-caps text-label-caps step-label">Account</span>
+            </div>
+            <div class="w-12 h-[2px] bg-outline-variant mb-6 step-line" id="step-line-2"></div>
+
+            <div class="flex flex-col items-center gap-2 opacity-40" id="step-ind-3">
+                <div class="w-10 h-10 rounded-full bg-surface-container-highest text-on-surface flex items-center justify-center step-circle">
+                    <span class="material-symbols-outlined">settings</span>
+                </div>
+                <span class="font-label-caps text-label-caps step-label">Configure</span>
+            </div>
+            <div class="w-12 h-[2px] bg-outline-variant mb-6 step-line" id="step-line-3"></div>
+
+            <div class="flex flex-col items-center gap-2 opacity-40" id="step-ind-4">
+                <div class="w-10 h-10 rounded-full bg-surface-container-highest text-on-surface flex items-center justify-center step-circle">
+                    <span class="material-symbols-outlined">rocket_launch</span>
+                </div>
+                <span class="font-label-caps text-label-caps step-label">Ready</span>
+            </div>
+        </div>
+
+        <!-- Onboarding Step Content Container -->
+        <div class="w-full flex flex-col items-center">
+            <!-- Step 1: Welcome -->
+            <div id="onboarding-step-1" class="w-full flex flex-col items-center">
+                <!-- Hero Section -->
+                <section class="max-w-5xl w-full px-6 text-center flex flex-col items-center mb-16">
+                    <div class="relative mb-12 animate-float">
+                        <div class="absolute inset-0 bg-primary/20 blur-[80px] rounded-full scale-150"></div>
+                        <div class="relative w-48 h-48 md:w-56 md:h-56 glass-card rounded-[40px] flex items-center justify-center p-8 shadow-2xl overflow-hidden border-2 border-white/40">
+                            <img alt="ScribeAI Hero Icon" class="w-full h-full object-contain hero-glow" src="icon.png"/>
+                        </div>
+                    </div>
+                    <h1 class="font-display-lg text-[42px] md:text-[56px] leading-[1.1] mb-6 max-w-3xl">
+                        Welcome to <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-tertiary">ScribeAI</span>
+                    </h1>
+                    <p class="font-body-lg text-on-surface-variant text-[18px] md:text-[22px] max-w-2xl font-normal leading-relaxed">
+                        Your system-wide writing assistant, perfectly integrated into your macOS workflow. Refine any text, anywhere, instantly.
+                    </p>
+                </section>
+                <!-- Features Grid -->
+                <section class="max-w-6xl w-full px-6 mb-20 grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Step 1 -->
+                    <div class="glass-card p-8 rounded-[32px] group hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                        <div class="w-12 h-12 rounded-2xl bg-primary/10 text-primary flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                            <span class="font-display-lg text-headline-md">1</span>
+                        </div>
+                        <h3 class="font-headline-md text-headline-md mb-3">Select Text</h3>
+                        <p class="text-on-surface-variant font-body-md text-body-md leading-relaxed">
+                            Highlight text in Slack, Notes, Finder, or any other Mac application where you need a little polish.
+                        </p>
+                    </div>
+                    <!-- Step 2 -->
+                    <div class="glass-card p-8 rounded-[32px] group hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                        <div class="w-12 h-12 rounded-2xl bg-tertiary/10 text-tertiary flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                            <span class="font-display-lg text-headline-md">2</span>
+                        </div>
+                        <h3 class="font-headline-md text-headline-md mb-3">Trigger ScribeAI</h3>
+                        <div class="mb-4 flex flex-wrap gap-2">
+                            <span class="px-2 py-1 bg-surface-container-high rounded-md border border-outline-variant font-mono-label text-mono-label shadow-sm">⌘</span>
+                            <span class="px-2 py-1 bg-surface-container-high rounded-md border border-outline-variant font-mono-label text-mono-label shadow-sm">Option</span>
+                            <span class="px-2 py-1 bg-surface-container-high rounded-md border border-outline-variant font-mono-label text-mono-label shadow-sm">S</span>
+                        </div>
+                        <p class="text-on-surface-variant font-body-md text-body-md leading-relaxed">
+                            A sleek floating panel appears instantly over your work, ready to transform your draft into a masterpiece.
+                        </p>
+                    </div>
+                    <!-- Step 3 -->
+                    <div class="glass-card p-8 rounded-[32px] group hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                        <div class="w-12 h-12 rounded-2xl bg-secondary/10 text-secondary flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                            <span class="font-display-lg text-headline-md">3</span>
+                        </div>
+                        <h3 class="font-headline-md text-headline-md mb-3">Improve &amp; Insert</h3>
+                        <p class="text-on-surface-variant font-body-md text-body-md leading-relaxed">
+                            Select your tone, add custom instructions, and click <span class="font-bold text-secondary">Insert</span> to replace the original text with a refined version.
+                        </p>
+                    </div>
+                </section>
+                <!-- CTA & Footer -->
+                <section class="flex flex-col items-center gap-8 w-full max-w-sm px-6">
+                    <button id="onboarding-start-btn" class="w-full bg-primary text-on-primary py-4 rounded-2xl font-body-lg text-body-lg shadow-lg hover:shadow-primary/30 active:scale-95 transition-all duration-200 flex items-center justify-center gap-3">
+                        Get Started
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'wght' 700;">arrow_forward</span>
+                    </button>
+                    <div class="flex flex-col items-center gap-2">
+                        <div class="flex items-center gap-4">
+                            <span class="w-6 h-[1px] bg-outline-variant"></span>
+                            <p class="font-label-caps text-label-caps text-outline">System Requirements</p>
+                            <span class="w-6 h-[1px] bg-outline-variant"></span>
+                        </div>
+                        <p class="font-body-md text-body-md text-on-surface-variant opacity-60">
+                            Requires macOS Monterey or later
+                        </p>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Step 2: Account (Sign In / Sign Up) -->
+            <div id="onboarding-step-2" class="w-full max-w-md hidden flex-col items-center animate-fade-in">
+                <div class="glass-card w-full p-8 rounded-[32px] shadow-2xl flex flex-col gap-6">
+                    <div class="flex border-b border-outline-variant pb-1 justify-around">
+                        <button id="tab-signin-btn" class="font-bold text-body-lg text-primary border-b-2 border-primary pb-2 px-4 transition-all">Sign In</button>
+                        <button id="tab-signup-btn" class="font-bold text-body-lg text-on-surface-variant pb-2 px-4 transition-all hover:text-primary">Sign Up</button>
+                    </div>
+                    
+                    <!-- Sign In Form -->
+                    <form id="signin-form" class="flex flex-col gap-4">
+                        <div class="flex flex-col gap-1.5 text-left">
+                            <label class="text-[11px] font-bold uppercase tracking-wider text-outline">Email Address</label>
+                            <input type="email" id="signin-email" class="w-full px-4 py-3 rounded-xl border border-outline-variant focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/10" placeholder="you@example.com" required>
+                        </div>
+                        <div class="flex flex-col gap-1.5 text-left">
+                            <label class="text-[11px] font-bold uppercase tracking-wider text-outline">Password</label>
+                            <input type="password" id="signin-password" class="w-full px-4 py-3 rounded-xl border border-outline-variant focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/10" placeholder="••••••••" required>
+                        </div>
+                        <div id="signin-error" class="text-error text-sm font-semibold text-center min-h-[20px]"></div>
+                        <button type="submit" class="w-full bg-primary text-on-primary py-3.5 rounded-2xl font-bold hover:bg-primary/95 transition-all shadow-lg shadow-primary/25">
+                            Sign In
+                        </button>
+                    </form>
+
+                    <!-- Sign Up Form -->
+                    <form id="signup-form" class="flex flex-col gap-4 hidden">
+                        <div class="flex flex-col gap-1.5 text-left">
+                            <label class="text-[11px] font-bold uppercase tracking-wider text-outline">Full Name</label>
+                            <input type="text" id="signup-name" class="w-full px-4 py-3 rounded-xl border border-outline-variant focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/10" placeholder="Alex Carter" required>
+                        </div>
+                        <div class="flex flex-col gap-1.5 text-left">
+                            <label class="text-[11px] font-bold uppercase tracking-wider text-outline">Email Address</label>
+                            <input type="email" id="signup-email" class="w-full px-4 py-3 rounded-xl border border-outline-variant focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/10" placeholder="you@example.com" required>
+                        </div>
+                        <div class="flex flex-col gap-1.5 text-left">
+                            <label class="text-[11px] font-bold uppercase tracking-wider text-outline">Password</label>
+                            <input type="password" id="signup-password" class="w-full px-4 py-3 rounded-xl border border-outline-variant focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/10" placeholder="Min. 6 characters" required>
+                        </div>
+                        <div class="flex flex-col gap-1.5 text-left">
+                            <label class="text-[11px] font-bold uppercase tracking-wider text-outline">Confirm Password</label>
+                            <input type="password" id="signup-confirm-password" class="w-full px-4 py-3 rounded-xl border border-outline-variant focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/10" placeholder="••••••••" required>
+                        </div>
+                        <div id="signup-error" class="text-error text-sm font-semibold text-center min-h-[20px]"></div>
+                        <button type="submit" class="w-full bg-primary text-on-primary py-3.5 rounded-2xl font-bold hover:bg-primary/95 transition-all shadow-lg shadow-primary/25">
+                            Create Account
+                        </button>
+                    </form>
+
+                    <div class="flex items-center my-1">
+                        <div class="flex-grow border-t border-outline-variant"></div>
+                        <span class="mx-3 text-[11px] font-bold uppercase tracking-wider text-outline">or</span>
+                        <div class="flex-grow border-t border-outline-variant"></div>
+                    </div>
+
+                    <button type="button" id="google-auth-btn" class="w-full flex items-center justify-center gap-3 border border-outline-variant bg-white text-on-surface py-3 rounded-2xl font-bold hover:bg-surface-variant transition-all shadow-sm">
+                        <svg class="w-5 h-5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" fill="#FBBC05"/>
+                            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" fill="#EA4335"/>
+                        </svg>
+                        <span>Continue with Google</span>
+                    </button>
+
+                    <div class="flex justify-center mt-2">
+                        <button id="auth-skip-btn" class="text-sm font-bold text-outline hover:text-primary transition-all underline decoration-1">Skip for now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 3: Configure -->
+            <div id="onboarding-step-3" class="w-full max-w-md hidden flex-col items-center animate-fade-in">
+                <div class="glass-card w-full p-8 rounded-[32px] shadow-2xl flex flex-col gap-6 text-left">
+                    <div>
+                        <h3 class="font-headline-md text-headline-md text-on-surface mb-1">Configure AI Provider</h3>
+                        <p class="text-on-surface-variant text-sm">Select how ScribeAI connects to AI models. You can change this anytime.</p>
+                    </div>
+                    
+                    <div class="flex flex-col gap-1.5">
+                        <label class="text-[11px] font-bold uppercase tracking-wider text-outline">AI Provider</label>
+                        <select id="onboarding-provider" class="w-full px-4 py-3 rounded-xl border border-outline-variant bg-white focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/10">
+                            <option value="gemini">Google Gemini (Free Cloud)</option>
+                            <option value="ollama">Ollama (100% Local)</option>
+                        </select>
+                    </div>
+
+                    <div id="onboarding-ollama-group" class="flex flex-col gap-4 hidden">
+                        <div class="flex flex-col gap-1.5">
+                            <label class="text-[11px] font-bold uppercase tracking-wider text-outline">Ollama Model</label>
+                            <input type="text" id="onboarding-ollama-model" class="w-full px-4 py-3 rounded-xl border border-outline-variant focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/10" placeholder="e.g. llama3, gemma2, mistral" value="gemma2:2b">
+                        </div>
+                        <div class="flex flex-col gap-1.5">
+                            <label class="text-[11px] font-bold uppercase tracking-wider text-outline">Ollama URL</label>
+                            <input type="text" id="onboarding-ollama-url" class="w-full px-4 py-3 rounded-xl border border-outline-variant focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/10" placeholder="http://127.0.0.1:11434" value="http://127.0.0.1:11434">
+                        </div>
+                    </div>
+
+                    <button id="config-save-btn" class="w-full bg-primary text-on-primary py-3.5 rounded-2xl font-bold hover:bg-primary/95 transition-all shadow-lg shadow-primary/25 flex items-center justify-center gap-2 mt-2">
+                        Save & Continue
+                        <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 4: Ready -->
+            <div id="onboarding-step-4" class="w-full max-w-lg hidden flex-col items-center animate-fade-in">
+                <div class="flex flex-col items-center text-center">
+                    <div class="w-16 h-16 rounded-full bg-success/15 text-success flex items-center justify-center mb-6 shadow-md shadow-success/10">
+                        <span class="material-symbols-outlined text-[32px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                    </div>
+                    <h2 class="font-display-lg text-[32px] mb-4">ScribeAI is Ready!</h2>
+                    <p class="text-on-surface-variant text-base mb-6 max-w-md">
+                        You have successfully configured ScribeAI. Select any text across the web, then click the extension icon to refine it in place.
+                    </p>
+                    
+                    <div id="onboarding-account-summary" class="flex items-center gap-2 px-5 py-2.5 bg-primary/10 border border-primary/20 rounded-full text-primary text-sm font-semibold mb-8">
+                        <!-- Dynamic details -->
+                    </div>
+                    
+                    <button id="get-started-btn" class="w-[280px] bg-primary text-on-primary py-4 rounded-2xl font-bold shadow-lg hover:shadow-primary/30 active:scale-95 transition-all duration-200 flex items-center justify-center gap-3">
+                        Launch ScribeAI
+                        <span class="material-symbols-outlined">arrow_forward</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Micro-interaction Scripts -->
+    <script src="supabase.js"></script>
+    <script>
+        const SUPABASE_URL = "https://pqcqtpvmgziejnauidsu.supabase.co";
+        const SUPABASE_KEY = "sb_publishable_8SEXfi2S0YYKH1_YAmT3fQ_B3CPD1Fl";
+        const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        document.addEventListener('mousemove', (e) => {
+            const blobs = document.querySelectorAll('.bg-blob');
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            
+            blobs.forEach((blob, index) => {
+                const speed = (index + 1) * 20;
+                blob.style.transform = `translate(${x * speed}px, ${y * speed}px)`;
+            });
+        });
+
+        // Wizard steps management
+        let currentStep = 1;
+        
+        const onboardingStep1 = document.getElementById('onboarding-step-1');
+        const onboardingStep2 = document.getElementById('onboarding-step-2');
+        const onboardingStep3 = document.getElementById('onboarding-step-3');
+        const onboardingStep4 = document.getElementById('onboarding-step-4');
+
+        const onboardingStartBtn = document.getElementById('onboarding-start-btn');
+        const tabSigninBtn = document.getElementById('tab-signin-btn');
+        const tabSignupBtn = document.getElementById('tab-signup-btn');
+        const signinForm = document.getElementById('signin-form');
+        const signupForm = document.getElementById('signup-form');
+        const signinError = document.getElementById('signin-error');
+        const signupError = document.getElementById('signup-error');
+        const authSkipBtn = document.getElementById('auth-skip-btn');
+        const googleAuthBtn = document.getElementById('google-auth-btn');
+
+        const onboardingProviderSelect = document.getElementById('onboarding-provider');
+        const onboardingOllamaGroup = document.getElementById('onboarding-ollama-group');
+        const onboardingOllamaModelInput = document.getElementById('onboarding-ollama-model');
+        const onboardingOllamaUrlInput = document.getElementById('onboarding-ollama-url');
+        const configSaveBtn = document.getElementById('config-save-btn');
+
+        const onboardingAccountSummary = document.getElementById('onboarding-account-summary');
+        const launchBtn = document.getElementById('get-started-btn');
+        const skipBtnHeader = document.getElementById('skip-btn');
+
+        // Helper to update the stepper visual state
+        function setOnboardingStep(step) {
+            currentStep = step;
+            
+            // Show active step content, hide others
+            const steps = [onboardingStep1, onboardingStep2, onboardingStep3, onboardingStep4];
+            steps.forEach((s, idx) => {
+                if (idx + 1 === step) {
+                    s.classList.remove('hidden');
+                    s.classList.add('flex');
+                } else {
+                    s.classList.add('hidden');
+                    s.classList.remove('flex');
+                }
+            });
+
+            // Update Stepper indicators
+            for (let i = 1; i <= 4; i++) {
+                const indicator = document.getElementById(`step-ind-${i}`);
+                if (indicator) {
+                    const circle = indicator.querySelector('.step-circle');
+                    const label = indicator.querySelector('.step-label');
+                    
+                    if (i < step) {
+                        indicator.classList.remove('opacity-40');
+                        indicator.classList.add('opacity-100');
+                        circle.className = "w-10 h-10 rounded-full bg-success text-on-primary flex items-center justify-center shadow-lg ring-4 ring-success/10 step-circle";
+                        circle.innerHTML = `<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check</span>`;
+                        label.className = "font-label-caps text-label-caps text-success step-label";
+                    } else if (i === step) {
+                        indicator.classList.remove('opacity-40');
+                        indicator.classList.add('opacity-100');
+                        circle.className = "w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center shadow-lg ring-4 ring-primary/10 step-circle";
+                        if (i === 1) circle.innerHTML = `<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>`;
+                        else if (i === 2) circle.innerHTML = `<span class="material-symbols-outlined">person</span>`;
+                        else if (i === 3) circle.innerHTML = `<span class="material-symbols-outlined">settings</span>`;
+                        else if (i === 4) circle.innerHTML = `<span class="material-symbols-outlined">rocket_launch</span>`;
+                        label.className = "font-label-caps text-label-caps text-primary step-label";
+                    } else {
+                        indicator.classList.add('opacity-40');
+                        indicator.classList.remove('opacity-100');
+                        circle.className = "w-10 h-10 rounded-full bg-surface-container-highest text-on-surface flex items-center justify-center step-circle";
+                        if (i === 2) circle.innerHTML = `<span class="material-symbols-outlined">person</span>`;
+                        else if (i === 3) circle.innerHTML = `<span class="material-symbols-outlined">settings</span>`;
+                        else if (i === 4) circle.innerHTML = `<span class="material-symbols-outlined">rocket_launch</span>`;
+                        label.className = "font-label-caps text-label-caps step-label";
+                    }
+                }
+                
+                const line = document.getElementById(`step-line-${i}`);
+                if (line) {
+                    if (i < step) {
+                        line.className = "w-12 h-[2px] bg-success mb-6 step-line";
+                    } else {
+                        line.className = "w-12 h-[2px] bg-outline-variant mb-6 step-line";
+                    }
+                }
+            }
+        }
+
+        // Onboarding Navigation
+        if (onboardingStartBtn) {
+            onboardingStartBtn.addEventListener('click', () => {
+                setOnboardingStep(2);
+            });
+        }
+
+        // Tab shifting in step 2
+        if (tabSigninBtn && tabSignupBtn) {
+            tabSigninBtn.addEventListener('click', () => {
+                tabSigninBtn.className = "font-bold text-body-lg text-primary border-b-2 border-primary pb-2 px-4 transition-all";
+                tabSignupBtn.className = "font-bold text-body-lg text-on-surface-variant pb-2 px-4 transition-all hover:text-primary";
+                signinForm.classList.remove('hidden');
+                signupForm.classList.add('hidden');
+                signinError.textContent = "";
+            });
+
+            tabSignupBtn.addEventListener('click', () => {
+                tabSignupBtn.className = "font-bold text-body-lg text-primary border-b-2 border-primary pb-2 px-4 transition-all";
+                tabSigninBtn.className = "font-bold text-body-lg text-on-surface-variant pb-2 px-4 transition-all hover:text-primary";
+                signupForm.classList.remove('hidden');
+                signinForm.classList.add('hidden');
+                signupError.textContent = "";
+            });
+        }
+
+        // Storage helpers for Chrome Extension
+        function chromeGet(key) {
+            return new Promise((resolve) => {
+                chrome.storage.local.get([key], (res) => {
+                    resolve(res[key]);
+                });
+            });
+        }
+
+        function chromeSet(key, value) {
+            return new Promise((resolve) => {
+                const obj = {};
+                obj[key] = value;
+                chrome.storage.local.set(obj, () => {
+                    resolve();
+                });
+            });
+        }
+
+        async function getLoggedInUser() {
+            try {
+                const { data: { session } } = await supabaseClient.auth.getSession();
+                if (session && session.user) {
+                    return {
+                        name: session.user.user_metadata?.full_name || session.user.email.split('@')[0],
+                        email: session.user.email
+                    };
+                }
+            } catch (e) {
+                console.error("Error getting Supabase session in onboarding:", e);
+            }
+            return null;
+        }
+
+        // Step 2 form actions
+        if (signinForm) {
+            signinForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const email = document.getElementById('signin-email').value.trim();
+                const password = document.getElementById('signin-password').value;
+
+                signinError.style.color = "";
+                signinError.textContent = "";
+                const submitBtn = signinForm.querySelector('button[type="submit"]');
+                submitBtn.disabled = true;
+                const originalText = submitBtn.textContent;
+                submitBtn.textContent = "Signing In...";
+
+                try {
+                    const { data, error } = await supabaseClient.auth.signInWithPassword({
+                        email: email,
+                        password: password
+                    });
+
+                    if (error) {
+                        signinError.textContent = error.message;
+                    } else {
+                        setOnboardingStep(3);
+                    }
+                } catch (err) {
+                    signinError.textContent = "Connection error. Please try again.";
+                } finally {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = originalText;
+                }
+            });
+        }
+
+        if (signupForm) {
+            signupForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const name = document.getElementById('signup-name').value.trim();
+                const email = document.getElementById('signup-email').value.trim();
+                const password = document.getElementById('signup-password').value;
+                const confirmPassword = document.getElementById('signup-confirm-password').value;
+
+                signupError.style.color = "";
+                signupError.textContent = "";
+
+                if (password.length < 6) {
+                    signupError.textContent = "Password must be at least 6 characters.";
+                    return;
+                }
+
+                if (password !== confirmPassword) {
+                    signupError.textContent = "Passwords do not match.";
+                    return;
+                }
+
+                const submitBtn = signupForm.querySelector('button[type="submit"]');
+                submitBtn.disabled = true;
+                const originalText = submitBtn.textContent;
+                submitBtn.textContent = "Creating Account...";
+
+                try {
+                    const { data, error } = await supabaseClient.auth.signUp({
+                        email: email,
+                        password: password,
+                        options: {
+                            data: {
+                                full_name: name
+                            }
+                        }
+                    });
+
+                    if (error) {
+                        signupError.textContent = error.message;
+                    } else {
+                        if (data.session) {
+                            setOnboardingStep(3);
+                        } else {
+                            signupError.style.color = "#006c49"; // Match the green secondary color
+                            signupError.textContent = "Sign up successful! Please check your email to verify your account.";
+                            setTimeout(() => {
+                                setOnboardingStep(3);
+                            }, 3000);
+                        }
+                    }
+                } catch (err) {
+                    signupError.textContent = "Connection error. Please try again.";
+                } finally {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = originalText;
+                }
+            });
+        }
+
+        if (authSkipBtn) {
+            authSkipBtn.addEventListener('click', () => {
+                setOnboardingStep(3);
+            });
+        }
+
+        if (googleAuthBtn) {
+            googleAuthBtn.addEventListener('click', async () => {
+                signinError.textContent = "";
+                signupError.textContent = "";
+                
+                const originalContent = googleAuthBtn.innerHTML;
+                googleAuthBtn.disabled = true;
+                googleAuthBtn.querySelector('span').textContent = "Signing In...";
+                
+                try {
+                    const redirectUrl = chrome.identity.getRedirectURL();
+                    const authUrl = `${SUPABASE_URL}/auth/v1/authorize?provider=google&redirect_to=${encodeURIComponent(redirectUrl)}`;
+                    
+                    chrome.identity.launchWebAuthFlow({
+                        url: authUrl,
+                        interactive: true
+                    }, async (responseUrl) => {
+                        if (chrome.runtime.lastError || !responseUrl) {
+                            const errMsg = (chrome.runtime.lastError && chrome.runtime.lastError.message) || "Authentication failed or cancelled.";
+                            signinError.textContent = errMsg;
+                            googleAuthBtn.disabled = false;
+                            googleAuthBtn.innerHTML = originalContent;
+                            return;
+                        }
+                        
+                        try {
+                            const urlObj = new URL(responseUrl);
+                            const params = new URLSearchParams(urlObj.hash.substring(1));
+                            const accessToken = params.get('access_token');
+                            const refreshToken = params.get('refresh_token');
+                            
+                            if (accessToken && refreshToken) {
+                                const { data, error } = await supabaseClient.auth.setSession({
+                                    access_token: accessToken,
+                                    refresh_token: refreshToken
+                                });
+                                
+                                if (error) {
+                                    signinError.textContent = error.message;
+                                } else {
+                                    setOnboardingStep(3);
+                                }
+                            } else {
+                                signinError.textContent = "Failed to parse credentials from Google response.";
+                            }
+                        } catch (parseErr) {
+                            signinError.textContent = "Error processing sign-in result.";
+                        } finally {
+                            googleAuthBtn.disabled = false;
+                            googleAuthBtn.innerHTML = originalContent;
+                        }
+                    });
+                } catch (err) {
+                    signinError.textContent = "Identity provider launch failed.";
+                    googleAuthBtn.disabled = false;
+                    googleAuthBtn.innerHTML = originalContent;
+                }
+            });
+        }
+
+        // Step 3 Actions
+        if (onboardingProviderSelect) {
+            onboardingProviderSelect.addEventListener('change', (e) => {
+                if (e.target.value === 'ollama') {
+                    onboardingOllamaGroup.classList.remove('hidden');
+                } else {
+                    onboardingOllamaGroup.classList.add('hidden');
+                }
+            });
+        }
+
+        if (configSaveBtn) {
+            configSaveBtn.addEventListener('click', async () => {
+                const provider = onboardingProviderSelect.value;
+                await chromeSet('scribeai_provider', provider);
+                if (provider === 'ollama') {
+                    await chromeSet('scribeai_ollama_model', onboardingOllamaModelInput.value.trim() || 'gemma2:2b');
+                    await chromeSet('scribeai_ollama_url', onboardingOllamaUrlInput.value.trim() || 'http://127.0.0.1:11434');
+                }
+
+                // Set up Step 4 Summary
+                const user = await getLoggedInUser();
+                if (user) {
+                    onboardingAccountSummary.innerHTML = `
+                        <span class="material-symbols-outlined text-[18px]">person</span>
+                        <span>Logged in as <b>${user.name}</b></span>
+                    `;
+                } else {
+                    onboardingAccountSummary.innerHTML = `
+                        <span class="material-symbols-outlined text-[18px]">info</span>
+                        <span>No account linked (Local Mode)</span>
+                    `;
+                }
+
+                setOnboardingStep(4);
+            });
+        }
+
+        // Launch Action
+        const handleStart = () => {
+            if (typeof chrome !== 'undefined' && chrome.runtime && chrome.runtime.openOptionsPage) {
+                chrome.runtime.openOptionsPage();
+            } else {
+                window.close();
+            }
+        };
+
+        if (launchBtn) {
+            launchBtn.addEventListener('click', handleStart);
+        }
+        if (skipBtnHeader) {
+            skipBtnHeader.addEventListener('click', handleStart);
+        }
+    </script>
+</body>
+</html>

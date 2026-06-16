@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MacVoice - macOS Control Agent</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <!-- MediaPipe FaceMesh & Camera Utils -->
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/face_mesh.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div class="app-container">
+    <!-- Window Titlebar / Drag Handle -->
+    <header class="titlebar">
+      <div class="app-logo">
+        <span class="logo-dot"></span>
+        <span class="logo-text">MacVoice</span>
+        <span class="provider-badge">Ollama</span>
+      </div>
+      <button class="win-btn close-btn" id="btn-close" title="Close App">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </header>
+
+    <main class="main-content">
+      <!-- Glow Visualizer Area -->
+      <div class="visualizer-container">
+        <div class="glow-ring-outer" id="glow-ring">
+          <div class="glow-ring-inner">
+            <button class="mic-trigger" id="btn-mic" aria-label="Start Listening">
+              <svg class="mic-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+                <path d="M19 10v1a7 7 0 0 1-14 0v-1"/>
+                <line x1="12" y1="19" x2="12" y2="22"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div class="canvas-wrapper">
+          <canvas id="waveform-canvas" width="300" height="70"></canvas>
+        </div>
+        <p class="status-text" id="status-text">Click Mic or Press Space to Command</p>
+      </div>
+
+      <!-- Eye Control Toggle Card -->
+      <div class="eye-control-bar">
+        <button class="eye-btn" id="btn-eye-control">
+          <svg class="eye-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8Z"/>
+            <circle cx="12" cy="12" r="3"/>
+          </svg>
+          <span id="eye-btn-text">Enable Eye Control</span>
+        </button>
+        
+        <div class="webcam-preview-container hidden" id="webcam-preview-container">
+          <video id="webcam" autoplay playsinline style="display: none;"></video>
+          <canvas id="mesh-canvas" width="120" height="90"></canvas>
+        </div>
+        
+        <div class="blink-indicator" id="blink-indicator">BLINK</div>
+      </div>
+
+      <!-- Live Transcript Display -->
+      <div class="transcript-card">
+        <div class="card-header">
+          <span class="header-title">Live Voice Transcript</span>
+          <span class="live-dot animate-pulse" id="live-indicator"></span>
+        </div>
+        <p class="transcript-text" id="transcript-text">...</p>
+      </div>
+
+      <!-- Action Execution Panel -->
+      <div class="action-card">
+        <div class="card-header">
+          <span class="header-title">Executed Command Log</span>
+        </div>
+        <div class="log-container" id="log-container">
+          <div class="log-placeholder">Speak a command like "Open Chrome" or "Turn up the volume" to begin.</div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Settings Drawer (Hidden by default, toggleable via hotkey or small indicator) -->
+    <div class="settings-drawer hidden" id="settings-drawer">
+      <div class="drawer-header">
+        <h3>Settings</h3>
+        <button class="drawer-close" id="btn-settings-close">&times;</button>
+      </div>
+      <div class="form-group">
+        <label for="ollama-url">Ollama Local URL</label>
+        <input type="text" id="ollama-url" value="http://localhost:11434">
+      </div>
+      <div class="form-group">
+        <label for="ollama-model">Model Name</label>
+        <input type="text" id="ollama-model" value="gemma2:2b">
+      </div>
+      <div class="form-group checkbox-group" style="flex-direction: row; align-items: center; gap: 8px; margin-top: 5px;">
+        <input type="checkbox" id="wake-word-active" style="width: auto; -webkit-app-region: no-drag;" checked>
+        <label for="wake-word-active" style="cursor: pointer; margin-bottom: 0;">Enable Wake Word (Say "Hi Buddy")</label>
+      </div>
+      <button class="save-btn" id="btn-settings-save">Save & Close</button>
+    </div>
+  </div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>

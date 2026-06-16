@@ -1,0 +1,13 @@
+{
+  "name": "macvoice",
+  "version": "1.0.0",
+  "description": "Voice Control Agent for macOS using local Ollama",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "server": "node server.js"
+  },
+  "dependencies": {
+    "electron": "^30.0.6"
+  }
+}

@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>ScribeAI — Premium Offline AI Writing Companion</title>
+  <meta name="description" content="ScribeAI is a premium, privacy-first offline AI writing assistant for macOS. Polish grammar, rewrite drafts, and refine text in any app instantly using local WebGPU LLM models. Zero data harvesting.">
+  <meta name="keywords" content="offline AI, writing companion, grammar checker, macOS writing assistant, privacy AI, local LLM, WebGPU AI, ScribeAI, text refinement">
+  <meta name="author" content="ScribeAI Team">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://scribeai.com/">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://scribeai.com/">
+  <meta property="og:title" content="ScribeAI — Premium Offline AI Writing Companion">
+  <meta property="og:description" content="ScribeAI is a privacy-first offline AI writing assistant for macOS. Polish grammar and refine text in any app instantly using local WebGPU LLM models.">
+  <meta property="og:image" content="https://scribeai.com/website/assets/hero_mockup.png">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://scribeai.com/">
+  <meta property="twitter:title" content="ScribeAI — Premium Offline AI Writing Companion">
+  <meta property="twitter:description" content="ScribeAI is a privacy-first offline AI writing assistant for macOS. Polish grammar and refine text in any app instantly using local WebGPU LLM models.">
+  <meta property="twitter:image" content="https://scribeai.com/website/assets/hero_mockup.png">
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "ScribeAI",
+    "operatingSystem": "macOS Monterey or later",
+    "applicationCategory": "WritingApplication",
+    "offers": {
+      "@type": "Offer",
+      "price": "0.00",
+      "priceCurrency": "USD"
+    },
+    "description": "ScribeAI is a premium, privacy-first offline AI writing companion for macOS. Polish grammar, rewrite drafts, and refine text in any app instantly using local WebGPU LLM models.",
+    "screenshot": "https://scribeai.com/website/assets/hero_mockup.png",
+    "downloadUrl": "https://github.com/Anirudh3434/scribeai/releases/download/v1.0.0/ScribeAI-1.0.0-arm64.dmg",
+    "softwareVersion": "2.4.0",
+    "license": "https://opensource.org/licenses/MIT"
+  }
+  </script>
+
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&amp;family=Hanken+Grotesk:wght@400;500;600&amp;family=Geist:wght@400;600&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+  <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "background": "#131315",
+                        "primary-container": "#a078ff",
+                        "surface-container-lowest": "#0e0e10",
+                        "on-background": "#e5e1e4",
+                        "on-surface": "#e5e1e4",
+                        "error": "#ffb4ab",
+                        "tertiary-fixed": "#6ffbbe",
+                        "inverse-primary": "#6d3bd7",
+                        "surface-container-highest": "#353437",
+                        "surface": "#131315",
+                        "primary-fixed-dim": "#d0bcff",
+                        "on-surface-variant": "#cbc3d7",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-low": "#1c1b1d",
+                        "secondary-fixed": "#d8e2ff",
+                        "secondary-container": "#0566d9",
+                        "surface-variant": "#353437",
+                        "on-primary": "#3c0091",
+                        "surface-bright": "#39393b",
+                        "outline-variant": "#494454",
+                        "on-secondary": "#002e6a",
+                        "on-primary-container": "#340080",
+                        "on-secondary-fixed-variant": "#004395",
+                        "secondary-fixed-dim": "#adc6ff",
+                        "primary-fixed": "#e9ddff",
+                        "on-tertiary": "#003824",
+                        "on-tertiary-fixed": "#002113",
+                        "on-tertiary-container": "#00311f",
+                        "on-primary-fixed": "#23005c",
+                        "inverse-on-surface": "#313032",
+                        "primary": "#d0bcff",
+                        "on-secondary-container": "#e6ecff",
+                        "on-secondary-fixed": "#001a42",
+                        "secondary": "#adc6ff",
+                        "surface-dim": "#131315",
+                        "on-primary-fixed-variant": "#5516be",
+                        "inverse-surface": "#e5e1e4",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "error-container": "#93000a",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "surface-container-high": "#2a2a2c",
+                        "surface-container": "#201f22",
+                        "tertiary": "#4edea3",
+                        "surface-tint": "#d0bcff",
+                        "outline": "#958ea0",
+                        "on-error": "#690005",
+                        "tertiary-container": "#00a572"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-max": "1200px",
+                        "element-gap": "16px",
+                        "section-gap": "120px",
+                        "gutter": "24px",
+                        "margin-mobile": "20px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Hanken Grotesk"],
+                        "label-sm": ["Geist"],
+                        "headline-lg-mobile": ["Sora"],
+                        "headline-lg": ["Sora"],
+                        "display-lg": ["Sora"]
+                    },
+                    "fontSize": {
+                        "body-md": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                        "headline-lg-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                        "headline-lg": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "display-lg": ["72px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+  <style>
+        body {
+            background-color: #131315;
+            color: #e5e1e4;
+            font-family: 'Hanken Grotesk', sans-serif;
+            overflow-x: hidden;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(22, 22, 30, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: border-color 0.3s ease, transform 0.3s ease;
+        }
+        .glass-card:hover {
+            border-color: rgba(208, 188, 255, 0.3);
+        }
+        .text-gradient {
+            background: linear-gradient(135deg, #d0bcff 0%, #adc6ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .glow-button {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .glow-button::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 120%;
+            height: 120%;
+            background: radial-gradient(circle, rgba(208, 188, 255, 0.4) 0%, transparent 70%);
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 0.5s ease;
+            pointer-events: none;
+        }
+        .glow-button:hover::after {
+            transform: translate(-50%, -50%) scale(1);
+        }
+        .shimmer {
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+            background-size: 200% 100%;
+            animation: shimmer 2s infinite;
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        .logo-image {
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
+        }
+    </style>
+</head>
+<body class="antialiased">
+<!-- Navigation -->
+<nav class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-xl border-b border-outline-variant/10">
+  <div class="max-w-container-max mx-auto px-gutter py-4 flex justify-between items-center">
+    <div class="flex items-center gap-2">
+      <img class="logo-image w-8 h-8 object-contain" src="assets/icon.png" alt="ScribeAI Logo">
+      <span class="text-2xl font-display-lg font-bold text-on-surface tracking-tight">ScribeAI</span>
+    </div>
+    <div class="hidden md:flex items-center gap-8">
+      <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors duration-300" href="#features">Features</a>
+      <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors duration-300" href="#sandbox">Interactive Sandbox</a>
+      <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors duration-300" href="#privacy">Privacy First</a>
+      <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors duration-300" href="#faq">FAQ</a>
+    </div>
+    <a id="nav-download-btn" href="https://github.com/Anirudh3434/scribeai/releases/download/v1.0.0/ScribeAI-1.0.0-arm64.dmg" download class="px-6 py-2 bg-surface-container-highest text-on-surface rounded-full font-label-sm text-label-sm hover:bg-primary hover:text-on-primary transition-all duration-300 scale-95 active:scale-90 inline-block text-center">
+      Download App
+    </a>
+  </div>
+</nav>
+<main class="pt-32">
+  <!-- Hero Section -->
+  <section class="relative max-w-container-max mx-auto px-gutter mb-section-gap overflow-visible">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <div class="z-10">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 mb-8">
+          <span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">spark</span>
+          <span class="font-label-sm text-[10px] uppercase tracking-widest text-primary">Now Supporting 100% Offline AI</span>
+        </div>
+        <h1 class="font-display-lg text-display-lg mb-6 leading-none">
+          Write Better,<br>
+          Everywhere,<br>
+          <span class="text-gradient">100% Offline.</span>
+        </h1>
+        <p class="font-body-md text-body-md text-on-surface-variant max-w-lg mb-10">
+          ScribeAI is your global writing companion. Select text in any macOS application, press <kbd class="px-2 py-1 bg-surface-container-high rounded text-sm font-mono opacity-80">⌥ + ⌘ + S</kbd>, and instantly refine grammar, polish emails, or rewrite drafts offline. No servers, no subscriptions, total privacy.
+        </p>
+        <div class="flex flex-wrap gap-4 items-center">
+          <a id="hero-download-btn" href="https://github.com/Anirudh3434/scribeai/releases/download/v1.0.0/ScribeAI-1.0.0-arm64.dmg" download class="glow-button group px-8 py-4 bg-gradient-to-r from-primary-container to-secondary-container text-white rounded-xl font-bold flex items-center gap-3 transition-transform hover:scale-105 active:scale-95">
+            <span class="material-symbols-outlined">download</span>
+            <span class="">Download macOS App</span>
+          </a>
+          <div class="flex gap-3">
+            <div id="hero-chrome-btn" class="px-6 py-4 border border-outline-variant/30 rounded-xl font-medium text-on-surface-variant hover:border-primary/50 transition-colors flex items-center gap-2 cursor-not-allowed opacity-60">
+              <span class="material-symbols-outlined text-sm">extension</span>
+              <span class="">Chrome Extension</span>
+              <span class="px-1.5 py-0.5 rounded bg-surface-container-highest text-[10px] font-bold uppercase tracking-tighter">Soon</span>
+            </div>
+            <div id="hero-windows-btn" class="px-6 py-4 border border-outline-variant/30 rounded-xl font-medium text-on-surface-variant hover:border-primary/50 transition-colors flex items-center gap-2 opacity-60 cursor-not-allowed">
+              <span class="material-symbols-outlined text-sm">desktop_windows</span>
+              <span class="">Windows App</span>
+              <span class="px-1.5 py-0.5 rounded bg-surface-container-highest text-[10px] font-bold uppercase tracking-tighter">Soon</span>
+            </div>
+          </div>
+        </div>
+        <p class="mt-6 font-label-sm text-label-sm text-on-surface-variant/50">
+          Requires macOS Monterey+ / Apple Silicon • Free &amp; Open Source
+        </p>
+      </div>
+      <div class="relative lg:h-[600px] flex items-center justify-center">
+        <div class="absolute inset-0 bg-primary/10 blur-[120px] rounded-full"></div>
+        <div class="relative w-full aspect-square rounded-2xl border border-white/10 overflow-hidden shadow-2xl glass-card">
+          <img class="w-full h-full object-cover" alt="ScribeAI Desktop App Showcase on macOS" src="assets/hero_mockup.png">
+          <div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-40"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Features Section -->
+  <section class="max-w-container-max mx-auto px-gutter mb-section-gap" id="features">
+    <div class="text-center mb-16">
+      <span class="font-label-sm text-label-sm text-primary uppercase tracking-widest mb-4 block">Why ScribeAI?</span>
+      <h2 class="font-headline-lg text-headline-lg">Polished drafts without compromise</h2>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <!-- Feature 1 -->
+      <div class="glass-card p-8 rounded-3xl group">
+        <div class="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 transition-colors group-hover:bg-primary/20">
+          <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">cloud_off</span>
+        </div>
+        <h3 class="font-headline-lg text-2xl mb-4">100% Offline AI Models</h3>
+        <p class="font-body-md text-base text-on-surface-variant">Utilizes WebGPU to run optimized Qwen 1.5B models directly in your hardware cache. Text never leaves your machine.</p>
+      </div>
+      <!-- Feature 2 -->
+      <div class="glass-card p-8 rounded-3xl group">
+        <div class="w-12 h-12 rounded-2xl bg-secondary/10 flex items-center justify-center mb-6 transition-colors group-hover:bg-secondary/20">
+          <span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">keyboard</span>
+        </div>
+        <h3 class="font-headline-lg text-2xl mb-4">Universal Hotkey</h3>
+        <p class="font-body-md text-base text-on-surface-variant">Highlight text in Slack, Notes, or Safari and hit ⌥ + ⌘ + S to trigger the instant polish overlay.</p>
+      </div>
+      <!-- Feature 3 -->
+      <div class="glass-card p-8 rounded-3xl group">
+        <div class="w-12 h-12 rounded-2xl bg-error/10 flex items-center justify-center mb-6 transition-colors group-hover:bg-error/20">
+          <span class="material-symbols-outlined text-error" style="font-variation-settings: 'FILL' 1;">spellcheck</span>
+        </div>
+        <h3 class="font-headline-lg text-2xl mb-4">Name Preservation</h3>
+        <p class="font-body-md text-base text-on-surface-variant">Integrated fuzzy algorithms prevent small models from hallucinating or misspelling proper names like Rohith.</p>
+      </div>
+      <!-- Feature 4 -->
+      <div class="glass-card p-8 rounded-3xl group">
+        <div class="w-12 h-12 rounded-2xl bg-tertiary/10 flex items-center justify-center mb-6 transition-colors group-hover:bg-tertiary/20">
+          <span class="material-symbols-outlined text-tertiary" style="font-variation-settings: 'FILL' 1;">api</span>
+        </div>
+        <h3 class="font-headline-lg text-2xl mb-4">Custom API Keys</h3>
+        <p class="font-body-md text-base text-on-surface-variant">Not running WebGPU? Plugin your Gemini or OpenAI keys for blazing-fast online processing with zero markups.</p>
+      </div>
+    </div>
+  </section>
+  <!-- Privacy Section -->
+  <section class="mb-section-gap" id="privacy">
+    <div class="max-w-container-max mx-auto px-gutter">
+      <div class="glass-card rounded-[40px] p-12 lg:p-20 overflow-hidden relative">
+        <div class="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-tertiary/5 to-transparent"></div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div class="flex justify-center order-2 lg:order-1">
+            <div class="relative">
+              <div class="w-64 h-64 rounded-full border border-tertiary/20 flex items-center justify-center">
+                <div class="w-48 h-48 rounded-full border border-tertiary/40 flex items-center justify-center">
+                  <div class="w-32 h-32 rounded-full bg-tertiary/10 flex items-center justify-center animate-pulse">
+                    <span class="material-symbols-outlined text-tertiary text-6xl" style="font-variation-settings: 'FILL' 1;">shield_with_heart</span>
+                  </div>
+                </div>
+              </div>
+              <div class="absolute -top-4 -right-4 px-4 py-2 bg-tertiary text-on-tertiary font-bold rounded-lg text-sm shadow-xl shadow-tertiary/20">
+                100% SECURE
+              </div>
+            </div>
+          </div>
+          <div class="order-1 lg:order-2">
+            <span class="px-4 py-1.5 rounded-full bg-tertiary/10 text-tertiary font-label-sm text-[10px] uppercase tracking-widest mb-6 inline-block">Privacy First</span>
+            <h2 class="font-headline-lg text-headline-lg mb-8">Zero Data Harvesting. Period.</h2>
+            <p class="font-body-md text-body-md text-on-surface-variant mb-8">
+              Traditional writing tools send every single letter you type to corporate servers. ScribeAI operates locally via WebGPU. Your text stays on your machine, in your GPU memory, preserving sensitive business contracts, client files, and confidential passwords.
+            </p>
+            <ul class="space-y-4">
+              <li class="flex items-center gap-4">
+                <span class="material-symbols-outlined text-tertiary">check_circle</span>
+                <span class="font-body-md text-on-surface">Local hardware execution—no central databases.</span>
+              </li>
+              <li class="flex items-center gap-4">
+                <span class="material-symbols-outlined text-tertiary">check_circle</span>
+                <span class="font-body-md text-on-surface">No telemetry tracking or data log scraping.</span>
+              </li>
+              <li class="flex items-center gap-4">
+                <span class="material-symbols-outlined text-tertiary">check_circle</span>
+                <span class="font-body-md text-on-surface">Direct P2P connections for Gemini API mode.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Playground Section -->
+  <section class="max-w-container-max mx-auto px-gutter mb-section-gap" id="sandbox">
+    <div class="grid grid-cols-1 lg:grid-cols-5 gap-12 items-center">
+      <div class="lg:col-span-2">
+        <span class="px-4 py-1.5 rounded-full bg-primary/10 text-primary font-label-sm text-[10px] uppercase tracking-widest mb-6 inline-block">Live Playground</span>
+        <h2 class="font-headline-lg text-headline-lg mb-6">See ScribeAI in action</h2>
+        <p class="font-body-md text-body-md text-on-surface-variant mb-10">
+          Test our parsing engine below. Choose one of our draft templates, select a tone chip, and watch ScribeAI polish it without adding conversation filler or explanations.
+        </p>
+        <div class="space-y-4" id="preset-selectors">
+          <button id="preset-proper-name" class="preset-btn w-full p-4 glass-card rounded-2xl text-left hover:bg-white/5 transition-colors border-l-4 border-l-primary" data-preset="Proper Name Spelling">
+            <span class="font-bold">Proper Name Spelling</span>
+          </button>
+          <button id="preset-messy-message" class="preset-btn w-full p-4 glass-card rounded-2xl text-left hover:bg-white/5 transition-colors" data-preset="Messy Team Message">
+            <span class="font-bold">Messy Team Message</span>
+          </button>
+          <button id="preset-wordy-proposal" class="preset-btn w-full p-4 glass-card rounded-2xl text-left hover:bg-white/5 transition-colors" data-preset="Wordy Business Proposal">
+            <span class="font-bold">Wordy Business Proposal</span>
+          </button>
+        </div>
+      </div>
+      <div class="lg:col-span-3">
+        <div class="bg-[#0e0e10] border border-outline-variant/20 rounded-[32px] p-8 shadow-2xl relative">
+          <div class="flex items-center justify-between mb-6">
+            <span class="font-label-sm text-xs text-on-surface-variant/40 uppercase tracking-widest">YOUR DRAFT</span>
+            <span class="px-2 py-0.5 rounded bg-surface-container-highest text-[10px] text-on-surface-variant font-bold">INPUT</span>
+          </div>
+          <textarea class="w-full bg-black/40 border border-outline-variant/10 rounded-2xl p-6 font-mono text-primary min-h-[160px] mb-8 focus:ring-1 focus:ring-primary focus:border-primary transition-all" id="draft-input" placeholder="Type or paste something messy here...">i write rohit but ai write rihoy</textarea>
+          <div class="flex flex-wrap items-center justify-between gap-4 mb-8">
+            <div class="flex gap-2 p-1 bg-surface-container-low rounded-xl border border-white/5" id="tone-selector">
+              <button id="tone-chip-refine" class="tone-chip px-4 py-2 bg-primary text-on-primary rounded-lg text-sm font-bold" data-tone="improve">Refine</button>
+              <button id="tone-chip-business" class="tone-chip px-4 py-2 hover:bg-white/5 rounded-lg text-sm font-medium transition-colors" data-tone="professional">Business</button>
+              <button id="tone-chip-casual" class="tone-chip px-4 py-2 hover:bg-white/5 rounded-lg text-sm font-medium transition-colors" data-tone="casual">Casual</button>
+              <button id="tone-chip-shorten" class="tone-chip px-4 py-2 hover:bg-white/5 rounded-lg text-sm font-medium transition-colors" data-tone="concise">Shorten</button>
+            </div>
+            <button class="px-8 py-3 bg-gradient-to-r from-primary-container to-secondary-container text-white rounded-full font-bold flex items-center gap-2 shadow-lg shadow-primary/20 hover:scale-105 active:scale-95 transition-transform" id="polish-btn">
+              <span class="run-btn-text">Polish Text</span>
+              <span class="material-symbols-outlined text-sm run-icon">autorenew</span>
+            </button>
+          </div>
+          <div class="flex items-center justify-between mb-6">
+            <span class="font-label-sm text-xs text-on-surface-variant/40 uppercase tracking-widest">SCRIBEAI REFINED VERSION</span>
+            <span class="px-2 py-0.5 rounded bg-tertiary-container/20 text-tertiary text-[10px] font-bold uppercase">Clean Output</span>
+          </div>
+          <div class="w-full bg-black/40 border border-outline-variant/10 rounded-2xl p-6 font-mono text-tertiary min-h-[160px] relative overflow-hidden" id="refined-output">
+            <div class="hidden absolute inset-0 shimmer pointer-events-none" id="shimmer-overlay"></div>
+            <p id="output-text" class="result-text">I write Rohit, but the AI writes Rihoy.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- FAQ Section -->
+  <section class="max-w-3xl mx-auto px-gutter mb-section-gap" id="faq">
+    <div class="text-center mb-16">
+      <span class="font-label-sm text-label-sm text-primary uppercase tracking-widest mb-4 block">Common Questions</span>
+      <h2 class="font-headline-lg text-headline-lg">Everything you need to know</h2>
+    </div>
+    <div class="space-y-4">
+      <details id="faq-shortcut" class="group glass-card rounded-2xl p-2 transition-all open:bg-primary/5">
+        <summary class="flex items-center justify-between p-6 cursor-pointer list-none font-bold text-lg text-on-surface">
+          How does the global macOS shortcut work?
+          <span class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
+        </summary>
+        <div class="px-6 pb-6 text-on-surface-variant leading-relaxed">
+          ScribeAI runs as a lightweight accessibility agent. When you highlight text and press the hotkey, it captures the selection via macOS APIs, processes it locally using the embedded LLM, and offers to replace it or copy the result to your clipboard.
+        </div>
+      </details>
+      <details id="faq-requirements" class="group glass-card rounded-2xl p-2 transition-all open:bg-primary/5">
+        <summary class="flex items-center justify-between p-6 cursor-pointer list-none font-bold text-lg text-on-surface">
+          What are the system requirements for offline WebGPU models?
+          <span class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
+        </summary>
+        <div class="px-6 pb-6 text-on-surface-variant leading-relaxed">
+          For the best experience, we recommend an Apple Silicon Mac (M1/M2/M3) with at least 8GB of RAM. The WebGPU implementation works in Chrome 113+ and Safari 17+. If your hardware is older, you can toggle on "API Mode" to use cloud models.
+        </div>
+      </details>
+      <details id="faq-free" class="group glass-card rounded-2xl p-2 transition-all open:bg-primary/5">
+        <summary class="flex items-center justify-between p-6 cursor-pointer list-none font-bold text-lg text-on-surface">
+          Is ScribeAI completely free?
+          <span class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
+        </summary>
+        <div class="px-6 pb-6 text-on-surface-variant leading-relaxed">
+          Yes, the core ScribeAI client is free and open-source. Since the AI runs on your own hardware, there are no server costs for us to pass on to you. If you choose to use third-party APIs (like OpenAI), you pay only for your own usage directly to them.
+        </div>
+      </details>
+      <details id="faq-identity" class="group glass-card rounded-2xl p-2 transition-all open:bg-primary/5">
+        <summary class="flex items-center justify-between p-6 cursor-pointer list-none font-bold text-lg text-on-surface">
+          Why doesn't the AI change proper names or spelling of names?
+          <span class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
+        </summary>
+        <div class="px-6 pb-6 text-on-surface-variant leading-relaxed">
+          We've implemented a custom "Identity Lock" layer. Before the AI processes your text, we index proper nouns and names. After processing, we run a verification pass to ensure the AI hasn't accidentally regularized unique spellings or changed cultural names.
+        </div>
+      </details>
+    </div>
+  </section>
+  <!-- Final CTA -->
+  <section class="max-w-container-max mx-auto px-gutter mb-section-gap">
+    <div class="glass-card rounded-[40px] py-24 px-8 text-center relative overflow-hidden">
+      <div class="absolute inset-0 bg-primary/5 blur-[100px]"></div>
+      <h2 class="font-display-lg text-5xl md:text-7xl mb-8 relative z-10">Take control of your<br><span class="text-gradient">writing workflow</span></h2>
+      <p class="font-body-md text-body-md text-on-surface-variant max-w-2xl mx-auto mb-12 relative z-10">
+        Get started with the global macOS app or install the Chrome Extension to write cleaner, more professional content everywhere.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4 relative z-10">
+        <a id="final-download-btn" href="https://github.com/Anirudh3434/scribeai/releases/download/v1.0.0/ScribeAI-1.0.0-arm64.dmg" download class="px-10 py-5 bg-gradient-to-r from-primary-container to-secondary-container text-white rounded-2xl font-bold flex items-center gap-3 shadow-2xl shadow-primary/20 hover:scale-105 active:scale-95">
+          <span class="material-symbols-outlined">download</span>
+          <span class="">Download macOS App (.dmg)</span>
+        </a>
+        <div id="final-chrome-btn" class="px-8 py-5 border border-outline-variant/30 rounded-2xl font-medium text-on-surface hover:bg-white/5 transition-colors flex items-center gap-3 opacity-60 cursor-not-allowed">
+          <span class="material-symbols-outlined">extension</span>
+          <span class="">Chrome Extension</span>
+          <span class="px-1.5 py-0.5 rounded bg-surface-container-highest text-[10px] font-bold">SOON</span>
+        </div>
+        <div id="final-windows-btn" class="px-8 py-5 border border-outline-variant/30 rounded-2xl font-medium text-on-surface hover:bg-white/5 transition-colors flex items-center gap-3 opacity-60 cursor-not-allowed">
+          <span class="material-symbols-outlined">desktop_windows</span>
+          <span class="">Windows App</span>
+          <span class="px-1.5 py-0.5 rounded bg-surface-container-highest text-[10px] font-bold">SOON</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest border-t border-outline-variant/10 py-20">
+  <div class="max-w-container-max mx-auto px-gutter">
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-12">
+      <div>
+        <div class="flex items-center gap-2 mb-4">
+          <img class="logo-image w-6 h-6 object-contain" src="assets/icon.png" alt="ScribeAI Logo">
+          <span class="text-xl font-display-lg font-bold text-on-surface">ScribeAI</span>
+        </div>
+        <p class="text-on-surface-variant font-body-md text-sm max-w-xs">Global writing refinement client. Privacy by design.</p>
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-8">
+        <a id="footer-privacy" class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy Policy</a>
+        <a id="footer-terms" class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Terms of Service</a>
+        <a id="footer-github" class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" href="https://github.com/Anirudh3434/scribeai" target="_blank" rel="noopener noreferrer">Github</a>
+        <a id="footer-twitter" class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Twitter</a>
+      </div>
+    </div>
+    <div class="mt-20 pt-8 border-t border-outline-variant/10 flex flex-col md:flex-row justify-between items-center gap-4">
+      <p class="font-label-sm text-label-sm text-on-surface-variant/40">© 2026 ScribeAI. Released under the MIT License.</p>
+      <div class="flex gap-4">
+        <div class="w-1.5 h-1.5 rounded-full bg-tertiary"></div>
+        <span class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant/40">v2.4.0 Stable</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+    const presets = {
+        'Proper Name Spelling': 'i write rohit but ai write rihoy',
+        'Messy Team Message': 'hey guys can we meet at 5 to talk about the project i think we need to pivot a bit or maybe just change the logo what do u think',
+        'Wordy Business Proposal': 'In view of the fact that we have significant challenges ahead of us, it is our recommendation that we should proceed with caution and utilize all available resources to ensure success.'
+    };
+
+    const outputs = {
+        'Proper Name Spelling': {
+            improve: 'I write Rohit, but the AI writes Rihoy.',
+            professional: 'Although the input is spelled Rohit, the AI assistant generates Rihoy.',
+            casual: 'Hey, so I write Rohit but the AI outputs Rihoy. Any idea why?',
+            concise: 'I write Rohit; AI writes Rihoy.'
+        },
+        'Messy Team Message': {
+            improve: "Hello team, I just wanted to let you know that the meeting is at 5:00. Please be on time, otherwise we will lose the slot. Thank you.",
+            professional: "Dear Team, Please be advised that our upcoming meeting is scheduled for 5:00 PM. It is imperative that all members arrive promptly to ensure we retain our reserved time slot. Thank you.",
+            casual: "Hey guys, just a heads-up that our sync is at 5. Try to be on time so we don't lose the room! Thanks!",
+            concise: "Team: Meeting is at 5 PM. Please arrive on time so we don't lose the slot."
+        },
+        'Wordy Business Proposal': {
+            improve: 'We are currently investigating the possibility of postponing the product delivery deadline.',
+            professional: 'We are currently evaluating the feasibility of requesting a temporary extension for the product delivery schedule.',
+            casual: "We're looking into pushing back the product launch date a bit.",
+            concise: 'We are assessing postponing the product delivery deadline.'
+        }
+    };
+
+    let currentPreset = 'Proper Name Spelling';
+    let currentTone = 'improve';
+
+    // Preset Selection Event Listeners
+    const presetButtons = document.querySelectorAll('#preset-selectors .preset-btn');
+    presetButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            presetButtons.forEach(b => b.classList.remove('border-l-4', 'border-l-primary'));
+            btn.classList.add('border-l-4', 'border-l-primary');
+            
+            currentPreset = btn.getAttribute('data-preset');
+            document.getElementById('draft-input').value = presets[currentPreset];
+            triggerPolish();
+        });
+    });
+
+    // Tone Selection Event Listeners
+    const toneChips = document.querySelectorAll('#tone-selector .tone-chip');
+    toneChips.forEach(chip => {
+        chip.addEventListener('click', () => {
+            toneChips.forEach(c => {
+                c.classList.remove('bg-primary', 'text-on-primary', 'font-bold');
+                c.classList.add('hover:bg-white/5', 'font-medium', 'transition-colors');
+            });
+            chip.classList.add('bg-primary', 'text-on-primary', 'font-bold');
+            chip.classList.remove('hover:bg-white/5', 'font-medium', 'transition-colors');
+            
+            currentTone = chip.getAttribute('data-tone');
+            triggerPolish();
+        });
+    });
+
+    const polishBtn = document.getElementById('polish-btn');
+    const runBtnText = polishBtn.querySelector('.run-btn-text');
+    const runIcon = polishBtn.querySelector('.run-icon');
+
+    polishBtn.addEventListener('click', () => {
+        // Clear preset border highlight if user edits input manually
+        const inputVal = document.getElementById('draft-input').value;
+        let isPreset = false;
+        for (let key in presets) {
+            if (presets[key] === inputVal) {
+                currentPreset = key;
+                isPreset = true;
+            }
+        }
+        if (!isPreset) {
+            currentPreset = null;
+            presetButtons.forEach(b => b.classList.remove('border-l-4', 'border-l-primary'));
+        }
+        triggerPolish();
+    });
+
+    // Typewriter print effect
+    let typeInterval = null;
+    function typeEffect(element, text, speed = 12, onComplete) {
+        clearInterval(typeInterval);
+        element.textContent = "";
+        element.classList.add('typing');
+        
+        let idx = 0;
+        typeInterval = setInterval(() => {
+            if (idx < text.length) {
+                element.textContent += text.charAt(idx);
+                idx++;
+            } else {
+                clearInterval(typeInterval);
+                element.classList.remove('typing');
+                if (onComplete) onComplete();
+            }
+        }, speed);
+    }
+
+    function triggerPolish() {
+        const input = document.getElementById('draft-input').value;
+        const outputText = document.getElementById('output-text');
+        const shimmer = document.getElementById('shimmer-overlay');
+        
+        if (!input) return;
+
+        polishBtn.disabled = true;
+        shimmer.classList.remove('hidden');
+        runBtnText.textContent = 'Polishing...';
+        runIcon.classList.add('animate-spin');
+        
+        setTimeout(() => {
+            let matchText = '';
+            
+            // Check preset match
+            if (currentPreset && outputs[currentPreset] && outputs[currentPreset][currentTone]) {
+                matchText = outputs[currentPreset][currentTone];
+            } else {
+                // Basic client-side grammar fixer rule
+                let fixed = input.trim();
+                fixed = fixed.replace(/\bpls\b/gi, 'please')
+                             .replace(/\bthx\b/gi, 'thank you')
+                             .replace(/\bu\b/gi, 'you')
+                             .replace(/\br\b/gi, 'are');
+                
+                if (fixed.length > 0) {
+                    fixed = fixed.charAt(0).toUpperCase() + fixed.slice(1);
+                }
+                if (fixed.length > 0 && !/[.!?]$/.test(fixed)) {
+                    fixed += '.';
+                }
+                
+                if (currentTone === 'professional') {
+                    matchText = "Please be advised that " + fixed.charAt(0).toLowerCase() + fixed.slice(1);
+                } else if (currentTone === 'casual') {
+                    matchText = "Hey! Just wanted to share: " + fixed;
+                } else if (currentTone === 'concise') {
+                    matchText = fixed.length > 40 ? fixed.slice(0, Math.floor(fixed.length * 0.7)) + '...' : fixed;
+                } else {
+                    matchText = fixed;
+                }
+            }
+            
+            typeEffect(outputText, matchText, 10, () => {
+                shimmer.classList.add('hidden');
+                runBtnText.textContent = 'Polish Text';
+                runIcon.classList.remove('animate-spin');
+                polishBtn.disabled = false;
+            });
+        }, 600);
+    }
+</script>
+</body>
+</html>

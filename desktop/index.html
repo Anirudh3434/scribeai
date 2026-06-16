@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ScribeAI Assistant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="card" id="app-card">
+    <!-- Close button for frameless window -->
+    <button class="win-close-btn" id="win-close-btn" title="Close Assistant" aria-label="Close Assistant">
+      <svg class="icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 6 6 18"/>
+        <path d="m6 6 12 12"/>
+      </svg>
+    </button>
+
+    <!-- Settings button -->
+    <button class="win-settings-btn" id="win-settings-btn" title="AI Provider Settings" aria-label="AI Provider Settings">
+      <svg class="gear-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.1a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/>
+        <circle cx="12" cy="12" r="3"/>
+      </svg>
+    </button>
+
+    <!-- Removed profile badge -->
+
+    <!-- Header (Constant Visual Anchor across all views) -->
+    <header class="header" id="app-header">
+      <div class="logo-group">
+        <img class="logo-image" src="icon.png" alt="ScribeAI Logo">
+        <div>
+          <h1 class="logo-text">Scribe<span>AI</span></h1>
+          <p class="tagline">writing refinement</p>
+        </div>
+      </div>
+    </header>
+
+    <!-- Views Container -->
+    <div class="views-wrapper">
+      <!-- 0. WELCOME / ONBOARDING VIEW -->
+      <div id="welcome-view" class="view">
+        <!-- Background Atmospheric Elements -->
+        <div class="bg-blob bg-primary-blob"></div>
+        <div class="bg-blob bg-tertiary-blob"></div>
+
+        <!-- Top Navigation Bar inside onboarding -->
+        <header class="onboarding-header">
+          <div class="logo-group-onboarding">
+            <img class="logo-image" src="icon.png" alt="ScribeAI Logo">
+            <h1 class="logo-text">Scribe<span>AI</span></h1>
+          </div>
+          <button id="welcome-skip-btn" class="skip-btn-onboarding">
+            Skip Setup
+            <svg class="arrow-double-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m13 17 5-5-5-5"/>
+              <path d="m6 17 5-5-5-5"/>
+            </svg>
+          </button>
+        </header>
+
+        <!-- Stepper Component -->
+        <div class="stepper-onboarding">
+          <div class="step-indicator active" id="step-ind-1">
+            <div class="step-indicator-circle">
+              <svg class="sparkles-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275Z"/>
+              </svg>
+            </div>
+            <span>Welcome</span>
+          </div>
+          <div class="step-line" id="step-line-1"></div>
+          <div class="step-indicator" id="step-ind-2">
+            <div class="step-indicator-circle">
+              <svg class="settings-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="3"/>
+                <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.1a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/>
+              </svg>
+            </div>
+            <span>Configure</span>
+          </div>
+          <div class="step-line" id="step-line-2"></div>
+          <div class="step-indicator" id="step-ind-3">
+            <div class="step-indicator-circle">
+              <svg class="rocket-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4.5 16.5c-1.5 1.25-2.5 3.5-2.5 3.5s2.25-1 3.5-2.5"/>
+                <path d="M12 2C6.5 2 2 6.5 2 12c0 1.25.25 2.5.75 3.5l1.25-1.25C4 13.25 4 12.25 4.5 11.5c1.5-2 4.5-3.5 7.5-3.5 3 0 6 1.5 7.5 3.5.5.75.5 1.75.5 2.75l1.25-1.25c.5-1 .75-2.25.75-3.5 0-5.5-4.5-10-10-10z"/>
+                <path d="M9 15c1.5 1.5 4 2.5 6 1.5l5.5 5.5"/>
+              </svg>
+            </div>
+            <span>Ready</span>
+          </div>
+        </div>
+
+        <!-- Onboarding Step Content Container -->
+        <div class="onboarding-steps-container">
+          <!-- Step 1: Welcome -->
+          <div id="onboarding-step-1" class="onboarding-step-content active">
+
+
+            <!-- Features Grid (3 Columns) -->
+            <!-- Interactive Multi-Screen Carousel Slider -->
+            <div class="welcome-slider-viewport">
+              <div class="welcome-slider-track" id="welcome-slider-track">
+                <!-- Slide 0: Welcome Cover -->
+                <div class="welcome-slide">
+                  <div class="welcome-cover">
+                    <div class="welcome-logo-container">
+                      <img class="welcome-logo-large" src="icon.png" alt="ScribeAI Logo">
+                      <div class="welcome-logo-glow"></div>
+                    </div>
+                    <h2 class="welcome-title">Welcome to Scribe<span>AI</span></h2>
+                    <p class="welcome-subtitle">Premium Offline Writing Companion</p>
+                    <p class="welcome-description">Refine grammar, rewrite drafts, and polish text locally in any macOS application with 100% privacy.</p>
+                  </div>
+                </div>
+
+                <!-- Slide 1: Select Text -->
+                <div class="welcome-slide">
+                  <img class="welcome-slide-img" src="assets/slide1.png" alt="Select Text">
+                  <h3>1. Select Text</h3>
+                  <p>Highlight text in Slack, Notes, browser, or any other Mac application where you need a little polish.</p>
+                </div>
+                
+                <!-- Slide 2: Press Shortcut -->
+                <div class="welcome-slide">
+                  <img class="welcome-slide-img" src="assets/slide2.png" alt="Trigger Shortcut">
+                  <h3>2. Trigger Shortcut</h3>
+                  <div class="kbd-row-onboarding" style="margin-bottom: 12px; justify-content: center; gap: 8px;">
+                    <kbd class="kbd-glow">⌘</kbd>
+                    <kbd class="kbd-glow">Option</kbd>
+                    <kbd class="kbd-glow">S</kbd>
+                  </div>
+                  <p>Press ⌥ + ⌘ + S to instantly display a sleek, floating writing assistant panel over your active window.</p>
+                </div>
+                
+                <!-- Slide 3: Improve & Insert -->
+                <div class="welcome-slide">
+                  <img class="welcome-slide-img" src="assets/slide3.png" alt="Improve and Insert">
+                  <h3>3. Improve &amp; Insert</h3>
+                  <p>Select your tone, enter custom instructions, and watch ScribeAI replace your draft with a polished version offline.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide Dots -->
+            <div class="welcome-slider-dots" id="welcome-slider-dots">
+              <div class="welcome-slider-dot active" data-slide="0"></div>
+              <div class="welcome-slider-dot" data-slide="1"></div>
+              <div class="welcome-slider-dot" data-slide="2"></div>
+              <div class="welcome-slider-dot" data-slide="3"></div>
+            </div>
+
+            <!-- CTA -->
+            <div class="onboarding-cta-container">
+              <button id="onboarding-start-btn" class="welcome-glow-btn">
+                <span>Next Step</span>
+                <svg class="arrow-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M5 12h14"/>
+                  <path d="m12 5 7 7-7 7"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Step 2: Configure -->
+          <div id="onboarding-step-2" class="onboarding-step-content">
+            <div class="onboarding-config-card">
+              <h3>Configure AI Provider</h3>
+              <p class="config-desc">Select how ScribeAI connects to AI models. You can change this anytime.</p>
+              
+              <div class="form-group-onboarding">
+                <label for="onboarding-provider">AI Provider</label>
+                <select id="onboarding-provider">
+                  <option value="gemini-custom">Google Gemini (Custom Key)</option>
+                  <option value="webgpu">WebGPU (100% Offline, No Install)</option>
+                </select>
+              </div>
+
+              <div id="onboarding-gemini-custom-group" class="form-group-onboarding hidden">
+                <label for="onboarding-gemini-key">Gemini API Key</label>
+                <input type="password" id="onboarding-gemini-key" placeholder="AIzaSy...">
+                
+                <label for="onboarding-gemini-model" class="stacked-label">Gemini Model</label>
+                <input type="text" id="onboarding-gemini-model" placeholder="e.g. gemini-1.5-flash" value="gemini-1.5-flash">
+              </div>
+
+              <button class="onboarding-next-btn" id="config-save-btn">
+                <span>Save & Continue</span>
+                <svg class="arrow-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M5 12h14"/>
+                  <path d="m12 5 7 7-7 7"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Step 3: Ready -->
+          <div id="onboarding-step-3" class="onboarding-step-content">
+            <div class="onboarding-ready-card animate-float">
+              <div class="success-icon-large" id="onboarding-ready-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                  <polyline points="22 4 12 14.01 9 11.01"/>
+                </svg>
+              </div>
+              <h2 id="onboarding-ready-title">ScribeAI is Ready!</h2>
+              <p class="ready-desc" id="onboarding-ready-desc">You have successfully configured ScribeAI. Select any text across your Mac, press <b>⌘ + Option + S</b>, and start writing better.</p>
+              
+              <!-- Large interactive progress percentage -->
+              <div id="onboarding-download-pct" class="hidden" style="font-size: 48px; font-weight: 850; background: linear-gradient(135deg, var(--accent), #7c3aed); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 15px 0; text-align: center; font-variant-numeric: tabular-nums;">0%</div>
+
+              <!-- Download status and progress for WebGPU -->
+              <div id="onboarding-download-container" class="hidden" style="width: 100%; margin-top: 15px; text-align: left;">
+                <p id="onboarding-download-status" style="font-size: 11px; font-weight: 500; color: var(--text-secondary); margin-bottom: 6px; text-align: center;">Preparing model download...</p>
+                <div style="width: 100%; background: rgba(0, 0, 0, 0.08); border: 1px solid rgba(0, 0, 0, 0.1); height: 8px; border-radius: 4px; overflow: hidden; position: relative;">
+                  <div id="onboarding-download-bar" style="width: 0%; height: 100%; background: var(--accent); border-radius: 4px; transition: width 0.2s;"></div>
+                </div>
+              </div>
+
+              <!-- Buttons -->
+              <div class="actions-row" style="width: 100%; margin-top: 20px; gap: 10px;">
+                <button id="onboarding-download-btn" class="welcome-glow-btn hidden" style="flex: 1; margin: 0;">
+                  <span>Download Offline Model (~390MB)</span>
+                </button>
+                <button id="onboarding-cancel-download-btn" class="welcome-glow-btn secondary hidden" style="flex: 1; margin: 0; background: rgba(0, 0, 0, 0.05); color: var(--text-primary); border: 1px solid rgba(0, 0, 0, 0.1);">
+                  <span>Cancel</span>
+                </button>
+                <button id="welcome-btn" class="welcome-glow-btn" style="flex: 1; margin: 0;">
+                  <span>Launch Assistant</span>
+                  <svg class="arrow-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 12h14"/>
+                    <path d="m12 5 7 7-7 7"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="requirements-footer">
+          <div class="divider-line"></div>
+          <span>System Requirements</span>
+          <div class="divider-line"></div>
+        </div>
+        <p class="requirements-text">Requires macOS Monterey or later &bull; Version 1.0.0</p>
+      </div>
+
+      <!-- 1. INPUT VIEW -->
+      <div id="input-view" class="view">
+        <div class="form-container">
+          <div class="tone-section">
+            <span class="section-label">Tone</span>
+            <div class="chips-container">
+              <button class="tone-chip active" data-tone="improve">Refine</button>
+              <button class="tone-chip" data-tone="professional">Business</button>
+              <button class="tone-chip" data-tone="casual">Casual</button>
+              <button class="tone-chip" data-tone="concise">Short</button>
+              <button class="tone-chip" data-tone="expand">Expand</button>
+            </div>
+          </div>
+
+          <div class="custom-prompt-container">
+            <textarea id="custom-prompt" rows="3" placeholder="Add instructions, such as translate to French or use bullet points"></textarea>
+          </div>
+
+
+
+          <button id="submit-btn" class="action-btn primary">
+            <span>Improve Writing</span>
+          </button>
+
+          <div class="shortcut-tip">
+            Press <kbd>⌘</kbd> + <kbd>Enter</kbd> to improve &bull; <kbd>Esc</kbd> to cancel
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. LOADING VIEW -->
+      <div id="loading-view" class="view">
+        <div class="loading-container">
+          <svg class="loading-spinner" viewBox="0 0 50 50">
+            <circle class="path-bg" cx="25" cy="25" r="20" fill="none" stroke-width="4"></circle>
+            <circle class="path-spin" cx="25" cy="25" r="20" fill="none" stroke-width="4"></circle>
+          </svg>
+          <p class="status-text" id="loading-status">ScribeAI is writing...</p>
+          <div id="loading-progress-container" class="hidden" style="width: 100%; background: rgba(0, 0, 0, 0.08); border: 1px solid rgba(0, 0, 0, 0.1); height: 6px; border-radius: 3px; margin-top: 10px; overflow: hidden; position: relative;">
+            <div id="loading-progress-bar" style="width: 0%; height: 100%; background: var(--accent); border-radius: 3px; transition: width 0.2s;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. SUCCESS VIEW -->
+      <div id="success-view" class="view">
+        <div class="success-container">
+          <svg class="checkmark-svg" viewBox="0 0 52 52">
+            <circle class="checkmark-circle" cx="26" cy="26" r="24" fill="none"></circle>
+            <path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"></path>
+          </svg>
+          <p class="status-text success-text">Refinement Complete!</p>
+        </div>
+      </div>
+
+      <!-- 4. RESULT VIEW -->
+      <div id="result-view" class="view">
+        <div class="result-container">
+          <span class="section-label">Suggested version</span>
+          <textarea id="result-box" rows="8"></textarea>
+          
+          <div class="actions-row">
+            <button id="insert-btn" class="action-btn success flex-1">Insert Text</button>
+            <button id="cancel-btn" class="action-btn secondary flex-1">Cancel</button>
+          </div>
+
+          <div class="shortcut-tip">
+            Press <kbd>⌘</kbd> + <kbd>Enter</kbd> to insert
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. ERROR VIEW -->
+      <div id="error-view" class="view">
+        <div class="error-container">
+          <h2 class="error-title">Refinement Error</h2>
+          <p id="error-message" class="error-message">Something went wrong.</p>
+          <button id="retry-btn" class="action-btn secondary full-width">Retry</button>
+        </div>
+      </div>
+
+      <!-- 6. SETTINGS VIEW -->
+      <div id="settings-view" class="view">
+        <div class="settings-container">
+          <span class="section-label">AI Configuration</span>
+          
+          <div class="form-group-local">
+            <label for="local-provider">AI Provider</label>
+            <select id="local-provider">
+              <option value="gemini-custom">Google Gemini (Custom Key)</option>
+              <option value="webgpu">WebGPU (100% Offline, No Install)</option>
+            </select>
+          </div>
+
+          <div id="local-gemini-custom-group" class="form-group-local hidden">
+            <label for="local-gemini-key">Gemini API Key</label>
+            <input type="password" id="local-gemini-key" placeholder="AIzaSy...">
+            
+            <label for="local-gemini-model" class="stacked-label">Gemini Model</label>
+            <input type="text" id="local-gemini-model" placeholder="e.g. gemini-1.5-flash" value="gemini-1.5-flash">
+          </div>
+
+          <div id="local-webgpu-group" class="form-group-local hidden">
+            <p class="config-desc" style="font-size: 11px; margin-bottom: 8px;">WebGPU runs 100% offline. You can pre-download the model below so rewriting is instant.</p>
+            <div style="display: flex; gap: 8px; width: 100%; margin-bottom: 8px;">
+              <button id="settings-download-btn" class="action-btn secondary" style="flex: 1; font-size: 12px; height: 32px; padding: 0 12px; display: inline-flex; justify-content: center; align-items: center; border-radius: 8px; cursor: pointer; margin: 0;">
+                Pre-download Offline Model (~390MB)
+              </button>
+              <button id="settings-cancel-download-btn" class="action-btn secondary hidden" style="font-size: 12px; height: 32px; padding: 0 12px; display: inline-flex; justify-content: center; align-items: center; border-radius: 8px; cursor: pointer; background: rgba(0, 0, 0, 0.05); color: var(--text-primary); border: 1px solid rgba(0, 0, 0, 0.1); margin: 0;">
+                Cancel
+              </button>
+            </div>
+            <!-- Large interactive progress percentage -->
+            <div id="settings-download-pct" class="hidden" style="font-size: 32px; font-weight: 850; background: linear-gradient(135deg, var(--accent), #7c3aed); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 10px 0; text-align: center; font-variant-numeric: tabular-nums;">0%</div>
+
+            <div id="settings-download-container" class="hidden" style="width: 100%; margin-bottom: 8px;">
+              <p id="settings-download-status" style="font-size: 11px; font-weight: 500; color: var(--text-secondary); margin-bottom: 4px; text-align: center;">Preparing model...</p>
+              <div style="width: 100%; background: rgba(0, 0, 0, 0.08); border: 1px solid rgba(0, 0, 0, 0.1); height: 6px; border-radius: 3px; overflow: hidden; position: relative;">
+                <div id="settings-download-bar" style="width: 0%; height: 100%; background: var(--accent); border-radius: 3px; transition: width 0.2s;"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="actions-row settings-actions">
+            <button id="save-local-settings-btn" class="action-btn primary flex-1">Save Settings</button>
+            <button id="cancel-local-settings-btn" class="action-btn secondary flex-1">Back</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>

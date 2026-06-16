@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ScribeAI WebLLM Deep Test</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Courier New', monospace; background: #1a1a2e; color: #e0e0e0; padding: 20px; font-size: 13px; }
+    h1 { color: #00d2ff; margin-bottom: 10px; }
+    .status { color: #ffd700; margin-bottom: 15px; font-size: 14px; }
+    .progress-bar { width: 100%; height: 8px; background: #333; border-radius: 4px; margin-bottom: 15px; overflow: hidden; }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, #00d2ff, #7c3aed); border-radius: 4px; transition: width 0.3s; width: 0%; }
+    .pass { color: #00ff88; }
+    .fail { color: #ff4466; }
+    .dim { color: #888; }
+    .result { margin: 3px 0; white-space: pre-wrap; word-break: break-all; }
+    .category { color: #00d2ff; margin-top: 15px; margin-bottom: 5px; font-weight: bold; }
+    .summary { margin-top: 20px; padding: 15px; border: 2px solid #00d2ff; border-radius: 8px; font-size: 16px; font-weight: bold; }
+    .summary.all-pass { border-color: #00ff88; color: #00ff88; }
+    .summary.has-fail { border-color: #ff4466; color: #ff4466; }
+  </style>
+</head>
+<body>
+  <h1>🧪 ScribeAI WebLLM Deep Test Suite</h1>
+  <div class="status" id="status">Initializing WebLLM engine...</div>
+  <div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+  <div id="output"></div>
+
+  <script type="module">
+    const SELECTED_MODEL = "Qwen2.5-1.5B-Instruct-q4f16_1-MLC";
+
+    const statusEl = document.getElementById('status');
+    const progressEl = document.getElementById('progress');
+    const outputEl = document.getElementById('output');
+
+    function log(html) {
+      outputEl.innerHTML += html + '\n';
+      // Also log to console for Electron main process capture
+      const text = html.replace(/<[^>]*>/g, '');
+      console.log(text);
+    }
+
+    const tonePrompts = {
+      professional: "Rewrite the text to be highly professional, polite, articulate, and well-structured, suitable for formal business correspondence or emails. Maintain a respectful, clear, and authoritative tone.",
+      casual: "Rewrite the text to be friendly, casual, and conversational, while maintaining clarity and correct grammar. Perfect for quick team chats, Slack messages, or informal emails.",
+      improve: "Refine the grammar, vocabulary, spelling, punctuation, and sentence flow of the text, making it sound natural, polished, and elegant while strictly preserving the original meaning and layout formatting (like line breaks or lists). Avoid sounding overly formal or robotic.",
+      concise: "Shorten the text to make it extremely direct and concise. Remove fluff, redundancy, and passive language while retaining all core details, meaning, and essential context.",
+      expand: "Elaborate on the ideas in the text. Add descriptive details, transitions, and polished vocabulary to make it more comprehensive, engaging, and fully-formed, without repeating points."
+    };
+
+    function getSystemPrompt(tone, customInst = "") {
+      const toneInstruction = tonePrompts[tone] || tonePrompts.improve;
+      const customPromptText = customInst ? `Additional custom instruction: ${customInst}` : "";
+      return `You are ScribeAI, a premium AI writing assistant. Your task is to rewrite, refine, or generate text strictly according to the user's instructions.
+
+CRITICAL INSTRUCTION FOR OUTPUT FORMATTING:
+1. Return ONLY the final rewritten/generated text.
+2. Absolutely NO conversational filler, introductions, or explanations (e.g., do NOT write "Here is the refined text:", "Sure, here is...", "Okay", or "Hope this helps").
+3. Do NOT wrap the output in quotation marks, backticks, or markdown code blocks.
+4. Preserve the user's paragraph breaks, formatting, list styles, and punctuation wherever possible.
+5. If the input text is extremely short, generic, or lacks context (e.g., "test", single words), do NOT complain or ask for details. Return the polished version or the text as-is.
+6. If the input is gibberish/placeholders (like "asdf" or "qwerty") and there is an additional custom instruction, IGNORE the gibberish and generate fresh content based on the custom instruction.
+7. Do NOT change, correct, or translate proper nouns, people's names, brand names, or specific terminology. Keep them exactly as spelled in the input text.
+
+DIRECTIVE:
+${toneInstruction}
+
+${customPromptText}`;
+    }
+
+    function cleanOutput(text) {
+      let cleaned = text.trim();
+      if ((cleaned.startsWith('"') && cleaned.endsWith('"')) || (cleaned.startsWith("'") && cleaned.endsWith("'")))
+        cleaned = cleaned.slice(1, -1).trim();
+      if (cleaned.startsWith("```")) {
+        const lines = cleaned.split("\n");
+        if (lines[0].startsWith("```")) lines.shift();
+        if (lines.length && lines[lines.length - 1] === "```") lines.pop();
+        cleaned = lines.join("\n").trim();
+      }
+      const lines = cleaned.split(/\r?\n/);
+      const blocks = []; let currentBlock = [];
+      for (let i = 0; i < lines.length; i++) {
+        const line = lines[i].trim();
+        if (/^[-*_~=\s]{3,}$/.test(line)) {
+          if (currentBlock.length > 0) { blocks.push(currentBlock.join("\n").trim()); currentBlock = []; }
+        } else if (line === "") {
+          if (currentBlock.length > 0) { blocks.push(currentBlock.join("\n").trim()); currentBlock = []; }
+        } else { currentBlock.push(lines[i]); }
+      }
+      if (currentBlock.length > 0) blocks.push(currentBlock.join("\n").trim());
+      const explanationPatterns = [
+        /meets (all )?the specified instructions/i, /adhering to the guidelines/i,
+        /tone/i, /formal business correspondence/i, /here is the/i, /sure, here/i,
+        /polished version/i, /rewrite/i, /refined/i, /I have/i, /I've/i,
+        /corrected/i, /grammar/i, /spelling/i, /hope this helps/i, /let me know/i,
+        /specified instructions/i, /original text/i, /this text meets/i,
+        /formal business/i, /business correspondence/i, /writing assistant/i,
+        /condensed version/i, /original (prompt|meaning|message)/i,
+        /maintains the (essential|original|core)/i, /preserves the (essential|original|core|meaning)/i,
+        /this version/i, /the above/i, /text has been/i,
+        /has been (rewritten|refined|polished|condensed|shortened)/i
+      ];
+      const contentBlocks = [];
+      for (const block of blocks) {
+        const isExplanation = explanationPatterns.some(r => r.test(block)) && block.length < 500;
+        if (!isExplanation) contentBlocks.push(block);
+      }
+      if (contentBlocks.length > 0) cleaned = contentBlocks.join("\n\n").trim();
+      else cleaned = blocks[0] || text;
+      if (cleaned.startsWith('**') && cleaned.endsWith('**')) cleaned = cleaned.slice(2, -2).trim();
+      if ((cleaned.startsWith('"') && cleaned.endsWith('"')) || (cleaned.startsWith("'") && cleaned.endsWith("'")))
+        cleaned = cleaned.slice(1, -1).trim();
+      return cleaned;
+    }
+
+    // Test tracking
+    let total = 0, passed = 0, failed = 0;
+    const failures = [];
+
+    function validate(name, cleaned, raw, checks) {
+      total++;
+      const issues = [];
+      for (const ch of checks) {
+        if (!ch.fn(cleaned, raw)) {
+          issues.push(typeof ch.msg === 'function' ? ch.msg(cleaned) : ch.msg);
+        }
+      }
+      if (issues.length === 0) {
+        passed++;
+        log(`<span class="pass">  ✅ PASS: ${name}</span>`);
+      } else {
+        failed++;
+        log(`<span class="fail">  ❌ FAIL: ${name}</span>`);
+        issues.forEach(i => log(`<span class="fail">     ↳ ${i}</span>`));
+        log(`<span class="dim">     RAW: ${JSON.stringify(raw).slice(0, 300)}</span>`);
+        log(`<span class="dim">     CLEANED: ${JSON.stringify(cleaned).slice(0, 300)}</span>`);
+        failures.push({ name, issues });
+      }
+    }
+
+    // Levenshtein distance for fuzzy name matching
+    function levenshtein(a, b) {
+      const m = a.length, n = b.length;
+      const dp = Array.from({ length: m + 1 }, () => new Array(n + 1).fill(0));
+      for (let i = 0; i <= m; i++) dp[i][0] = i;
+      for (let j = 0; j <= n; j++) dp[0][j] = j;
+      for (let i = 1; i <= m; i++) {
+        for (let j = 1; j <= n; j++) {
+          dp[i][j] = a[i - 1] === b[j - 1]
+            ? dp[i - 1][j - 1]
+            : 1 + Math.min(dp[i - 1][j], dp[i][j - 1], dp[i - 1][j - 1]);
+        }
+      }
+      return dp[m][n];
+    }
+
+    function restoreNames(inputText, outputText) {
+      const COMMON = new Set([
+        'the','and','for','are','but','not','you','all','can','had','her','was','one',
+        'our','out','has','have','from','they','been','said','she','which','their',
+        'will','other','about','many','then','them','these','some','would','make',
+        'like','him','into','time','very','when','come','could','now','than','first',
+        'its','who','after','back','year','also','your','just','know','take','with',
+        'that','this','what','here','how','much','most','only','over','such','each',
+        'any','both','few','more','own','same','too','use','way','may','per','via',
+        'get','got','see','saw','been','being','does','did','might','shall','should',
+        'must','let','lets','put','set','try','ask','say','tell','give','keep',
+        'begin','seem','help','show','hear','play','move','live','look','feel',
+        'open','close','turn','start','stop','plan','work','find','need','want',
+        'think','thought','believe','expect','hope','wish','leave','bring','write',
+        'read','learn','speak','meet','discuss','decide','consider','suggest',
+        'provide','include','follow','require','offer','happen','seem','appear',
+        'send','check','deploy','submit','install','remove','fix','run','setup',
+        'day','week','month','year','today','tomorrow','yesterday','morning','night',
+        'thing','stuff','part','place','case','point','group','number','world',
+        'hand','line','word','side','head','house','long','right','left','end',
+        'home','state','area','city','body','mind','rest','face','fact','form',
+        'water','room','book','idea','name','list','file','link','page','site',
+        'issue','server','system','error','data','code','user','email','phone',
+        'client','project','product','feature','service','request','response',
+        'report','update','meeting','call','team','sprint','module','dashboard',
+        'available','ready','done','working','finished','pending','urgent','quick',
+        'yes','yeah','sure','okay','well','good','great','nice','fine','bad',
+        'new','old','big','small','high','low','full','real','last','next',
+        'different','important','large','possible','early','late','young','hard',
+        'certain','clear','free','true','whole','major','better','able','likely',
+        'hey','hello','dude','bro','guys','man','bruh','lol','asap','fyi',
+        'cool','awesome','wow','damn','crap','oops','yep','nope','nah',
+        'monday','tuesday','wednesday','thursday','friday','saturday','sunday',
+        'again','already','always','never','often','still','every','soon',
+        'app','api','url','web','bug','log','dev','ops','test','push','pull',
+        'build','deploy','merge','branch','commit','release','config','database',
+        'backend','frontend','endpoint','webhook','refactor','integrate','sync',
+        'dear','regards','sincerely','best','kind','warm','please','thanks',
+        'thank','sorry','welcome','congratulations','cheers',
+        'someone','anyone','everyone','something','anything','everything',
+        'nothing','another','between','before','behind','below','above',
+        'around','through','during','without','within','along','across',
+        'down','away','off','upon','toward','against','among','until',
+        'text','rewrite','improve','refine','polish','correct','instruction','version',
+        'however','therefore','because','although','whether','since','while',
+        'maybe','perhaps','really','actually','basically','simply','usually'
+      ]);
+      const inputWords = inputText.match(/\b[a-zA-Z]{3,}\b/g) || [];
+      const nameMap = new Map();
+      for (const w of inputWords) {
+        const lower = w.toLowerCase();
+        if (!COMMON.has(lower)) nameMap.set(lower, w);
+      }
+      if (nameMap.size === 0) return outputText;
+      let result = outputText;
+      const outputWords = outputText.match(/\b[a-zA-Z]{3,}\b/g) || [];
+      const alreadyFixed = new Set();
+      for (const outWord of outputWords) {
+        const outLower = outWord.toLowerCase();
+        if (COMMON.has(outLower) || nameMap.has(outLower) || alreadyFixed.has(outLower)) continue;
+        for (const [nameLower, nameOriginal] of nameMap) {
+          if (nameLower === outLower) continue;
+          const dist = levenshtein(nameLower, outLower);
+          if (dist <= 2 && Math.abs(nameLower.length - outLower.length) <= 1) {
+            let replacement = nameOriginal;
+            if (outWord[0] === outWord[0].toUpperCase() && nameOriginal[0] === nameOriginal[0].toLowerCase()) {
+              replacement = nameOriginal[0].toUpperCase() + nameOriginal.slice(1);
+            }
+            result = result.replace(new RegExp('\\b' + outWord.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b'), replacement);
+            alreadyFixed.add(outLower);
+            break;
+          }
+        }
+      }
+      return result;
+    }
+
+    async function runTest(engine, name, input, tone, checks, customInst = "") {
+      statusEl.textContent = `Running: ${name}...`;
+      const systemPrompt = getSystemPrompt(tone, customInst);
+      try {
+        const reply = await engine.chat.completions.create({
+          messages: [
+            { role: 'system', content: systemPrompt },
+            { role: 'user', content: `Text to rewrite:\n${input}` }
+          ],
+          temperature: 0.3
+        });
+        const raw = reply.choices[0].message.content;
+        let cleaned = cleanOutput(raw);
+        cleaned = restoreNames(input, cleaned);
+        validate(name, cleaned, raw, checks);
+      } catch (err) {
+        total++;
+        failed++;
+        log(`<span class="fail">  ❌ ERROR: ${name} — ${err.message}</span>`);
+        failures.push({ name, issues: [err.message] });
+      }
+    }
+
+    // ── MAIN ──
+    async function main() {
+      // 1. Load WebLLM engine
+      log('<span class="category">══ Loading WebLLM Engine ══</span>');
+      const webllm = await import("https://esm.run/@mlc-ai/web-llm");
+
+      const engine = await webllm.CreateMLCEngine(SELECTED_MODEL, {
+        initProgressCallback: (report) => {
+          const pct = Math.round(report.progress * 100);
+          progressEl.style.width = `${pct}%`;
+          statusEl.textContent = `Model: ${pct}% — ${report.text || ''}`;
+        }
+      });
+      log('<span class="pass">Engine loaded successfully!</span>');
+      statusEl.textContent = 'Running tests...';
+      progressEl.style.width = '100%';
+
+      // ── CATEGORY 1: Name Preservation ──
+      log('<span class="category">─── CATEGORY 1: Name Preservation ───</span>');
+
+      await runTest(engine, "1a: Single name (rohit)", "hey rohit, are you avaible for the call?", "improve", [
+        { fn: (c) => /\brohit\b/i.test(c), msg: "Name 'rohit' was changed" },
+        { fn: (c) => !c.includes("---"), msg: "Contains divider" },
+        { fn: (c) => !c.startsWith("**"), msg: "Starts with bold markers" },
+      ]);
+
+      await runTest(engine, "1b: Multiple names (anirudh, tarun, sakshi)", "anirudh and tarun needs to submit the repoort to sakshi by friday", "improve", [
+        { fn: (c) => /anirudh/i.test(c), msg: "Name 'anirudh' was changed" },
+        { fn: (c) => /tarun/i.test(c), msg: "Name 'tarun' was changed" },
+        { fn: (c) => /sakshi/i.test(c), msg: "Name 'sakshi' was changed" },
+      ]);
+
+      // ── CATEGORY 2: Tone Accuracy ──
+      log('<span class="category">─── CATEGORY 2: Tone Accuracy ───</span>');
+
+      await runTest(engine, "2a: Professional tone", "yo dude the server is down again can someone fix it asap", "professional", [
+        { fn: (c) => c.length > 20, msg: "Output too short" },
+        { fn: (c) => !/\byo\b/i.test(c), msg: "Still contains casual 'yo'" },
+        { fn: (c) => !/\bdude\b/i.test(c), msg: "Still contains casual 'dude'" },
+      ]);
+
+      await runTest(engine, "2b: Casual tone", "Dear Team, I would like to request your immediate attention to the quarterly budget review.", "casual", [
+        { fn: (c) => c.length > 15, msg: "Output too short" },
+      ]);
+
+      await runTest(engine, "2c: Concise tone", "I was just wondering if it would be possible for you to maybe take a look at the document that I sent you yesterday, if you get a chance.", "concise", [
+        { fn: (c) => c.length < 130, msg: (c) => `Output not concise enough (${c.length} chars)` },
+        { fn: (c) => c.length > 5, msg: "Output too aggressively shortened" },
+      ]);
+
+      // ── CATEGORY 3: Output Cleanliness ──
+      log('<span class="category">─── CATEGORY 3: Output Cleanliness ───</span>');
+
+      await runTest(engine, "3a: No markdown artifacts", "plz send me the updated figma link for the login page", "professional", [
+        { fn: (c) => !c.includes("```"), msg: "Contains code block markers" },
+        { fn: (c) => !c.includes("---"), msg: "Contains horizontal rule" },
+        { fn: (c) => !(c.startsWith("**") && c.endsWith("**")), msg: "Wrapped in bold markers" },
+      ]);
+
+      await runTest(engine, "3b: No conversational filler", "i want to tell akshit that the deployment is schedueld for tommorow", "improve", [
+        { fn: (c) => !/^(sure|here is|okay|certainly)/i.test(c), msg: "Starts with conversational filler" },
+        { fn: (c) => !/hope this helps/i.test(c), msg: "Contains 'hope this helps'" },
+      ]);
+
+      // ── CATEGORY 4: Edge Cases ──
+      log('<span class="category">─── CATEGORY 4: Edge Cases ───</span>');
+
+      await runTest(engine, "4a: Single word ('ok')", "ok", "improve", [
+        { fn: (c) => c.length >= 2, msg: "Output is empty" },
+        { fn: (c) => c.length < 150, msg: "Model over-expanded a single word" },
+      ]);
+
+      await runTest(engine, "4b: Bullet list format", "- fix landing page\n- install MLC webllm\n- remove supabase auth", "improve", [
+        { fn: (c) => c.includes("-") || c.includes("•"), msg: "Bullet list format was lost" },
+      ]);
+
+      await runTest(engine, "4c: Multi-paragraph", "Hi team,\n\nJust a quick update.\n\nWe finished auth.\nStill working on dashboard.\n\nThanks,\nAnirudh", "improve", [
+        { fn: (c) => c.includes("\n"), msg: "Paragraph breaks were collapsed" },
+      ]);
+
+      // ── CATEGORY 5: Stress ──
+      log('<span class="category">─── CATEGORY 5: Stress Tests ───</span>');
+
+      await runTest(engine, "5a: Long msg with typos + names", "hey guys so i was thnking about the feture we discused. rupali mentioned the backend api needs refactoring. lets sync tommorow.", "improve", [
+        { fn: (c) => /rupali/i.test(c), msg: "Name 'rupali' was changed" },
+        { fn: (c) => c.length > 50, msg: "Output suspiciously short" },
+      ]);
+
+      await runTest(engine, "5b: Short msg", "thanks for the update", "improve", [
+        { fn: (c) => c.length > 5, msg: "Output too short or empty" },
+        { fn: (c) => c.length < 200, msg: "Model over-expanded a short message" },
+      ]);
+
+      // ── REPORT ──
+      log('');
+      const summaryClass = failed === 0 ? 'all-pass' : 'has-fail';
+      const emoji = failed === 0 ? '🟢' : '🔴';
+      const verdict = failed === 0 ? 'ALL TESTS PASSED — WebLLM is ready to go live!' : `${failed} test(s) FAILED. Review needed.`;
+
+      log(`<div class="summary ${summaryClass}">${emoji} RESULTS: ${passed}/${total} passed, ${failed} failed\n${verdict}</div>`);
+
+      statusEl.textContent = `Done! ${passed}/${total} passed.`;
+
+      if (failures.length > 0) {
+        log('<span class="fail">\nFailed cases:</span>');
+        failures.forEach(f => {
+          log(`<span class="fail">  ❌ ${f.name}: ${f.issues.join(', ')}</span>`);
+        });
+      }
+
+      // Signal completion to main process
+      console.log(`__TEST_COMPLETE__ ${passed}/${total} passed, ${failed} failed`);
+    }
+
+    main().catch(err => {
+      log(`<span class="fail">FATAL: ${err.message}</span>`);
+      console.error("Test suite crashed:", err);
+      console.log(`__TEST_COMPLETE__ CRASHED`);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+{
+  "name": "scribeai-desktop",
+  "version": "1.0.0",
+  "description": "Global macOS ScribeAI writing assistant",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --mac"
+  },
+  "devDependencies": {
+    "electron": "^28.2.0",
+    "electron-builder": "^24.13.3"
+  },
+  "author": "Anirudh Bhardwaj",
+  "build": {
+    "appId": "com.scribeai.assistant",
+    "productName": "ScribeAI",
+    "files": [
+      "**/*",
+      "!test-webllm.html",
+      "!test-webllm-runner.js",
+      "!**/*.log",
+      "!dist"
+    ],
+    "mac": {
+      "category": "public.app-category.productivity",
+      "target": [
+        "dmg"
+      ],
+      "entitlements": "entitlements.mac.plist",
+      "entitlementsInherit": "entitlements.mac.inherit.plist"
+    },
+    "publish": {
+      "provider": "github",
+      "owner": "Anirudh3434",
+      "repo": "scribeai"
+    }
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.107.0"
+  }
+}
