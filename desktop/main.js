@@ -66,6 +66,49 @@ app.on('window-all-closed', () => {
   }
 });
 
+// Forward update events to renderer
+function sendUpdateStatus(status, details = '') {
+  if (mainWindow && !mainWindow.isDestroyed()) {
+    mainWindow.webContents.send('update-status-change', status, details);
+  }
+}
+
+autoUpdater.on('checking-for-update', () => {
+  sendUpdateStatus('checking');
+});
+
+autoUpdater.on('update-available', (info) => {
+  sendUpdateStatus('available', info.version);
+});
+
+autoUpdater.on('update-not-available', () => {
+  sendUpdateStatus('not-available');
+});
+
+autoUpdater.on('error', (err) => {
+  sendUpdateStatus('error', err.message || err);
+});
+
+autoUpdater.on('download-progress', (progressObj) => {
+  const percent = Math.round(progressObj.percent);
+  sendUpdateStatus('downloading', `${percent}%`);
+});
+
+autoUpdater.on('update-downloaded', (info) => {
+  sendUpdateStatus('downloaded', info.version);
+});
+
+// IPC handlers for manual updates
+ipcMain.on('check-for-updates-manual', () => {
+  autoUpdater.checkForUpdates().catch(err => {
+    sendUpdateStatus('error', err.message || err);
+  });
+});
+
+ipcMain.on('quit-and-install', () => {
+  autoUpdater.quitAndInstall();
+});
+
 // IPC communication channels
 ipcMain.on('resize-window', (event, width, height) => {
   if (mainWindow) {

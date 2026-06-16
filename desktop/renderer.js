@@ -172,9 +172,9 @@ winSettingsBtn.addEventListener('click', () => {
   loadLocalSettings();
   const provider = localProviderSelect.value;
   if (provider === 'gemini-custom' || provider === 'webgpu') {
-    window.electronAPI.send('resize-window', 380, 410);
+    window.electronAPI.send('resize-window', 380, 470);
   } else {
-    window.electronAPI.send('resize-window', 380, 310);
+    window.electronAPI.send('resize-window', 380, 370);
   }
   showView('settings-view');
 });
@@ -183,15 +183,15 @@ localProviderSelect.addEventListener('change', (e) => {
   if (e.target.value === 'gemini-custom') {
     localGeminiCustomGroup.classList.remove('hidden');
     if (localWebgpuGroup) localWebgpuGroup.classList.add('hidden');
-    window.electronAPI.send('resize-window', 380, 410);
+    window.electronAPI.send('resize-window', 380, 470);
   } else if (e.target.value === 'webgpu') {
     localGeminiCustomGroup.classList.add('hidden');
     if (localWebgpuGroup) localWebgpuGroup.classList.remove('hidden');
-    window.electronAPI.send('resize-window', 380, 410);
+    window.electronAPI.send('resize-window', 380, 470);
   } else {
     localGeminiCustomGroup.classList.add('hidden');
     if (localWebgpuGroup) localWebgpuGroup.classList.add('hidden');
-    window.electronAPI.send('resize-window', 380, 310);
+    window.electronAPI.send('resize-window', 380, 370);
   }
 });
 
@@ -961,4 +961,56 @@ retryBtn.addEventListener('click', () => {
   window.electronAPI.send('resize-window', 380, 350);
   showView('input-view');
   customPrompt.focus();
+});
+
+// Manual updates check button
+const checkUpdateBtn = document.getElementById('check-update-btn');
+const updateStatusText = document.getElementById('update-status-text');
+
+if (checkUpdateBtn) {
+  checkUpdateBtn.addEventListener('click', () => {
+    if (checkUpdateBtn.textContent === 'Install Update') {
+      window.electronAPI.send('quit-and-install');
+    } else {
+      updateStatusText.textContent = "Checking...";
+      checkUpdateBtn.disabled = true;
+      window.electronAPI.send('check-for-updates-manual');
+    }
+  });
+}
+
+// Listen for auto-updater status changes
+window.electronAPI.on('update-status-change', (status, details) => {
+  if (!updateStatusText || !checkUpdateBtn) return;
+
+  switch (status) {
+    case 'checking':
+      updateStatusText.textContent = "Checking...";
+      checkUpdateBtn.disabled = true;
+      break;
+    case 'available':
+      updateStatusText.textContent = `v${details} available!`;
+      checkUpdateBtn.disabled = true;
+      break;
+    case 'not-available':
+      updateStatusText.textContent = "v1.0.0 (Up to date)";
+      checkUpdateBtn.disabled = false;
+      checkUpdateBtn.textContent = "Check Updates";
+      break;
+    case 'downloading':
+      updateStatusText.textContent = `Downloading: ${details}`;
+      checkUpdateBtn.disabled = true;
+      break;
+    case 'downloaded':
+      updateStatusText.textContent = `v${details} ready!`;
+      checkUpdateBtn.disabled = false;
+      checkUpdateBtn.textContent = "Install Update";
+      break;
+    case 'error':
+      updateStatusText.textContent = "Check failed";
+      checkUpdateBtn.disabled = false;
+      checkUpdateBtn.textContent = "Retry Check";
+      console.error("Update error detail:", details);
+      break;
+  }
 });
