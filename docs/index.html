@@ -27,14 +27,14 @@
   <meta property="og:url" content="https://scribeai.shop/">
   <meta property="og:title" content="ScribeAI — Premium Offline AI Writing Companion">
   <meta property="og:description" content="ScribeAI is a privacy-first offline AI writing assistant for macOS. Polish grammar and refine text in any app instantly using local WebGPU LLM models.">
-  <meta property="og:image" content="https://scribeai.shop/assets/hero_mockup.png">
+  <meta property="og:image" content="https://scribeai.shop/assets/hero_mockup.webp">
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image">
   <meta property="twitter:url" content="https://scribeai.shop/">
   <meta property="twitter:title" content="ScribeAI — Premium Offline AI Writing Companion">
   <meta property="twitter:description" content="ScribeAI is a privacy-first offline AI writing assistant for macOS. Polish grammar and refine text in any app instantly using local WebGPU LLM models.">
-  <meta property="twitter:image" content="https://scribeai.shop/assets/hero_mockup.png">
+  <meta property="twitter:image" content="https://scribeai.shop/assets/hero_mockup.webp">
 
   <!-- Structured Data JSON-LD -->
   <script type="application/ld+json">
@@ -50,16 +50,22 @@
       "priceCurrency": "USD"
     },
     "description": "ScribeAI is a premium, privacy-first offline AI writing companion for macOS. Polish grammar, rewrite drafts, and refine text in any app instantly using local WebGPU LLM models.",
-    "screenshot": "https://scribeai.shop/assets/hero_mockup.png",
+    "screenshot": "https://scribeai.shop/assets/hero_mockup.webp",
     "downloadUrl": "https://github.com/Anirudh3434/scribeai/releases/download/v1.0.2/ScribeAI-1.0.2-arm64.dmg",
     "softwareVersion": "2.4.0",
     "license": "https://opensource.org/licenses/MIT"
   }
   </script>
 
-  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&amp;family=Hanken+Grotesk:wght@400;500;600&amp;family=Geist:wght@400;600&amp;display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries" defer></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&amp;family=Hanken+Grotesk:wght@400;500;600&amp;family=Geist:wght@400;600&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&amp;family=Hanken+Grotesk:wght@400;500;600&amp;family=Geist:wght@400;600&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+  </noscript>
   <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
@@ -210,7 +216,7 @@
 <nav class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-xl border-b border-outline-variant/10">
   <div class="max-w-container-max mx-auto px-gutter py-4 flex justify-between items-center">
     <div class="flex items-center gap-2">
-      <img class="logo-image w-8 h-8 object-contain" src="assets/icon.png" alt="ScribeAI Logo">
+      <img class="logo-image w-8 h-8 object-contain" src="assets/icon.webp" alt="ScribeAI Logo">
       <span class="text-2xl font-display-lg font-bold text-on-surface tracking-tight">ScribeAI</span>
     </div>
     <div class="hidden md:flex items-center gap-8">
@@ -266,7 +272,7 @@
       <div class="relative lg:h-[600px] flex items-center justify-center">
         <div class="absolute inset-0 bg-primary/10 blur-[120px] rounded-full"></div>
         <div class="relative w-full aspect-square rounded-2xl border border-white/10 overflow-hidden shadow-2xl glass-card">
-          <img class="w-full h-full object-cover" alt="ScribeAI Desktop App Showcase on macOS" src="assets/hero_mockup.png">
+          <img class="w-full h-full object-cover" alt="ScribeAI Desktop App Showcase on macOS" src="assets/hero_mockup.webp">
           <div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-40"></div>
         </div>
       </div>
@@ -594,6 +600,44 @@
       </details>
     </div>
   </section>
+
+  <!-- Technical Specifications & Trust Section -->
+  <section class="max-w-container-max mx-auto px-gutter mb-section-gap">
+    <div class="glass-card rounded-[40px] p-12 lg:p-20 relative overflow-hidden">
+      <div class="absolute inset-0 bg-secondary/5 blur-[100px] pointer-events-none"></div>
+      <div class="max-w-3xl mx-auto text-center mb-16">
+        <span class="px-4 py-1.5 rounded-full bg-secondary/10 text-secondary font-label-sm text-[10px] uppercase tracking-widest mb-6 inline-block">Architecture & Trust</span>
+        <h2 class="font-headline-lg text-headline-lg mb-6">Built Open Source & Verifiable</h2>
+        <p class="font-body-md text-body-md text-on-surface-variant">
+          ScribeAI is committed to full transparency. As an independent developer utility, our client-side source code is fully open-source and audited by the community. Here are the core specifications of the client engine:
+        </p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+        <div class="p-6 bg-surface-container rounded-2xl border border-outline-variant/10">
+          <span class="material-symbols-outlined text-primary text-3xl mb-4">memory</span>
+          <h3 class="font-bold text-lg mb-2">WebGPU Execution</h3>
+          <p class="text-on-surface-variant text-sm leading-relaxed">
+            Utilizes the WebLLM runtime framework to run local parameters on Apple Silicon GPUs, supporting quantized Qwen-1.5B weights with 1.6GB VRAM peak footprint.
+          </p>
+        </div>
+        <div class="p-6 bg-surface-container rounded-2xl border border-outline-variant/10">
+          <span class="material-symbols-outlined text-secondary text-3xl mb-4">security</span>
+          <h3 class="font-bold text-lg mb-2">Independent Auditing</h3>
+          <p class="text-on-surface-variant text-sm leading-relaxed">
+            The code has no telemetry tracker scripts, tracking cookies, or analytics servers. Review or fork our build scripts directly in our public repository.
+          </p>
+        </div>
+        <div class="p-6 bg-surface-container rounded-2xl border border-outline-variant/10">
+          <span class="material-symbols-outlined text-tertiary text-3xl mb-4">account_circle</span>
+          <h3 class="font-bold text-lg mb-2">Developer Transparency</h3>
+          <p class="text-on-surface-variant text-sm leading-relaxed">
+            Created and maintained by Anirudh Bhardwaj (ScribeAI Project Lead). Feel free to verify our builds or contact support at support@scribeai.shop.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Final CTA -->
   <section class="max-w-container-max mx-auto px-gutter mb-section-gap">
     <div class="glass-card rounded-[40px] py-24 px-8 text-center relative overflow-hidden">
@@ -634,7 +678,7 @@
       <div class="lg:col-span-4 flex flex-col justify-between">
         <div>
           <div class="flex items-center gap-3 mb-6">
-            <img class="logo-image w-8 h-8 object-contain" src="assets/icon.png" alt="ScribeAI Logo">
+            <img class="logo-image w-8 h-8 object-contain" src="assets/icon.webp" alt="ScribeAI Logo">
             <span class="text-2xl font-display-lg font-bold text-on-surface tracking-tight">ScribeAI</span>
           </div>
           <p class="text-on-surface-variant font-body-md text-sm leading-relaxed mb-6 max-w-xs">
