@@ -66,8 +66,6 @@ web_modules/
 .yarn-integrity
 
 # dotenv environment variable files
-.env
-.env.*
 !.env.example
 
 # parcel-bundler cache (https://parceljs.org/)
@@ -147,3 +145,5 @@ desktop/node_modules/
 desktop/dist/
 .DS_Store
 .qodo/
+desktop/dev-app-update.yml
+config.bat
