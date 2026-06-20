@@ -39,6 +39,27 @@
         "ElectronTeamID": "DFAJ4H2NLS"
       }
     },
+    "dmg": {
+      "background": "build/background.tiff",
+      "window": {
+        "width": 600,
+        "height": 600
+      },
+      "iconSize": 100,
+      "contents": [
+        {
+          "x": 160,
+          "y": 300,
+          "type": "file"
+        },
+        {
+          "x": 440,
+          "y": 300,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
     "publish": {
       "provider": "github",
       "owner": "Anirudh3434",
