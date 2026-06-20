@@ -1,6 +1,6 @@
 {
   "name": "scribeai-desktop",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Global macOS ScribeAI writing assistant",
   "main": "main.js",
   "scripts": {
