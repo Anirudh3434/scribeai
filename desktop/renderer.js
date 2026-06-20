@@ -186,6 +186,7 @@ function loadLocalSettings() {
   const geminiModel = localStorage.getItem('scribeai_gemini_model') || 'gemini-1.5-flash';
   
   localProviderSelect.value = provider;
+  updateProviderCardActiveState('local-provider-cards', provider);
   localGeminiKeyInput.value = geminiKey;
   localGeminiModelInput.value = geminiModel;
   
@@ -276,7 +277,10 @@ function setOnboardingStep(step) {
     const geminiKey = localStorage.getItem('scribeai_gemini_key') || '';
     const geminiModel = localStorage.getItem('scribeai_gemini_model') || 'gemini-1.5-flash';
 
-    if (onboardingProviderSelect) onboardingProviderSelect.value = provider;
+    if (onboardingProviderSelect) {
+      onboardingProviderSelect.value = provider;
+      updateProviderCardActiveState('onboarding-provider-cards', provider);
+    }
     if (onboardingGeminiKeyInput) onboardingGeminiKeyInput.value = geminiKey;
     if (onboardingGeminiModelInput) onboardingGeminiModelInput.value = geminiModel;
 
@@ -1076,3 +1080,42 @@ window.electronAPI.on('update-status-change', (status, details) => {
       break;
   }
 });
+
+// Setup AI Provider Cards click listeners and state sync
+function setupProviderCards(containerId, inputId) {
+  const container = document.getElementById(containerId);
+  const input = document.getElementById(inputId);
+  if (!container || !input) return;
+
+  const cards = container.querySelectorAll('.provider-card');
+  cards.forEach(card => {
+    card.addEventListener('click', () => {
+      const val = card.getAttribute('data-value');
+      input.value = val;
+      
+      // Update active styling
+      cards.forEach(c => c.classList.remove('active'));
+      card.classList.add('active');
+
+      // Dispatch change event to trigger existing group toggle listeners
+      input.dispatchEvent(new Event('change'));
+    });
+  });
+}
+
+function updateProviderCardActiveState(containerId, value) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  const cards = container.querySelectorAll('.provider-card');
+  cards.forEach(card => {
+    if (card.getAttribute('data-value') === value) {
+      card.classList.add('active');
+    } else {
+      card.classList.remove('active');
+    }
+  });
+}
+
+// Initial card binding
+setupProviderCards('onboarding-provider-cards', 'onboarding-provider');
+setupProviderCards('local-provider-cards', 'local-provider');

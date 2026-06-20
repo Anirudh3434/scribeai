@@ -174,11 +174,37 @@
               <p class="config-desc">Select how ScribeAI connects to AI models. You can change this anytime.</p>
               
               <div class="form-group-onboarding">
-                <label for="onboarding-provider">AI Provider</label>
-                <select id="onboarding-provider">
-                  <option value="gemini-custom">Google Gemini (Custom Key)</option>
-                  <option value="webgpu">WebGPU (100% Offline, No Install)</option>
-                </select>
+                <label>AI Provider</label>
+                <div class="provider-cards-container" id="onboarding-provider-cards">
+                  <!-- WebGPU Offline Card (Recommended) -->
+                  <div class="provider-card" data-value="webgpu">
+                    <div class="recommended-badge">RECOMMENDED</div>
+                    <div class="provider-header-row">
+                      <div class="provider-card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full">
+                          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                          <path d="M6 12h12M12 6v12"></path>
+                        </svg>
+                      </div>
+                      <h4 class="provider-card-title">Offline WebGPU</h4>
+                    </div>
+                    <p class="provider-card-desc">Runs 100% locally. Premium privacy, no internet, no keys required.</p>
+                  </div>
+
+                  <!-- Gemini Custom Card -->
+                  <div class="provider-card" data-value="gemini-custom">
+                    <div class="provider-header-row">
+                      <div class="provider-card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full">
+                          <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                        </svg>
+                      </div>
+                      <h4 class="provider-card-title">Gemini Cloud API</h4>
+                    </div>
+                    <p class="provider-card-desc">Fast cloud processing. Requires a custom API key.</p>
+                  </div>
+                </div>
+                <input type="hidden" id="onboarding-provider" value="webgpu">
               </div>
 
               <div id="onboarding-gemini-custom-group" class="form-group-onboarding hidden">
@@ -338,11 +364,37 @@
           <span class="section-label">AI Configuration</span>
           
           <div class="form-group-local">
-            <label for="local-provider">AI Provider</label>
-            <select id="local-provider">
-              <option value="gemini-custom">Google Gemini (Custom Key)</option>
-              <option value="webgpu">WebGPU (100% Offline, No Install)</option>
-            </select>
+            <label>AI Provider</label>
+            <div class="provider-cards-container compact" id="local-provider-cards">
+              <!-- WebGPU Offline Card (Recommended) -->
+              <div class="provider-card" data-value="webgpu">
+                <div class="recommended-badge">RECOMMENDED</div>
+                <div class="provider-header-row">
+                  <div class="provider-card-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full">
+                      <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                      <path d="M6 12h12M12 6v12"></path>
+                    </svg>
+                  </div>
+                  <h4 class="provider-card-title">Offline WebGPU</h4>
+                </div>
+                <p class="provider-card-desc">100% private local execution.</p>
+              </div>
+
+              <!-- Gemini Custom Card -->
+              <div class="provider-card" data-value="gemini-custom">
+                <div class="provider-header-row">
+                  <div class="provider-card-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full">
+                      <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                    </svg>
+                  </div>
+                  <h4 class="provider-card-title">Gemini Cloud API</h4>
+                </div>
+                <p class="provider-card-desc">Fast responses with custom key.</p>
+              </div>
+            </div>
+            <input type="hidden" id="local-provider" value="webgpu">
           </div>
 
           <div id="local-gemini-custom-group" class="form-group-local hidden">

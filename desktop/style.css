@@ -1673,4 +1673,116 @@ kbd {
   animation: slideDownFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards;
 }
 
+/* AI Provider Cards Selection Style */
+.provider-cards-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 8px;
+}
+
+.provider-cards-container.compact {
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.provider-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+.provider-cards-container.compact .provider-card {
+  padding: 10px 12px;
+  border-radius: 10px;
+}
+
+.provider-card:hover {
+  border-color: var(--border-strong);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.04);
+}
+
+.provider-card.active {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  box-shadow: 0 4px 14px rgba(124, 58, 237, 0.12);
+}
+
+/* Recommended Badge */
+.recommended-badge {
+  position: absolute;
+  top: -8px;
+  left: 12px;
+  background: linear-gradient(135deg, #a855f7, #7c3aed);
+  color: #ffffff;
+  font-size: 8px;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: 99px;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 6px rgba(124, 58, 237, 0.3);
+}
+
+.provider-cards-container.compact .recommended-badge {
+  top: -7px;
+  left: 8px;
+  font-size: 7px;
+  padding: 2px 6px;
+}
+
+.provider-header-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.provider-cards-container.compact .provider-header-row {
+  margin-bottom: 4px;
+}
+
+.provider-card-icon {
+  width: 24px;
+  height: 24px;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+}
+
+.provider-card.active .provider-card-icon {
+  color: var(--accent);
+}
+
+.provider-card-title {
+  font-size: 13px;
+  font-weight: 650;
+  color: var(--text);
+}
+
+.provider-cards-container.compact .provider-card-title {
+  font-size: 11.5px;
+}
+
+.provider-card-desc {
+  font-size: 10.5px;
+  color: var(--muted);
+  line-height: 1.35;
+}
+
+.provider-cards-container.compact .provider-card-desc {
+  font-size: 9.5px;
+  line-height: 1.3;
+}
+
 
