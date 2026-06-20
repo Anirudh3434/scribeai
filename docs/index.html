@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html class="dark" lang="en">
 <head>
+  <!-- Google Analytics (GA4) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EG92K51MPE"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-EG92K51MPE');
+  </script>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <title>ScribeAI — Premium Offline AI Writing Companion</title>
@@ -572,6 +580,15 @@
           We've implemented a custom "Identity Lock" layer. Before the AI processes your text, we index proper nouns and names. After processing, we run a verification pass to ensure the AI hasn't accidentally regularized unique spellings or changed cultural names.
         </div>
       </details>
+      <details id="faq-1984" class="group glass-card rounded-2xl p-2 transition-all open:bg-primary/5">
+        <summary class="flex items-center justify-between p-6 cursor-pointer list-none font-bold text-lg text-on-surface">
+          Why does the downloaded DMG file group under the year 1984 in my Downloads folder?
+          <span class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
+        </summary>
+        <div class="px-6 pb-6 text-on-surface-variant leading-relaxed">
+          This is a harmless macOS / Safari quirk. When downloading files via GitHub Releases and S3 redirects, Safari occasionally does not receive a standard <code>Last-Modified</code> date header. If no date is found, macOS Safari defaults the file creation timestamp to **January 24, 1984**—the launch date of the original Apple Macintosh computer! The file is completely intact and safe to open.
+        </div>
+      </details>
     </div>
   </section>
   <!-- Final CTA -->
@@ -907,6 +924,43 @@
             });
         }, 600);
     }
+
+    // Analytics tracking for downloads and interactive clicks
+    function trackDownload(buttonId) {
+        if (typeof gtag === 'function') {
+            gtag('event', 'download_click', {
+                'button_id': buttonId,
+                'file_name': 'ScribeAI-1.0.1-arm64.dmg'
+            });
+        }
+    }
+
+    document.getElementById('nav-download-btn')?.addEventListener('click', () => trackDownload('nav-download'));
+    document.getElementById('hero-download-btn')?.addEventListener('click', () => trackDownload('hero-download'));
+    document.getElementById('final-download-btn')?.addEventListener('click', () => trackDownload('final-download'));
+    
+    // Track footer download link clicks
+    document.querySelectorAll('a[href*="arm64.dmg"]').forEach(link => {
+        link.addEventListener('click', (e) => {
+            if (e.currentTarget.closest('footer')) {
+                trackDownload('footer-download');
+            }
+        });
+    });
+
+    // Track extension / app coming soon clicks
+    document.getElementById('hero-chrome-btn')?.addEventListener('click', () => {
+        if (typeof gtag === 'function') gtag('event', 'extension_click_soon', { 'platform': 'chrome' });
+    });
+    document.getElementById('hero-windows-btn')?.addEventListener('click', () => {
+        if (typeof gtag === 'function') gtag('event', 'app_click_soon', { 'platform': 'windows' });
+    });
+    document.getElementById('final-chrome-btn')?.addEventListener('click', () => {
+        if (typeof gtag === 'function') gtag('event', 'extension_click_soon', { 'platform': 'chrome' });
+    });
+    document.getElementById('final-windows-btn')?.addEventListener('click', () => {
+        if (typeof gtag === 'function') gtag('event', 'app_click_soon', { 'platform': 'windows' });
+    });
 </script>
 </body>
 </html>
