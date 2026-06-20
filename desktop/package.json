@@ -25,15 +25,19 @@
     "mac": {
       "category": "public.app-category.productivity",
       "target": [
-        "dmg"
+        "dmg",
+        "zip"
       ],
-      "entitlements": "entitlements.mac.plist",
-      "entitlementsInherit": "entitlements.mac.inherit.plist"
+      "identity": "Apple Development: anigokala@outlook.com (DFAJ4H2NLS)",
+      "extendInfo": {
+        "ElectronTeamID": "DFAJ4H2NLS"
+      }
     },
     "publish": {
       "provider": "github",
       "owner": "Anirudh3434",
-      "repo": "scribeai"
+      "repo": "scribeai",
+      "private": true
     }
   },
   "dependencies": {

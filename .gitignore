@@ -147,3 +147,4 @@ desktop/node_modules/
 desktop/dist/
 .DS_Store
 .qodo/
+desktop/dev-app-update.yml
