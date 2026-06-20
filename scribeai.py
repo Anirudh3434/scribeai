@@ -7,7 +7,9 @@ import threading
 import tkinter as tk
 from tkinter import font as tkfont
 
-API_KEY = "AQ.Ab8RN6J4v2xilWoei73ZIZ0ChIu-WQ2Q16OUEH0MYBDpWXKKcQ"
+# Built-in AI calls are proxied through the Supabase Edge Function.
+# The actual Gemini key is stored as a secret in the Supabase dashboard.
+PROXY_URL = "https://pqcqtpvmgziejnauidsu.supabase.co/functions/v1/proxy-gemini"
 MODEL = "gemini-flash-latest"
 
 # Custom Label-based Button to support complete color customization on macOS
@@ -482,35 +484,27 @@ class ScribeAIApp:
             f"{custom_prompt}"
         )
 
-        url = f"https://generativelanguage.googleapis.com/v1beta/models/{MODEL}:generateContent?key={API_KEY}"
+        # Call the Supabase Edge Function proxy (Gemini key stored server-side)
         headers = {"Content-Type": "application/json"}
         payload = {
-            "contents": [
-                {
-                    "parts": [
-                        {"text": f"{system_prompt}\n\nText to rewrite:\n{self.initial_text}"}
-                    ]
-                }
-            ],
-            "generationConfig": {
-                "temperature": 0.3
-            }
+            "systemPrompt": system_prompt,
+            "initialText": self.initial_text,
+            "model": MODEL
         }
         
         try:
             req = urllib.request.Request(
-                url, 
-                data=json.dumps(payload).encode("utf-8"), 
-                headers=headers, 
+                PROXY_URL,
+                data=json.dumps(payload).encode("utf-8"),
+                headers=headers,
                 method="POST"
             )
             with urllib.request.urlopen(req) as res:
                 response_data = json.loads(res.read().decode("utf-8"))
                 
-                try:
-                    refined = response_data["candidates"][0]["content"]["parts"][0]["text"]
-                except (KeyError, IndexError):
-                    raise ValueError("Received an empty or malformed response from Gemini.")
+                refined = response_data.get("text")
+                if not refined:
+                    raise ValueError("Received an empty or malformed response from the service.")
                 
                 # Clean Output formatting
                 self.refined_text = self.clean_output(refined)
@@ -521,7 +515,7 @@ class ScribeAIApp:
         except urllib.error.HTTPError as e:
             try:
                 error_body = json.loads(e.read().decode("utf-8"))
-                err_msg = error_body["error"]["message"]
+                err_msg = error_body.get("error", {}).get("message") or f"HTTP Error {e.code}"
             except Exception:
                 err_msg = f"HTTP Error {e.code}"
             self.root.after(0, lambda msg=err_msg: self.state_error(msg))

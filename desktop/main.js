@@ -12,9 +12,8 @@ process.on('unhandledRejection', (reason, promise) => {
   console.error('UNHANDLED REJECTION:', reason);
 });
 
-// Disable Chromium sandboxing to prevent network blocks in translocated/sandboxed Gatekeeper contexts
-app.commandLine.appendSwitch('no-sandbox');
-app.commandLine.appendSwitch('disable-gpu-sandbox');
+// Note: Do NOT disable sandboxing for distribution builds.
+// Entitlements in entitlements.mac.plist handle network access correctly.
 
 let mainWindow;
 
@@ -270,57 +269,67 @@ ipcMain.on('get-init-text', (event) => {
   event.reply('init-text', inputText);
 });
 
-const API_KEY = "AQ.Ab8RN6J4v2xilWoei73ZIZ0ChIu-WQ2Q16OUEH0MYBDpWXKKcQ";
+// The built-in Gemini key is proxied through a Supabase Edge Function.
+// The actual API key is stored server-side — never in the client binary.
+const PROXY_URL = "https://pqcqtpvmgziejnauidsu.supabase.co/functions/v1/proxy-gemini";
 const MODEL = "gemini-flash-latest";
 
 ipcMain.handle('run-api-call', async (event, { provider, systemPrompt, initialText, geminiKey, geminiModel }) => {
   try {
-    if (provider === 'gemini' || provider === 'gemini-custom') {
-      let apiKey = API_KEY;
-      let model = MODEL;
+    // --- Built-in provider: proxied through Supabase Edge Function (key stays server-side) ---
+    if (provider === 'gemini') {
+      let response;
+      try {
+        response = await fetch(PROXY_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ systemPrompt, initialText, model: MODEL })
+        });
+      } catch (fetchErr) {
+        throw new Error("Failed to connect. Please check your internet connection.");
+      }
 
-      if (provider === 'gemini-custom') {
-        apiKey = geminiKey ? geminiKey.trim() : "";
-        model = geminiModel ? geminiModel.trim() : "gemini-1.5-flash";
+      if (!response.ok) {
+        const errData = await response.json().catch(() => ({}));
+        const errMsg = (errData.error && errData.error.message) || `HTTP error ${response.status}`;
+        throw new Error(`ScribeAI Service Error: ${errMsg}`);
+      }
 
-        if (!apiKey) {
-          throw new Error("Gemini API Key is missing. Please configure it in settings.");
-        }
+      const data = await response.json();
+      try {
+        return data.text;
+      } catch (e) {
+        throw new Error("Received an empty or malformed response from the service.");
+      }
+    }
 
-        // Map to active aliases to prevent 404 errors
-        if (model === 'gemini-1.5-flash' || model === 'gemini-1.5-flash-latest') {
-          model = 'gemini-flash-latest';
-        } else if (model === 'gemini-1.5-pro' || model === 'gemini-1.5-pro-latest') {
-          model = 'gemini-pro-latest';
-        }
+    // --- Custom provider: user supplies their own Gemini API key ---
+    if (provider === 'gemini-custom') {
+      const apiKey = geminiKey ? geminiKey.trim() : "";
+      if (!apiKey) {
+        throw new Error("Gemini API Key is missing. Please configure it in settings.");
+      }
+
+      let model = geminiModel ? geminiModel.trim() : "gemini-1.5-flash";
+      // Map deprecated aliases to active model names
+      if (model === 'gemini-1.5-flash' || model === 'gemini-1.5-flash-latest') {
+        model = 'gemini-flash-latest';
+      } else if (model === 'gemini-1.5-pro' || model === 'gemini-1.5-pro-latest') {
+        model = 'gemini-pro-latest';
       }
 
       const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
       const payload = {
-        contents: [
-          {
-            parts: [
-              { text: `Text to rewrite:\n${initialText}` }
-            ]
-          }
-        ],
-        system_instruction: {
-          parts: [
-            { text: systemPrompt }
-          ]
-        },
-        generationConfig: {
-          temperature: 0.3
-        }
+        contents: [{ parts: [{ text: `Text to rewrite:\n${initialText}` }] }],
+        system_instruction: { parts: [{ text: systemPrompt }] },
+        generationConfig: { temperature: 0.3 }
       };
 
       let response;
       try {
         response = await fetch(url, {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload)
         });
       } catch (fetchErr) {
@@ -339,9 +348,9 @@ ipcMain.handle('run-api-call', async (event, { provider, systemPrompt, initialTe
       } catch (e) {
         throw new Error("Received an empty or malformed response from Gemini.");
       }
-    } else {
-      throw new Error(`Unknown provider: ${provider}`);
     }
+
+    throw new Error(`Unknown provider: ${provider}`);
   } catch (error) {
     console.error("API Call execution failed:", error);
     throw error;

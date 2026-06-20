@@ -20,7 +20,13 @@
       "!test-webllm.html",
       "!test-webllm-runner.js",
       "!**/*.log",
-      "!dist"
+      "!dist",
+      "!.env",
+      "!.env.*",
+      "!dev-app-update.yml",
+      "!*.py",
+      "!test_*.js",
+      "!**/__tests__/**"
     ],
     "mac": {
       "category": "public.app-category.productivity",
