@@ -9,6 +9,39 @@ let webLlmEngine = null;
 const SELECTED_MODEL = "Qwen2.5-1.5B-Instruct-q4f16_1-MLC";
 let isDownloadCancelled = false;
 
+let scifiInterval = null;
+const scifiPhrases = [
+  "INITIALIZING COGNITIVE INTERFACE...",
+  "CALIBRATING SYNAPSE PATHWAYS...",
+  "ESTABLISHING VECTOR ENVELOPE...",
+  "SYNTHESIZING MATRIX STRATA...",
+  "OPTIMIZING SYNTACTIC WEIGHTS...",
+  "RECONSTRUCTING LEXICAL FABRIC...",
+  "ALIGNING GLYPH CODES..."
+];
+
+function startScifiLoading() {
+  if (scifiInterval) clearInterval(scifiInterval);
+  const loadingStatus = document.getElementById('loading-status');
+  if (loadingStatus) {
+    loadingStatus.textContent = scifiPhrases[0];
+  }
+  let index = 1;
+  scifiInterval = setInterval(() => {
+    if (loadingStatus) {
+      loadingStatus.textContent = scifiPhrases[index];
+      index = (index + 1) % scifiPhrases.length;
+    }
+  }, 900);
+}
+
+function stopScifiLoading() {
+  if (scifiInterval) {
+    clearInterval(scifiInterval);
+    scifiInterval = null;
+  }
+}
+
 async function getWebLlmEngine(onProgress) {
   if (webLlmEngine) return webLlmEngine;
   // Dynamically load WebLLM from esm.run
@@ -533,7 +566,7 @@ async function updateProviderOptionsAndMainButtonState() {
   // Update main submit button state
   if (submitBtn) {
     submitBtn.disabled = false;
-    submitBtn.textContent = "Improve Writing";
+    submitBtn.textContent = "Refine Text";
     submitBtn.removeAttribute('title');
   }
 }
@@ -595,6 +628,9 @@ function triggerRefinement() {
   window.electronAPI.send('resize-window', 280, 200);
   showView('loading-view');
 
+  // Start sci-fi loading phrase cycling
+  startScifiLoading();
+
   // Trigger background API call
   runApiCall(customInst);
 }
@@ -639,17 +675,18 @@ ${customPromptText}`;
 
     try {
       progressContainer.classList.remove('hidden');
-      loadingStatus.textContent = "Checking system WebGPU support...";
+      stopScifiLoading();
+      loadingStatus.textContent = "CALIBRATING COGNITIVE CORE...";
       window.electronAPI.send('resize-window', 300, 240);
 
       const engine = await getWebLlmEngine((progress, text) => {
         const pct = Math.round(progress * 100);
         progressBar.style.width = `${pct}%`;
-        loadingStatus.textContent = `Downloading Model: ${pct}%`;
+        loadingStatus.textContent = `[NEURAL SYNC: ${pct}%]`;
       });
 
       progressContainer.classList.add('hidden');
-      loadingStatus.textContent = "Rewriting text offline...";
+      startScifiLoading();
 
       const reply = await engine.chat.completions.create({
         messages: [
@@ -685,6 +722,7 @@ ${customPromptText}`;
 }
 
 function handleSuccess() {
+  stopScifiLoading();
   showView('success-view');
 
   setTimeout(() => {
@@ -696,6 +734,7 @@ function handleSuccess() {
 }
 
 function handleError(error) {
+  stopScifiLoading();
   errorMessage.textContent = error.message || "An unknown error occurred.";
   window.electronAPI.send('resize-window', 340, 240);
   showView('error-view');

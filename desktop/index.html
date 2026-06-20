@@ -138,10 +138,10 @@
                   <p>Press ⌥ + ⌘ + S to instantly display a sleek, floating writing assistant panel over your active window.</p>
                 </div>
                 
-                <!-- Slide 3: Improve & Insert -->
+                <!-- Slide 3: Refine & Insert -->
                 <div class="welcome-slide">
-                  <img class="welcome-slide-img" src="assets/slide3.png" alt="Improve and Insert">
-                  <h3>3. Improve &amp; Insert</h3>
+                  <img class="welcome-slide-img" src="assets/slide3.png" alt="Refine and Insert">
+                  <h3>3. Refine &amp; Insert</h3>
                   <p>Select your tone, enter custom instructions, and watch ScribeAI replace your draft with a polished version offline.</p>
                 </div>
               </div>
@@ -271,11 +271,11 @@
 
 
           <button id="submit-btn" class="action-btn primary">
-            <span>Improve Writing</span>
+            <span>Refine Text</span>
           </button>
 
           <div class="shortcut-tip">
-            Press <kbd>⌘</kbd> + <kbd>Enter</kbd> to improve &bull; <kbd>Esc</kbd> to cancel
+            Press <kbd>⌘</kbd> + <kbd>Enter</kbd> to refine &bull; <kbd>Esc</kbd> to cancel
           </div>
         </div>
       </div>
@@ -283,11 +283,12 @@
       <!-- 2. LOADING VIEW -->
       <div id="loading-view" class="view">
         <div class="loading-container">
-          <svg class="loading-spinner" viewBox="0 0 50 50">
-            <circle class="path-bg" cx="25" cy="25" r="20" fill="none" stroke-width="4"></circle>
-            <circle class="path-spin" cx="25" cy="25" r="20" fill="none" stroke-width="4"></circle>
-          </svg>
-          <p class="status-text" id="loading-status">ScribeAI is writing...</p>
+          <div class="scifi-loader-wrapper">
+            <div class="scifi-radar"></div>
+            <div class="scifi-reticle"></div>
+            <div class="scifi-dot"></div>
+          </div>
+          <p class="status-text" id="loading-status">INITIALIZING COGNITIVE INTERFACE...</p>
           <div id="loading-progress-container" class="hidden" style="width: 100%; background: rgba(0, 0, 0, 0.08); border: 1px solid rgba(0, 0, 0, 0.1); height: 6px; border-radius: 3px; margin-top: 10px; overflow: hidden; position: relative;">
             <div id="loading-progress-bar" style="width: 0%; height: 100%; background: var(--accent); border-radius: 3px; transition: width 0.2s;"></div>
           </div>
