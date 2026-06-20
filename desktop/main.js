@@ -1,14 +1,16 @@
-const { app, BrowserWindow, ipcMain, screen, clipboard } = require('electron');
+const { app, BrowserWindow, ipcMain, screen, clipboard, Notification } = require('electron');
 const path = require('path');
-const { autoUpdater } = require('electron-updater');
+const fs = require('fs');
 
-// Configure autoUpdater logging to console
-autoUpdater.logger = console;
+let autoUpdater;
+let updateReadyToInstall = false;
 
-if (!app.isPackaged) {
-  autoUpdater.updateConfigPath = path.join(__dirname, 'dev-app-update.yml');
-  autoUpdater.forceDevUpdateConfig = true;
-}
+process.on('uncaughtException', (err) => {
+  console.error('UNCAUGHT EXCEPTION:', err);
+});
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('UNHANDLED REJECTION:', reason);
+});
 
 // Disable Chromium sandboxing to prevent network blocks in translocated/sandboxed Gatekeeper contexts
 app.commandLine.appendSwitch('no-sandbox');
@@ -54,11 +56,8 @@ const { setupShortcut } = require('./setup-shortcut');
 app.whenReady().then(() => {
   setupShortcut();
   createWindow();
-
-  // Check for updates and notify the user natively
-  autoUpdater.checkForUpdatesAndNotify().catch((err) => {
-    console.error("Failed to check for updates:", err);
-  });
+  setupAutoUpdater();
+  checkForUpdates();
 
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();
@@ -71,43 +70,155 @@ app.on('window-all-closed', () => {
   }
 });
 
-// Forward update events to renderer
+function getGitHubToken() {
+  let token = process.env.GH_TOKEN || process.env.GITHUB_TOKEN;
+  if (token) return token;
+
+  const dotenvPaths = [
+    path.join(__dirname, '.env'),
+    path.join(__dirname, '..', '.env'),
+    path.join(app.getAppPath(), '.env')
+  ];
+
+  for (const envPath of dotenvPaths) {
+    try {
+      if (!fs.existsSync(envPath)) continue;
+
+      const envContent = fs.readFileSync(envPath, 'utf8');
+      const match = envContent.match(/(?:GH_TOKEN|GITHUB_TOKEN)="?([^"\s\n\r]+)"?/);
+      if (match) {
+        token = match[1];
+        break;
+      }
+    } catch (err) {
+      console.warn(`Unable to read updater token from ${envPath}:`, err.message || err);
+    }
+  }
+
+  return token;
+}
+
 function sendUpdateStatus(status, details = '') {
+  console.log(`[UPDATE STATUS] ${status} - Details: ${details}`);
   if (mainWindow && !mainWindow.isDestroyed()) {
     mainWindow.webContents.send('update-status-change', status, details);
   }
 }
 
-autoUpdater.on('checking-for-update', () => {
-  sendUpdateStatus('checking');
-});
+function showUpdateNotification({ title, body, onClick }) {
+  if (!Notification.isSupported()) return;
 
-autoUpdater.on('update-available', (info) => {
-  sendUpdateStatus('available', info.version);
-});
+  const notification = new Notification({
+    title,
+    body,
+    silent: false
+  });
 
-autoUpdater.on('update-not-available', () => {
-  sendUpdateStatus('not-available');
-});
+  if (onClick) {
+    notification.on('click', onClick);
+  }
 
-autoUpdater.on('error', (err) => {
-  sendUpdateStatus('error', err.message || err);
-});
+  notification.show();
+}
 
-autoUpdater.on('download-progress', (progressObj) => {
-  const percent = Math.round(progressObj.percent);
-  sendUpdateStatus('downloading', `${percent}%`);
-});
+function focusMainWindow() {
+  if (!mainWindow || mainWindow.isDestroyed()) {
+    createWindow();
+    return;
+  }
 
-autoUpdater.on('update-downloaded', (info) => {
-  sendUpdateStatus('downloaded', info.version);
-});
+  if (mainWindow.isMinimized()) {
+    mainWindow.restore();
+  }
 
-// IPC handlers for manual updates
-ipcMain.on('check-for-updates-manual', () => {
-  autoUpdater.checkForUpdates().catch(err => {
+  mainWindow.show();
+  mainWindow.focus();
+}
+
+function configureAutoUpdater() {
+  if (!autoUpdater) {
+    ({ autoUpdater } = require('electron-updater'));
+  }
+
+  autoUpdater.logger = console;
+  autoUpdater.autoDownload = true;
+  autoUpdater.autoInstallOnAppQuit = true;
+
+  const token = getGitHubToken();
+  if (token) {
+    autoUpdater.requestHeaders = {
+      Authorization: `token ${token}`
+    };
+  }
+
+  if (!app.isPackaged) {
+    autoUpdater.updateConfigPath = path.join(__dirname, 'dev-app-update.yml');
+    autoUpdater.forceDevUpdateConfig = true;
+  }
+}
+
+function setupAutoUpdater() {
+  configureAutoUpdater();
+
+  autoUpdater.on('checking-for-update', () => {
+    console.log('[UPDATE EVENT] checking-for-update');
+    updateReadyToInstall = false;
+    sendUpdateStatus('checking');
+  });
+
+  autoUpdater.on('update-available', (info) => {
+    console.log('[UPDATE EVENT] update-available:', info.version);
+    sendUpdateStatus('available', info.version);
+    showUpdateNotification({
+      title: 'ScribeAI update available',
+      body: `Version ${info.version} is downloading in the background.`,
+      onClick: focusMainWindow
+    });
+  });
+
+  autoUpdater.on('update-not-available', () => {
+    console.log('[UPDATE EVENT] update-not-available');
+    sendUpdateStatus('not-available', app.getVersion());
+  });
+
+  autoUpdater.on('error', (err) => {
+    console.error('[UPDATE EVENT] error:', err);
+    const message = err && err.message ? err.message : String(err);
+    if (!app.isPackaged && updateReadyToInstall && message.includes('Could not locate update bundle for com.github.Electron')) {
+      console.warn('[UPDATE EVENT] Ignoring dev-only Squirrel.Mac bundle lookup error after download.');
+      return;
+    }
+
     sendUpdateStatus('error', err.message || err);
   });
+
+  autoUpdater.on('download-progress', (progressObj) => {
+    const percent = Math.round(progressObj.percent);
+    console.log(`[UPDATE EVENT] download-progress: ${percent}% (${progressObj.transferred}/${progressObj.total} bytes)`);
+    sendUpdateStatus('downloading', `${percent}%`);
+  });
+
+  autoUpdater.on('update-downloaded', (info) => {
+    console.log('[UPDATE EVENT] update-downloaded:', info.version);
+    updateReadyToInstall = true;
+    sendUpdateStatus('downloaded', info.version);
+    showUpdateNotification({
+      title: 'ScribeAI update ready',
+      body: `Version ${info.version} is ready to install.`,
+      onClick: focusMainWindow
+    });
+  });
+}
+
+function checkForUpdates() {
+  return autoUpdater.checkForUpdates().catch((err) => {
+    console.error('Failed to check for updates:', err);
+    sendUpdateStatus('error', err.message || err);
+  });
+}
+
+ipcMain.on('check-for-updates-manual', () => {
+  checkForUpdates();
 });
 
 ipcMain.on('quit-and-install', () => {
@@ -289,4 +400,3 @@ ipcMain.handle('google-auth', async (event) => {
     });
   });
 });
-

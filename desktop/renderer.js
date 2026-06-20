@@ -966,6 +966,22 @@ retryBtn.addEventListener('click', () => {
 // Manual updates check button
 const checkUpdateBtn = document.getElementById('check-update-btn');
 const updateStatusText = document.getElementById('update-status-text');
+const updateProgressContainer = document.getElementById('update-progress-container');
+const updateProgressBar = document.getElementById('update-progress-bar');
+const updateProgressValue = document.getElementById('update-progress-value');
+
+function setUpdateProgress(percent) {
+  const safePercent = Math.max(0, Math.min(100, Number(percent) || 0));
+  if (updateProgressContainer) updateProgressContainer.classList.remove('hidden');
+  if (updateProgressBar) updateProgressBar.style.width = `${safePercent}%`;
+  if (updateProgressValue) updateProgressValue.textContent = `${safePercent}%`;
+}
+
+function resetUpdateProgress() {
+  if (updateProgressContainer) updateProgressContainer.classList.add('hidden');
+  if (updateProgressBar) updateProgressBar.style.width = '0%';
+  if (updateProgressValue) updateProgressValue.textContent = '0%';
+}
 
 if (checkUpdateBtn) {
   checkUpdateBtn.addEventListener('click', () => {
@@ -974,6 +990,7 @@ if (checkUpdateBtn) {
     } else {
       updateStatusText.textContent = "Checking...";
       checkUpdateBtn.disabled = true;
+      resetUpdateProgress();
       window.electronAPI.send('check-for-updates-manual');
     }
   });
@@ -987,29 +1004,35 @@ window.electronAPI.on('update-status-change', (status, details) => {
     case 'checking':
       updateStatusText.textContent = "Checking...";
       checkUpdateBtn.disabled = true;
+      resetUpdateProgress();
       break;
     case 'available':
       updateStatusText.textContent = `v${details} available!`;
       checkUpdateBtn.disabled = true;
+      setUpdateProgress(0);
       break;
     case 'not-available':
-      updateStatusText.textContent = "v1.0.0 (Up to date)";
+      updateStatusText.textContent = details ? `v${details} (Up to date)` : "Up to date";
       checkUpdateBtn.disabled = false;
       checkUpdateBtn.textContent = "Check Updates";
+      resetUpdateProgress();
       break;
     case 'downloading':
       updateStatusText.textContent = `Downloading: ${details}`;
       checkUpdateBtn.disabled = true;
+      setUpdateProgress(parseInt(details, 10));
       break;
     case 'downloaded':
       updateStatusText.textContent = `v${details} ready!`;
       checkUpdateBtn.disabled = false;
       checkUpdateBtn.textContent = "Install Update";
+      setUpdateProgress(100);
       break;
     case 'error':
       updateStatusText.textContent = "Check failed";
       checkUpdateBtn.disabled = false;
       checkUpdateBtn.textContent = "Retry Check";
+      resetUpdateProgress();
       console.error("Update error detail:", details);
       break;
   }
