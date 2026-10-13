@@ -1,3 +1,69 @@
+# robots.txt for scribeai.shop — https://scribeai.shop/robots.txt
+#
+# This site is an open-source (MIT) product page. The publisher's choice, made
+# 2026-10-13: allow discovery by search and AI-answer crawlers, and allow
+# training crawlers, because the app and its source are public anyway.
+# Adjust the training group below if that choice changes.
+
+# --- Search discovery (Google, Bing, and AI answer surfaces) ---
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# --- AI answer engines (citations) ---
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+# Applebot-Extended is the *training* crawler (see below), not search.
+# Blocking it here would remove the site from Siri/AI answers only if
+# Applebot (search) were also blocked; it is not.
+User-agent: Applebot-Extended
+Allow: /
+
+# --- Model training (publisher choice: allowed; source is public) ---
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+# --- Agentic fetch (user-triggered browsing) ---
+User-agent: CCBot
+Allow: /
+
+# --- Everything else ---
 User-agent: *
 Allow: /
 

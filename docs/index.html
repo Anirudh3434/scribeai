@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="dark" lang="en">
+<html lang="en">
 <head>
   <!-- Secure Privacy Consent Banner -->
   <script src="https://app.secureprivacy.ai/script/6a364d89da666268345c3ecb.js"></script>
@@ -14,10 +14,10 @@
   </script>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>ScribeAI — Premium Offline AI Writing Companion</title>
-  <meta name="description" content="ScribeAI is a premium, privacy-first offline AI writing assistant for macOS. Polish grammar, rewrite drafts, and refine text in any app instantly using local WebGPU LLM models. Zero data harvesting.">
+  <title>ScribeAI — Free Offline AI Writing Assistant for macOS</title>
+  <meta name="description" content="ScribeAI is a free, open-source AI writing assistant for macOS. Select text in any app, press ⌥⌘S, and it rewrites locally with an offline WebGPU model — no server, no account, no upload.">
   <meta name="keywords" content="offline AI, writing companion, grammar checker, macOS writing assistant, privacy AI, local LLM, WebGPU AI, ScribeAI, text refinement">
-  <meta name="author" content="ScribeAI Team">
+  <meta name="author" content="Anirudh Bhardwaj">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://scribeai.shop/">
   <link rel="icon" type="image/png" href="assets/icon.png">
@@ -25,15 +25,15 @@
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://scribeai.shop/">
-  <meta property="og:title" content="ScribeAI — Premium Offline AI Writing Companion">
-  <meta property="og:description" content="ScribeAI is a privacy-first offline AI writing assistant for macOS. Polish grammar and refine text in any app instantly using local WebGPU LLM models.">
+  <meta property="og:title" content="ScribeAI — Free Offline AI Writing Assistant for macOS">
+  <meta property="og:description" content="ScribeAI is a free, open-source AI writing assistant for macOS. Select text in any app, press ⌥⌘S, and it rewrites locally with an offline WebGPU model — no server, no account, no upload.">
   <meta property="og:image" content="https://scribeai.shop/assets/hero_mockup.webp">
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image">
   <meta property="twitter:url" content="https://scribeai.shop/">
-  <meta property="twitter:title" content="ScribeAI — Premium Offline AI Writing Companion">
-  <meta property="twitter:description" content="ScribeAI is a privacy-first offline AI writing assistant for macOS. Polish grammar and refine text in any app instantly using local WebGPU LLM models.">
+  <meta property="twitter:title" content="ScribeAI — Free Offline AI Writing Assistant for macOS">
+  <meta property="twitter:description" content="ScribeAI is a free, open-source AI writing assistant for macOS. Select text in any app, press ⌥⌘S, and it rewrites locally with an offline WebGPU model — no server, no account, no upload.">
   <meta property="twitter:image" content="https://scribeai.shop/assets/hero_mockup.webp">
 
   <!-- Structured Data JSON-LD -->
@@ -42,785 +42,1681 @@
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     "name": "ScribeAI",
-    "operatingSystem": "macOS Monterey or later",
+    "operatingSystem": "macOS 12 (Monterey) or later",
     "applicationCategory": "WritingApplication",
     "offers": {
       "@type": "Offer",
       "price": "0.00",
       "priceCurrency": "USD"
     },
-    "description": "ScribeAI is a premium, privacy-first offline AI writing companion for macOS. Polish grammar, rewrite drafts, and refine text in any app instantly using local WebGPU LLM models.",
+    "description": "ScribeAI is a free, open-source, offline AI writing assistant for macOS. Select text in any app, press ⌥⌘S, and it rewrites the text locally with a WebGPU model. No server, no account, no upload.",
     "screenshot": "https://scribeai.shop/assets/hero_mockup.webp",
-    "downloadUrl": "https://github.com/Anirudh3434/scribeai/releases/download/v1.0.2/ScribeAI-1.0.2-arm64.dmg",
-    "softwareVersion": "2.4.0",
-    "license": "https://opensource.org/licenses/MIT"
+    "downloadUrl": "https://github.com/Anirudh3434/scribeai/releases/latest",
+    "softwareVersion": "1.0.1",
+    "dateModified": "2026-10-13",
+    "license": "https://opensource.org/licenses/MIT",
+    "fileSize": "100 MB",
+    "memory": "8 GB",
+    "processor": "Apple silicon (M1 or newer)",
+    "sameAs": [
+      "https://github.com/Anirudh3434/scribeai",
+      "https://x.com/1scribe_ai"
+    ],
+    "publisher": { "@id": "https://scribeai.shop/#organization" },
+    "author": {
+      "@type": "Person",
+      "name": "Anirudh Bhardwaj",
+      "url": "https://github.com/Anirudh3434"
+    }
   }
   </script>
 
-  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries" defer></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": "https://scribeai.shop/#organization",
+    "name": "ScribeAI",
+    "url": "https://scribeai.shop/",
+    "logo": "https://scribeai.shop/assets/icon.png",
+    "founder": {
+      "@type": "Person",
+      "name": "Anirudh Bhardwaj",
+      "url": "https://github.com/Anirudh3434"
+    },
+    "sameAs": [
+      "https://github.com/Anirudh3434/scribeai",
+      "https://x.com/1scribe_ai",
+      "https://www.instagram.com/scribe_.ai"
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Does ScribeAI work offline?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. The default mode downloads a roughly 390MB model once, then rewrites with the network switched off: the model runs on your Mac's own GPU through WebGPU, and nothing is sent to a server. Only two things need internet — that one-time model download, and API mode, which you opt into with your own Gemini or OpenAI key."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does the global shortcut work?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "ScribeAI runs as a lightweight accessibility agent. When you highlight text and press ⌥⌘S, it reads the selection through macOS APIs, processes it locally, then replaces the selection or copies the result to your clipboard."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What does the offline model need from my Mac?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "An Apple silicon Mac (M1 or newer) with at least 8GB of memory running macOS 12 or later. The default model peaks around 1.6GB of VRAM, so an 8GB machine stays comfortable. If your hardware is older, switch on API mode in settings and the same rewrite runs on a cloud model instead."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is ScribeAI free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The client is free and open source under the MIT licence, and the built-in model costs nothing because it runs on your own hardware. If you add a third-party key such as OpenAI, you pay that provider directly for what you use."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How is ScribeAI different from Grammarly or other cloud assistants?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Cloud assistants such as Grammarly or QuillBot send every checked passage to their servers and charge a subscription. ScribeAI runs the model on your own GPU, costs nothing, works system-wide in any Mac app from one keystroke, and keeps working offline."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does the rewrite leave names alone?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Identity Lock layer indexes proper nouns before the model runs and checks the result afterwards, so unusual spellings and cultural names come back untouched."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does the downloaded file sort under 1984 in Downloads?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A harmless Safari quirk. When a download travels through GitHub Releases and S3 redirects, Safari occasionally receives no Last-Modified header and falls back to 24 January 1984, the launch date of the original Macintosh. The file itself is intact."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "How to install ScribeAI on your Mac",
+    "description": "Four steps from download to first rewrite. No account required.",
+    "step": [
+      {
+        "@type": "HowToStep",
+        "name": "Download the disk image",
+        "text": "Download the ScribeAI .dmg from the latest GitHub release. It is roughly 90MB and runs on Apple silicon Macs."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Drag it to Applications",
+        "text": "Open the downloaded image and move ScribeAI into your Applications folder, then eject the disk image."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Approve the first launch",
+        "text": "Right-click ScribeAI in Applications, choose Open, then confirm in the dialog. macOS Gatekeeper only asks once."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Select text and write",
+        "text": "Highlight text in any app, press ⌥⌘S, and the ScribeAI overlay opens over what you were doing."
+      }
+    ]
+  }
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&amp;family=Hanken+Grotesk:wght@400;500;600&amp;family=Geist:wght@400;600&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
   <noscript>
-    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&amp;family=Hanken+Grotesk:wght@400;500;600&amp;family=Geist:wght@400;600&amp;display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
   </noscript>
-  <script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    "colors": {
-                        "background": "#131315",
-                        "primary-container": "#a078ff",
-                        "surface-container-lowest": "#0e0e10",
-                        "on-background": "#e5e1e4",
-                        "on-surface": "#e5e1e4",
-                        "error": "#ffb4ab",
-                        "tertiary-fixed": "#6ffbbe",
-                        "inverse-primary": "#6d3bd7",
-                        "surface-container-highest": "#353437",
-                        "surface": "#131315",
-                        "primary-fixed-dim": "#d0bcff",
-                        "on-surface-variant": "#cbc3d7",
-                        "on-error-container": "#ffdad6",
-                        "surface-container-low": "#1c1b1d",
-                        "secondary-fixed": "#d8e2ff",
-                        "secondary-container": "#0566d9",
-                        "surface-variant": "#353437",
-                        "on-primary": "#3c0091",
-                        "surface-bright": "#39393b",
-                        "outline-variant": "#494454",
-                        "on-secondary": "#002e6a",
-                        "on-primary-container": "#340080",
-                        "on-secondary-fixed-variant": "#004395",
-                        "secondary-fixed-dim": "#adc6ff",
-                        "primary-fixed": "#e9ddff",
-                        "on-tertiary": "#003824",
-                        "on-tertiary-fixed": "#002113",
-                        "on-tertiary-container": "#00311f",
-                        "on-primary-fixed": "#23005c",
-                        "inverse-on-surface": "#313032",
-                        "primary": "#d0bcff",
-                        "on-secondary-container": "#e6ecff",
-                        "on-secondary-fixed": "#001a42",
-                        "secondary": "#adc6ff",
-                        "surface-dim": "#131315",
-                        "on-primary-fixed-variant": "#5516be",
-                        "inverse-surface": "#e5e1e4",
-                        "tertiary-fixed-dim": "#4edea3",
-                        "error-container": "#93000a",
-                        "on-tertiary-fixed-variant": "#005236",
-                        "surface-container-high": "#2a2a2c",
-                        "surface-container": "#201f22",
-                        "tertiary": "#4edea3",
-                        "surface-tint": "#d0bcff",
-                        "outline": "#958ea0",
-                        "on-error": "#690005",
-                        "tertiary-container": "#00a572"
-                    },
-                    "borderRadius": {
-                        "DEFAULT": "0.25rem",
-                        "lg": "0.5rem",
-                        "xl": "0.75rem",
-                        "full": "9999px"
-                    },
-                    "spacing": {
-                        "container-max": "1200px",
-                        "element-gap": "16px",
-                        "section-gap": "120px",
-                        "gutter": "24px",
-                        "margin-mobile": "20px"
-                    },
-                    "fontFamily": {
-                        "body-md": ["Hanken Grotesk"],
-                        "label-sm": ["Geist"],
-                        "headline-lg-mobile": ["Sora"],
-                        "headline-lg": ["Sora"],
-                        "display-lg": ["Sora"]
-                    },
-                    "fontSize": {
-                        "body-md": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
-                        "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "600"}],
-                        "headline-lg-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
-                        "headline-lg": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
-                        "display-lg": ["72px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "700"}]
-                    }
-                },
-            },
-        }
-    </script>
+
   <style>
-        body {
-            background-color: #131315;
-            color: #e5e1e4;
-            font-family: 'Hanken Grotesk', sans-serif;
-            overflow-x: hidden;
-        }
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-        .glass-card {
-            background: rgba(22, 22, 30, 0.6);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            transition: border-color 0.3s ease, transform 0.3s ease;
-        }
-        .glass-card:hover {
-            border-color: rgba(208, 188, 255, 0.3);
-        }
-        .text-gradient {
-            background: linear-gradient(135deg, #d0bcff 0%, #adc6ff 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .glow-button {
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-        .glow-button::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 120%;
-            height: 120%;
-            background: radial-gradient(circle, rgba(208, 188, 255, 0.4) 0%, transparent 70%);
-            transform: translate(-50%, -50%) scale(0);
-            transition: transform 0.5s ease;
-            pointer-events: none;
-        }
-        .glow-button:hover::after {
-            transform: translate(-50%, -50%) scale(1);
-        }
-        .shimmer {
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
-            background-size: 200% 100%;
-            animation: shimmer 2s infinite;
-        }
-        @keyframes shimmer {
-            0% { background-position: -200% 0; }
-            100% { background-position: 200% 0; }
-        }
-        .logo-image {
-            width: 32px;
-            height: 32px;
-            object-fit: contain;
-        }
-    </style>
+    :root {
+      --paper: #FBFBF9;
+      --paper-inset: #F1F1EC;
+      --ink: #17181B;
+      --graphite: #5F6368;
+      --proof: #D33A2C;
+      --proof-deep: #B32B1F;
+      --insert: #6D3BD7;
+      --rule: #DEDED7;
+      --rule-strong: #C4C4BA;
+      --shell: 1160px;
+      --gutter: clamp(20px, 4vw, 40px);
+
+      --serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+      --sans: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+      --mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+      --t-xs: 0.8125rem;
+      --t-sm: 0.9375rem;
+      --t-base: 1.0625rem;
+      --t-md: 1.3125rem;
+      --t-h3: clamp(1.125rem, 1.6vw, 1.375rem);
+      --t-h2: clamp(1.9rem, 3.4vw, 2.75rem);
+      --t-display: clamp(2.5rem, 6vw, 4.5rem);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: var(--t-base);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      overflow-x: hidden;
+    }
+
+    ::selection { background: rgba(109, 59, 215, 0.16); }
+
+    img { max-width: 100%; display: block; }
+
+    a { color: inherit; }
+
+    h1, h2, h3, h4 {
+      font-family: var(--serif);
+      font-weight: 500;
+      letter-spacing: -0.015em;
+      line-height: 1.12;
+      margin: 0;
+    }
+
+    p { margin: 0; }
+
+    code {
+      font-family: var(--mono);
+      font-size: 0.875em;
+      background: var(--paper-inset);
+      border: 1px solid var(--rule);
+      padding: 1px 5px;
+      border-radius: 3px;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--insert);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+
+    .skip {
+      position: absolute;
+      left: -9999px;
+      top: 0;
+      background: var(--ink);
+      color: var(--paper);
+      padding: 10px 16px;
+      z-index: 200;
+      font-size: var(--t-sm);
+    }
+    .skip:focus { left: 8px; top: 8px; }
+
+    .shell {
+      max-width: var(--shell);
+      margin: 0 auto;
+      padding-inline: var(--gutter);
+    }
+
+    .section {
+      border-top: 1px solid var(--rule);
+      padding-block: clamp(64px, 8vw, 112px);
+    }
+
+    .section-title {
+      font-size: var(--t-h2);
+      max-width: 22ch;
+    }
+
+    .lede {
+      color: var(--graphite);
+      max-width: 62ch;
+      font-size: var(--t-base);
+    }
+
+    .note {
+      font-size: var(--t-sm);
+      color: var(--graphite);
+    }
+
+    /* ---------- Header ---------- */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 60;
+      background: rgba(251, 251, 249, 0.92);
+      backdrop-filter: saturate(180%) blur(12px);
+      border-bottom: 1px solid var(--rule);
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      min-height: 64px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      font-family: var(--serif);
+      font-size: 1.375rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+    .brand img { width: 26px; height: 26px; object-fit: contain; }
+
+    .site-nav {
+      display: flex;
+      align-items: center;
+      gap: clamp(16px, 2.4vw, 32px);
+    }
+    .site-nav a {
+      font-size: var(--t-sm);
+      color: var(--graphite);
+      text-decoration: none;
+      padding-block: 4px;
+      border-bottom: 1px solid transparent;
+      transition: color 0.15s ease, border-color 0.15s ease;
+    }
+    .site-nav a:hover { color: var(--ink); border-bottom-color: var(--proof); }
+    .site-nav .btn { color: var(--paper); border-bottom-color: transparent; }
+    .site-nav .btn:hover { color: var(--paper); background: var(--proof-deep); border-bottom-color: transparent; }
+
+    .nav-links { display: flex; gap: clamp(16px, 2.4vw, 32px); }
+
+    /* ---------- Buttons ---------- */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-family: var(--sans);
+      font-size: var(--t-sm);
+      font-weight: 500;
+      line-height: 1;
+      padding: 14px 22px;
+      border-radius: 3px;
+      border: 1px solid transparent;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background-color 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+    }
+    .btn-primary { background: var(--ink); color: var(--paper); }
+    .btn-primary:hover { background: var(--proof-deep); }
+    .btn-quiet {
+      background: transparent;
+      color: var(--ink);
+      border-color: var(--rule-strong);
+    }
+    .btn-quiet:hover { border-color: var(--ink); }
+    .btn-sm { padding: 10px 16px; }
+    .btn[aria-disabled="true"] {
+      color: var(--graphite);
+      border-color: var(--rule);
+      cursor: not-allowed;
+      background: var(--paper-inset);
+    }
+    .btn[aria-disabled="true"]:hover { border-color: var(--rule); }
+
+    .tag {
+      font-family: var(--sans);
+      font-size: 0.6875rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: var(--graphite);
+      border: 1px solid var(--rule-strong);
+      border-radius: 2px;
+      padding: 2px 6px;
+      text-transform: none;
+    }
+
+    kbd {
+      font-family: var(--mono);
+      font-size: 0.85em;
+      background: var(--paper-inset);
+      border: 1px solid var(--rule-strong);
+      border-bottom-width: 2px;
+      border-radius: 4px;
+      padding: 2px 7px;
+      white-space: nowrap;
+    }
+
+    /* ---------- Hero ---------- */
+    .hero { padding-block: clamp(56px, 7vw, 96px) clamp(56px, 7vw, 104px); }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+      gap: clamp(40px, 5vw, 72px);
+      align-items: center;
+    }
+    .hero h1 {
+      font-size: var(--t-display);
+      line-height: 1.04;
+      letter-spacing: -0.03em;
+      max-width: 15ch;
+      margin-bottom: 28px;
+    }
+    .hero .lede { font-size: var(--t-md); line-height: 1.5; max-width: 40ch; color: var(--ink); }
+    .hero .lede strong { font-weight: 600; }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 36px;
+    }
+    .hero-meta {
+      margin-top: 20px;
+      font-size: var(--t-sm);
+      color: var(--graphite);
+      max-width: 44ch;
+    }
+
+    /* ---------- Proof sheet ---------- */
+    .proof {
+      background: #fff;
+      border: 1px solid var(--rule-strong);
+      border-radius: 4px;
+      box-shadow: 0 18px 40px -32px rgba(23, 24, 27, 0.55);
+      overflow: hidden;
+    }
+    .proof-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 12px 18px;
+      border-bottom: 1px solid var(--rule);
+      background: var(--paper-inset);
+    }
+    .proof-head span:first-child {
+      font-family: var(--mono);
+      font-size: var(--t-xs);
+      color: var(--graphite);
+    }
+    .proof-toggle { display: flex; gap: 4px; }
+    .proof-toggle button {
+      font-family: var(--sans);
+      font-size: var(--t-xs);
+      font-weight: 500;
+      color: var(--graphite);
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: 3px;
+      padding: 5px 10px;
+      cursor: pointer;
+      transition: background-color 0.15s ease, color 0.15s ease;
+    }
+    .proof-toggle button:hover { color: var(--ink); }
+    .proof-toggle button[aria-pressed="true"] {
+      background: var(--ink);
+      color: var(--paper);
+    }
+    .proof-body { padding: clamp(22px, 3vw, 32px); }
+    .proof-text {
+      font-family: var(--serif);
+      font-size: clamp(1.25rem, 1.9vw, 1.6rem);
+      line-height: 1.62;
+      letter-spacing: -0.01em;
+    }
+    .proof-text[hidden] { display: none; }
+    .proof-text del {
+      text-decoration: none;
+      color: var(--proof-deep);
+      position: relative;
+    }
+    .proof-text del::after {
+      content: "";
+      position: absolute;
+      left: -1px;
+      right: -1px;
+      top: 54%;
+      height: 1.5px;
+      background: var(--proof);
+      transform-origin: left center;
+      transform: scaleX(1);
+    }
+    .proof-text.play del::after {
+      animation: strike 0.5s cubic-bezier(0.2, 0.7, 0.3, 1) both;
+      animation-delay: var(--d, 0s);
+    }
+    .proof-text ins {
+      text-decoration: none;
+      color: var(--insert);
+      background: rgba(109, 59, 215, 0.08);
+      box-shadow: inset 0 -1.5px 0 var(--insert);
+    }
+    .proof-text.play ins {
+      animation: settle 0.5s ease both;
+      animation-delay: var(--d, 0s);
+    }
+    .proof-text .caret {
+      display: inline-block;
+      width: 2px;
+      height: 1em;
+      vertical-align: -0.15em;
+      background: var(--insert);
+      margin-left: 2px;
+    }
+    .proof-text.play .caret {
+      animation: blink 1.1s 6 both;
+      animation-delay: 1.4s;
+    }
+    @keyframes strike { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+    @keyframes settle { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+    @keyframes blink { 0%, 55% { opacity: 1; } 56%, 88% { opacity: 0; } 100% { opacity: 1; } }
+
+    .proof-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      padding: 14px clamp(22px, 3vw, 32px);
+      border-top: 1px solid var(--rule);
+      font-size: var(--t-xs);
+      color: var(--graphite);
+    }
+    .legend-key { display: inline-flex; align-items: center; gap: 7px; }
+    .legend-key i {
+      width: 18px;
+      height: 0;
+      border-top: 2px solid currentColor;
+      display: inline-block;
+    }
+    .legend-key.out { color: var(--proof-deep); }
+    .legend-key.in { color: var(--insert); }
+    .legend-key.in i { border-top-style: dashed; }
+
+    /* ---------- Feature rows ---------- */
+    .rows {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: clamp(32px, 5vw, 72px);
+    }
+    .rows li {
+      border-top: 1px solid var(--rule);
+      padding-block: 26px;
+      display: grid;
+      grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+      gap: 20px;
+      align-items: start;
+    }
+    .rows h3 { font-size: var(--t-h3); }
+    .rows p { color: var(--graphite); font-size: var(--t-sm); }
+    .rows code {
+      font-family: var(--mono);
+      font-size: 0.9em;
+      background: var(--paper-inset);
+      padding: 1px 5px;
+      border-radius: 3px;
+    }
+
+    /* ---------- Figure ---------- */
+    .figure { margin: clamp(40px, 5vw, 64px) 0 0; }
+    .figure img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      object-position: center;
+      border: 1px solid var(--rule-strong);
+      border-radius: 4px;
+      background: var(--paper-inset);
+    }
+    .figure figcaption {
+      margin-top: 12px;
+      font-size: var(--t-sm);
+      color: var(--graphite);
+      max-width: 60ch;
+    }
+
+    /* ---------- Privacy ---------- */
+    .statement {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4.4vw, 3.4rem);
+      line-height: 1.14;
+      letter-spacing: -0.025em;
+      max-width: 18ch;
+      margin-bottom: 32px;
+    }
+    .privacy-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: clamp(32px, 5vw, 72px);
+      align-items: start;
+    }
+    .proof-list { list-style: none; margin: 0; padding: 0; }
+    .proof-list li {
+      border-top: 1px solid var(--rule);
+      padding-block: 18px;
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      gap: 16px;
+      align-items: baseline;
+      font-size: var(--t-sm);
+      color: var(--graphite);
+    }
+    .proof-list li:last-child { border-bottom: 1px solid var(--rule); }
+    .proof-list .mark {
+      font-family: var(--serif);
+      color: var(--proof);
+      font-size: 1.125rem;
+      line-height: 1;
+    }
+    .proof-list strong { color: var(--ink); font-weight: 600; }
+
+    /* ---------- Sandbox ---------- */
+    .sandbox-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.35fr);
+      gap: clamp(32px, 4vw, 56px);
+      align-items: start;
+      margin-top: clamp(36px, 4vw, 56px);
+    }
+    .presets { list-style: none; margin: 0; padding: 0; }
+    .presets li { border-top: 1px solid var(--rule); }
+    .presets li:last-child { border-bottom: 1px solid var(--rule); }
+    .preset-btn {
+      display: block;
+      width: 100%;
+      text-align: left;
+      background: transparent;
+      border: 0;
+      border-left: 3px solid transparent;
+      padding: 16px 16px;
+      font-family: var(--sans);
+      font-size: var(--t-sm);
+      color: var(--graphite);
+      cursor: pointer;
+      transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
+    }
+    .preset-btn:hover { color: var(--ink); background: var(--paper-inset); }
+    .preset-btn.is-active {
+      color: var(--ink);
+      font-weight: 600;
+      border-left-color: var(--proof);
+      background: var(--paper-inset);
+    }
+    .preset-btn small {
+      display: block;
+      font-weight: 400;
+      font-size: var(--t-xs);
+      color: var(--graphite);
+      margin-top: 3px;
+    }
+
+    .tool {
+      background: var(--paper-inset);
+      border: 1px solid var(--rule-strong);
+      border-radius: 4px;
+      padding: clamp(20px, 3vw, 30px);
+    }
+    .tool-label {
+      font-family: var(--mono);
+      font-size: var(--t-xs);
+      color: var(--graphite);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    .tool textarea {
+      width: 100%;
+      min-height: 132px;
+      resize: vertical;
+      background: #fff;
+      border: 1px solid var(--rule-strong);
+      border-radius: 3px;
+      padding: 16px;
+      font-family: var(--mono);
+      font-size: var(--t-sm);
+      line-height: 1.6;
+      color: var(--ink);
+    }
+    .tool textarea:focus {
+      outline: none;
+      border-color: var(--insert);
+      box-shadow: 0 0 0 3px rgba(109, 59, 215, 0.14);
+    }
+    .tool-controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-block: 16px;
+    }
+    .tones { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tone-chip {
+      font-family: var(--sans);
+      font-size: var(--t-xs);
+      font-weight: 500;
+      color: var(--graphite);
+      background: #fff;
+      border: 1px solid var(--rule-strong);
+      border-radius: 999px;
+      padding: 7px 14px;
+      cursor: pointer;
+      transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+    }
+    .tone-chip:hover { color: var(--ink); border-color: var(--ink); }
+    .tone-chip.is-active {
+      background: var(--ink);
+      border-color: var(--ink);
+      color: var(--paper);
+    }
+    .output-box {
+      background: #fff;
+      border: 1px solid var(--rule-strong);
+      border-radius: 3px;
+      padding: 16px;
+      min-height: 132px;
+      font-size: var(--t-base);
+      line-height: 1.6;
+      color: var(--ink);
+      position: relative;
+      overflow: hidden;
+    }
+    .output-box .shimmer {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(23, 24, 27, 0.06), transparent);
+      background-size: 200% 100%;
+      animation: shimmer 1.1s linear infinite;
+      pointer-events: none;
+    }
+    @keyframes shimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
+    .hidden { display: none !important; }
+    .run-icon.is-spinning { animation: spin 0.9s linear infinite; display: inline-block; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ---------- Install steps ---------- */
+    .steps {
+      list-style: none;
+      margin: clamp(36px, 4vw, 56px) 0 0;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: clamp(20px, 3vw, 36px);
+      counter-reset: step;
+    }
+    .steps li { border-top: 2px solid var(--ink); padding-top: 18px; }
+    .steps .num {
+      font-family: var(--serif);
+      font-size: 1.75rem;
+      line-height: 1;
+      color: var(--proof);
+      display: block;
+      margin-bottom: 12px;
+    }
+    .steps h3 { font-size: var(--t-h3); margin-bottom: 8px; }
+    .steps p { font-size: var(--t-sm); color: var(--graphite); }
+    .steps strong { color: var(--ink); font-weight: 600; }
+
+    /* ---------- Aside ---------- */
+    .aside {
+      margin-top: clamp(40px, 5vw, 64px);
+      border: 1px solid var(--rule-strong);
+      border-left: 3px solid var(--proof);
+      border-radius: 3px;
+      background: var(--paper-inset);
+      padding: clamp(22px, 3vw, 32px);
+    }
+    .aside h3 { font-size: var(--t-h3); margin-bottom: 8px; }
+    .aside > p { font-size: var(--t-sm); color: var(--graphite); max-width: 70ch; }
+    .aside-options {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: clamp(24px, 3vw, 40px);
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 1px solid var(--rule-strong);
+    }
+    .aside-options h4 {
+      font-family: var(--sans);
+      font-size: var(--t-xs);
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: var(--ink);
+      margin-bottom: 12px;
+    }
+    .aside-options ol {
+      margin: 0;
+      padding-left: 1.2em;
+      font-size: var(--t-sm);
+      color: var(--graphite);
+    }
+    .aside-options li { margin-bottom: 7px; }
+    .aside-options li::marker { color: var(--proof); font-weight: 600; }
+    .cmd {
+      position: relative;
+      background: var(--ink);
+      border-radius: 3px;
+      padding: 14px 16px;
+      padding-right: 78px;
+      overflow-x: auto;
+    }
+    .cmd code {
+      font-family: var(--mono);
+      font-size: var(--t-xs);
+      color: #EDEDE6;
+      background: transparent;
+      border: 0;
+      padding: 0;
+      white-space: pre-wrap;
+      word-break: break-all;
+      display: block;
+    }
+    .cmd button {
+      position: absolute;
+      top: 9px;
+      right: 9px;
+      font-family: var(--sans);
+      font-size: var(--t-xs);
+      font-weight: 500;
+      background: transparent;
+      color: #B9B9AE;
+      border: 1px solid #3A3B3E;
+      border-radius: 3px;
+      padding: 5px 9px;
+      cursor: pointer;
+    }
+    .cmd button:hover { color: #fff; border-color: #6F7075; }
+
+    /* ---------- Specs ---------- */
+    .specs {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: clamp(24px, 3vw, 44px);
+      margin-top: clamp(36px, 4vw, 52px);
+    }
+    .specs > div { border-top: 1px solid var(--ink); padding-top: 18px; }
+    .specs h3 { font-size: var(--t-h3); margin-bottom: 10px; }
+    .specs p { font-size: var(--t-sm); color: var(--graphite); }
+    .specs dl {
+      margin: 14px 0 0;
+      font-family: var(--mono);
+      font-size: var(--t-xs);
+      color: var(--graphite);
+    }
+    .specs dl div {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      border-top: 1px dashed var(--rule-strong);
+      padding-block: 7px;
+    }
+    .specs dd { margin: 0; color: var(--ink); }
+    .specs a { color: var(--ink); text-decoration-color: var(--rule-strong); }
+
+    /* ---------- Byline / author ---------- */
+    .byline {
+      margin-top: clamp(40px, 5vw, 64px);
+      border-top: 1px solid var(--ink);
+      padding-top: 22px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px 32px;
+    }
+    .byline-text { max-width: 62ch; }
+    .byline h3 { font-size: var(--t-h3); margin-bottom: 8px; }
+    .byline p { font-size: var(--t-sm); color: var(--graphite); }
+    .byline a { color: var(--proof-deep); text-decoration-color: var(--rule-strong); }
+    .byline a:hover { text-decoration-color: currentColor; }
+    .byline-date { margin: 0; white-space: nowrap; }
+
+    /* ---------- FAQ ---------- */
+    .faq-wrap { max-width: 760px; }
+    .faq { border-top: 1px solid var(--rule); }
+    .faq:last-of-type { border-bottom: 1px solid var(--rule); }
+    .faq summary {
+      list-style: none;
+      cursor: pointer;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 24px;
+      padding-block: 22px;
+      font-size: 1.0625rem;
+      font-weight: 500;
+      transition: color 0.15s ease;
+    }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary:hover { color: var(--proof-deep); }
+    .faq summary h3 {
+      font-size: inherit;
+      font-weight: inherit;
+      margin: 0;
+      letter-spacing: 0;
+      line-height: inherit;
+    }
+    .faq summary::after {
+      content: "+";
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      line-height: 1;
+      color: var(--proof);
+      flex-shrink: 0;
+      transition: transform 0.2s ease;
+    }
+    .faq[open] summary::after { transform: rotate(45deg); }
+    .faq .answer {
+      padding-bottom: 24px;
+      color: var(--graphite);
+      max-width: 68ch;
+      font-size: var(--t-sm);
+    }
+    .faq .answer code {
+      font-family: var(--mono);
+      font-size: 0.9em;
+      background: var(--paper-inset);
+      padding: 1px 5px;
+      border-radius: 3px;
+    }
+
+    .fineprint {
+      font-size: 0.8125rem;
+      color: var(--graphite);
+      line-height: 1.55;
+    }
+
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    /* Comparison table in FAQ */
+    .faq .answer .compare {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: var(--sans);
+      font-size: 0.875rem;
+      margin-block: 4px 6px;
+    }
+    .faq .answer .compare th,
+    .faq .answer .compare td {
+      text-align: left;
+      padding: 9px 12px;
+      border-bottom: 1px solid var(--rule);
+      vertical-align: top;
+    }
+    .faq .answer .compare thead th {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--graphite);
+      border-bottom: 1px solid var(--ink);
+    }
+    .faq .answer .compare tbody th {
+      font-weight: 500;
+      color: var(--ink);
+    }
+    .faq .answer .compare tbody td { color: var(--graphite); }
+    .faq .answer .compare tbody tr:last-child th,
+    .faq .answer .compare tbody tr:last-child td { border-bottom: 0; }
+    @media (max-width: 560px) {
+      .faq .answer .compare,
+      .faq .answer .compare tbody tr { display: block; }
+      .faq .answer .compare thead { display: none; }
+      .faq .answer .compare tbody tr {
+        border: 1px solid var(--rule);
+        border-radius: 6px;
+        padding: 6px 10px;
+        margin-bottom: 10px;
+        background: var(--paper-inset);
+      }
+      .faq .answer .compare tbody th,
+      .faq .answer .compare tbody td {
+        display: flex;
+        justify-content: space-between;
+        gap: 14px;
+        border: 0;
+        padding: 5px 0;
+      }
+      .faq .answer .compare tbody td::before {
+        content: attr(data-label);
+        font-weight: 500;
+        color: var(--ink);
+      }
+    }
+
+    /* ---------- Closing ---------- */
+    .closing { text-align: left; }
+    .closing h2 {
+      font-size: clamp(2.25rem, 5vw, 3.75rem);
+      line-height: 1.06;
+      letter-spacing: -0.03em;
+      max-width: 16ch;
+      margin-bottom: 24px;
+    }
+    .closing .lede { max-width: 52ch; }
+    .closing-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
+
+    /* ---------- Footer ---------- */
+    .site-footer {
+      border-top: 1px solid var(--ink);
+      padding-block: clamp(48px, 6vw, 72px) 40px;
+      font-size: var(--t-sm);
+      color: var(--graphite);
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) repeat(3, minmax(0, 1fr));
+      gap: clamp(28px, 4vw, 56px);
+    }
+    .footer-grid h3 {
+      font-family: var(--sans);
+      font-size: var(--t-xs);
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: var(--ink);
+      margin-bottom: 14px;
+    }
+    .footer-grid ul { list-style: none; margin: 0; padding: 0; }
+    .footer-grid li { margin-bottom: 9px; }
+    .footer-grid a {
+      text-decoration: none;
+      color: var(--graphite);
+      border-bottom: 1px solid transparent;
+      transition: color 0.15s ease, border-color 0.15s ease;
+    }
+    .footer-grid a:hover { color: var(--ink); border-bottom-color: var(--proof); }
+    .footer-about p { max-width: 34ch; margin-block: 14px 18px; }
+    .socials { display: flex; gap: 10px; }
+    .socials a {
+      width: 34px;
+      height: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--rule-strong);
+      border-radius: 3px;
+      color: var(--graphite);
+    }
+    .socials a:hover { color: var(--ink); border-color: var(--ink); }
+    .socials svg { width: 16px; height: 16px; }
+    .footer-form { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
+    .footer-form .btn { width: 100%; }
+    .footer-form input {
+      flex: 1;
+      min-width: 0;
+      background: #fff;
+      border: 1px solid var(--rule-strong);
+      border-radius: 3px;
+      padding: 10px 12px;
+      font-family: var(--sans);
+      font-size: var(--t-sm);
+      color: var(--ink);
+    }
+    .footer-form input:focus {
+      outline: none;
+      border-color: var(--insert);
+      box-shadow: 0 0 0 3px rgba(109, 59, 215, 0.14);
+    }
+    .footer-bottom {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-top: clamp(40px, 5vw, 64px);
+      padding-top: 22px;
+      border-top: 1px solid var(--rule);
+      font-size: var(--t-xs);
+    }
+    .footer-bottom nav { display: flex; gap: 18px; flex-wrap: wrap; }
+    .footer-bottom a { text-decoration: none; }
+    .footer-bottom a:hover { color: var(--ink); }
+    .to-top {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: transparent;
+      border: 1px solid var(--rule-strong);
+      border-radius: 3px;
+      color: var(--graphite);
+      font-family: var(--sans);
+      font-size: var(--t-xs);
+      padding: 7px 11px;
+      cursor: pointer;
+    }
+    .to-top:hover { color: var(--ink); border-color: var(--ink); }
+
+    .section-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px 32px;
+      margin-bottom: clamp(32px, 4vw, 52px);
+    }
+    .section-head .lede { max-width: 46ch; }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 1000px) {
+      .hero-grid, .privacy-grid, .sandbox-grid { grid-template-columns: minmax(0, 1fr); }
+      .hero h1 { max-width: 18ch; }
+      .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .specs { grid-template-columns: minmax(0, 1fr); }
+      .footer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .rows { grid-template-columns: minmax(0, 1fr); }
+    }
+    @media (max-width: 860px) {
+      .nav-links { display: none; }
+    }
+    @media (max-width: 720px) {
+      .rows li { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+      .steps { grid-template-columns: minmax(0, 1fr); }
+      .aside-options { grid-template-columns: minmax(0, 1fr); }
+      .footer-grid { grid-template-columns: minmax(0, 1fr); }
+      .section-head { display: block; }
+      .section-head .lede { margin-top: 14px; }
+      .tool-controls { align-items: stretch; }
+      .tool-controls .btn { width: 100%; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-delay: 0ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+      }
+    }
+  </style>
 </head>
-<body class="antialiased">
-<!-- Navigation -->
-<nav class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-xl border-b border-outline-variant/10">
-  <div class="max-w-container-max mx-auto px-gutter py-4 flex justify-between items-center">
-    <div class="flex items-center gap-2">
-      <img class="logo-image w-8 h-8 object-contain" src="assets/icon.webp" alt="ScribeAI Logo">
-      <span class="text-2xl font-display-lg font-bold text-on-surface tracking-tight">ScribeAI</span>
-    </div>
-    <div class="hidden md:flex items-center gap-8">
-      <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors duration-300" href="#features">Features</a>
-      <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors duration-300" href="#install">Install</a>
-      <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors duration-300" href="#sandbox">Interactive Sandbox</a>
-      <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors duration-300" href="#privacy">Privacy First</a>
-      <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors duration-300" href="#faq">FAQ</a>
-    </div>
-    <a id="nav-download-btn" href="https://github.com/Anirudh3434/scribeai/releases/download/v1.0.2/ScribeAI-1.0.2-arm64.dmg" download class="px-6 py-2 bg-surface-container-highest text-on-surface rounded-full font-label-sm text-label-sm hover:bg-primary hover:text-on-primary transition-all duration-300 scale-95 active:scale-90 inline-block text-center">
-      Download App
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="shell header-inner">
+    <a class="brand" href="./">
+      <img src="assets/icon.webp" alt="" width="26" height="26">
+      ScribeAI
     </a>
+    <nav class="site-nav" aria-label="Primary">
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#privacy">Privacy</a>
+        <a href="#sandbox">Demo</a>
+        <a href="#install">Install</a>
+        <a href="#faq">Questions</a>
+      </div>
+      <a id="nav-download-btn" class="btn btn-primary btn-sm" href="https://github.com/Anirudh3434/scribeai/releases/latest">Download</a>
+    </nav>
   </div>
-</nav>
-<main class="pt-32">
-  <!-- Hero Section -->
-  <section class="relative max-w-container-max mx-auto px-gutter mb-section-gap overflow-visible">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-      <div class="z-10">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 mb-8">
-          <span class="font-label-sm text-[10px] uppercase tracking-widest text-primary">Now Supporting 100% Offline AI</span>
-        </div>
-        <h1 class="font-display-lg text-display-lg mb-6 leading-none">
-          Write Better,<br>
-          Everywhere,<br>
-          <span class="text-gradient">100% Offline.</span>
-        </h1>
-        <p class="font-body-md text-body-md text-on-surface-variant max-w-lg mb-10">
-          ScribeAI is your global writing companion. Select text in any macOS application, press <kbd class="px-2 py-1 bg-surface-container-high rounded text-sm font-mono opacity-80">⌥ + ⌘ + S</kbd>, and instantly refine grammar, polish emails, or rewrite drafts offline. No servers, no subscriptions, total privacy.
+</header>
+
+<main id="main">
+  <!-- Hero -->
+  <section class="hero shell">
+    <div class="hero-grid">
+      <div>
+        <h1>Rewrite anything on your Mac in a single keystroke.</h1>
+        <p class="lede">
+          ScribeAI is a free, open-source AI writing assistant for macOS that works offline.
+          Select text in any app, press <kbd>⌥⌘S</kbd>, and it hands back a cleaner draft.
+          The model runs on your own Mac, so your words never leave the machine.
         </p>
-        <div class="flex flex-wrap gap-4 items-center">
-          <a id="hero-download-btn" href="https://github.com/Anirudh3434/scribeai/releases/download/v1.0.2/ScribeAI-1.0.2-arm64.dmg" download class="glow-button group px-8 py-4 bg-gradient-to-r from-primary-container to-secondary-container text-white rounded-xl font-bold flex items-center gap-3 transition-transform hover:scale-105 active:scale-95">
-            <span class="material-symbols-outlined">download</span>
-            <span class="">Download macOS App</span>
-          </a>
-          <div class="flex gap-3">
-            <div id="hero-chrome-btn" class="px-6 py-4 border border-outline-variant/30 rounded-xl font-medium text-on-surface-variant hover:border-primary/50 transition-colors flex items-center gap-2 cursor-not-allowed opacity-60">
-              <span class="material-symbols-outlined text-sm">extension</span>
-              <span class="">Chrome Extension</span>
-              <span class="px-1.5 py-0.5 rounded bg-surface-container-highest text-[10px] font-bold uppercase tracking-tighter">Soon</span>
-            </div>
-            <div id="hero-windows-btn" class="px-6 py-4 border border-outline-variant/30 rounded-xl font-medium text-on-surface-variant hover:border-primary/50 transition-colors flex items-center gap-2 opacity-60 cursor-not-allowed">
-              <span class="material-symbols-outlined text-sm">desktop_windows</span>
-              <span class="">Windows App</span>
-              <span class="px-1.5 py-0.5 rounded bg-surface-container-highest text-[10px] font-bold uppercase tracking-tighter">Soon</span>
-            </div>
-          </div>
+        <div class="hero-actions">
+          <a id="hero-download-btn" class="btn btn-primary" href="https://github.com/Anirudh3434/scribeai/releases/latest">Download for macOS</a>
+          <a class="btn btn-quiet" href="#sandbox">Try the demo</a>
         </div>
-        <p class="mt-6 font-label-sm text-label-sm text-on-surface-variant/50">
-          Requires macOS Monterey+ / Apple Silicon • Free &amp; Open Source
+        <p class="hero-meta">
+          Free and open source. Needs macOS 12 or later on an Apple silicon Mac.
         </p>
       </div>
-      <div class="relative lg:h-[600px] flex items-center justify-center">
-        <div class="absolute inset-0 bg-primary/10 blur-[120px] rounded-full"></div>
-        <div class="relative w-full aspect-square rounded-2xl border border-white/10 overflow-hidden shadow-2xl glass-card">
-          <img class="w-full h-full object-cover" alt="ScribeAI Desktop App Showcase on macOS" src="assets/hero_mockup.webp">
-          <div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-40"></div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- Features Section -->
-  <section class="max-w-container-max mx-auto px-gutter mb-section-gap" id="features">
-    <div class="text-center mb-16">
-      <span class="font-label-sm text-label-sm text-primary uppercase tracking-widest mb-4 block">Why ScribeAI?</span>
-      <h2 class="font-headline-lg text-headline-lg">Polished drafts without compromise</h2>
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-      <!-- Feature 1 -->
-      <div class="glass-card p-8 rounded-3xl group">
-        <div class="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 transition-colors group-hover:bg-primary/20">
-          <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">cloud_off</span>
-        </div>
-        <h3 class="font-headline-lg text-2xl mb-4">100% Offline AI Models</h3>
-        <p class="font-body-md text-base text-on-surface-variant">Utilizes WebGPU to run optimized Qwen 1.5B models directly in your hardware cache. Text never leaves your machine.</p>
-      </div>
-      <!-- Feature 2 -->
-      <div class="glass-card p-8 rounded-3xl group">
-        <div class="w-12 h-12 rounded-2xl bg-secondary/10 flex items-center justify-center mb-6 transition-colors group-hover:bg-secondary/20">
-          <span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">keyboard</span>
-        </div>
-        <h3 class="font-headline-lg text-2xl mb-4">Universal Hotkey</h3>
-        <p class="font-body-md text-base text-on-surface-variant">Highlight text in Slack, Notes, or Safari and hit ⌥ + ⌘ + S to trigger the instant polish overlay.</p>
-      </div>
-      <!-- Feature 3 -->
-      <div class="glass-card p-8 rounded-3xl group">
-        <div class="w-12 h-12 rounded-2xl bg-error/10 flex items-center justify-center mb-6 transition-colors group-hover:bg-error/20">
-          <span class="material-symbols-outlined text-error" style="font-variation-settings: 'FILL' 1;">spellcheck</span>
-        </div>
-        <h3 class="font-headline-lg text-2xl mb-4">Name Preservation</h3>
-        <p class="font-body-md text-base text-on-surface-variant">Integrated fuzzy algorithms prevent small models from hallucinating or misspelling proper names like Rohith.</p>
-      </div>
-      <!-- Feature 4 -->
-      <div class="glass-card p-8 rounded-3xl group">
-        <div class="w-12 h-12 rounded-2xl bg-tertiary/10 flex items-center justify-center mb-6 transition-colors group-hover:bg-tertiary/20">
-          <span class="material-symbols-outlined text-tertiary" style="font-variation-settings: 'FILL' 1;">api</span>
-        </div>
-        <h3 class="font-headline-lg text-2xl mb-4">Custom API Keys</h3>
-        <p class="font-body-md text-base text-on-surface-variant">Not running WebGPU? Plugin your Gemini or OpenAI keys for blazing-fast online processing with zero markups.</p>
-      </div>
-    </div>
-  </section>
-  <!-- Installation Section -->
-  <section class="max-w-container-max mx-auto px-gutter mb-section-gap" id="install">
-    <div class="text-center mb-16">
-      <span class="font-label-sm text-label-sm text-primary uppercase tracking-widest mb-4 block">Get Started in 60 seconds</span>
-      <h2 class="font-headline-lg text-headline-lg">Install ScribeAI on your Mac</h2>
-      <p class="font-body-md text-body-md text-on-surface-variant mt-4 max-w-xl mx-auto">Four simple steps. No account required. Works immediately after install.</p>
-    </div>
 
-    <!-- Steps -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-      <!-- Step 1 -->
-      <div class="glass-card p-8 rounded-3xl group relative">
-        <div class="absolute -top-3 -left-3 w-8 h-8 rounded-full bg-primary flex items-center justify-center text-on-primary font-bold text-sm">1</div>
-        <div class="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 transition-colors group-hover:bg-primary/20">
-          <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">download</span>
+      <div class="proof" aria-label="Example of ScribeAI editing a sentence">
+        <div class="proof-head">
+          <span>draft.txt</span>
+          <div class="proof-toggle" role="group" aria-label="Show the marked-up draft or the rewritten sentence">
+            <button type="button" id="view-marks" aria-pressed="true">Marked up</button>
+            <button type="button" id="view-clean" aria-pressed="false">Rewritten</button>
+          </div>
         </div>
-        <h3 class="font-headline-lg text-xl mb-3">Download the DMG</h3>
-        <p class="font-body-md text-sm text-on-surface-variant">Click the download button below. The <code class="px-1.5 py-0.5 bg-surface-container-high rounded text-primary text-xs">.dmg</code> file is ~90MB and supports Apple Silicon Macs.</p>
-      </div>
-      <!-- Step 2 -->
-      <div class="glass-card p-8 rounded-3xl group relative">
-        <div class="absolute -top-3 -left-3 w-8 h-8 rounded-full bg-primary flex items-center justify-center text-on-primary font-bold text-sm">2</div>
-        <div class="w-12 h-12 rounded-2xl bg-secondary/10 flex items-center justify-center mb-6 transition-colors group-hover:bg-secondary/20">
-          <span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">folder_open</span>
-        </div>
-        <h3 class="font-headline-lg text-xl mb-3">Open &amp; Drag to Apps</h3>
-        <p class="font-body-md text-sm text-on-surface-variant">Open the downloaded DMG and drag <strong>ScribeAI</strong> into your Applications folder. Then eject the DMG.</p>
-      </div>
-      <!-- Step 3 -->
-      <div class="glass-card p-8 rounded-3xl group relative">
-        <div class="absolute -top-3 -left-3 w-8 h-8 rounded-full bg-primary flex items-center justify-center text-on-primary font-bold text-sm">3</div>
-        <div class="w-12 h-12 rounded-2xl bg-error/10 flex items-center justify-center mb-6 transition-colors group-hover:bg-error/20">
-          <span class="material-symbols-outlined text-error" style="font-variation-settings: 'FILL' 1;">security</span>
-        </div>
-        <h3 class="font-headline-lg text-xl mb-3">Allow First Launch</h3>
-        <p class="font-body-md text-sm text-on-surface-variant"><strong>Right-click</strong> ScribeAI in Applications → <strong>Open</strong> → click <strong>Open</strong> in the dialog. You only need to do this once.</p>
-      </div>
-      <!-- Step 4 -->
-      <div class="glass-card p-8 rounded-3xl group relative">
-        <div class="absolute -top-3 -left-3 w-8 h-8 rounded-full bg-primary flex items-center justify-center text-on-primary font-bold text-sm">4</div>
-        <div class="w-12 h-12 rounded-2xl bg-tertiary/10 flex items-center justify-center mb-6 transition-colors group-hover:bg-tertiary/20">
-          <span class="material-symbols-outlined text-tertiary" style="font-variation-settings: 'FILL' 1;">keyboard_command_key</span>
-        </div>
-        <h3 class="font-headline-lg text-xl mb-3">Select Text &amp; Write</h3>
-        <p class="font-body-md text-sm text-on-surface-variant">Highlight any text in any app, press <kbd class="px-2 py-0.5 bg-surface-container-high rounded font-mono text-xs">⌥ + ⌘ + S</kbd>, and ScribeAI appears instantly.</p>
-      </div>
-    </div>
-
-    <!-- Gatekeeper warning callout -->
-    <div class="glass-card rounded-3xl p-8 border border-yellow-500/20 bg-yellow-500/5 mb-12">
-      <div class="flex flex-col md:flex-row gap-6 items-start">
-        <div class="flex-shrink-0 w-12 h-12 rounded-2xl bg-yellow-500/10 flex items-center justify-center">
-          <span class="material-symbols-outlined text-yellow-400" style="font-variation-settings: 'FILL' 1;">info</span>
-        </div>
-        <div class="flex-1">
-          <h3 class="font-bold text-lg text-yellow-300 mb-2">macOS may show a security warning on first launch</h3>
-          <p class="text-on-surface-variant text-sm mb-4">
-            Because ScribeAI is distributed outside the Mac App Store, macOS Gatekeeper will show a warning the very first time you open it. This is normal for independent apps. <strong class="text-on-surface">There are two easy ways to bypass it:</strong>
+        <div class="proof-body">
+          <p class="proof-text play" id="proof-marks">
+            just wanted to <del style="--d:.15s">check in</del> <ins style="--d:.55s">follow up</ins>
+            about the report. <del style="--d:.75s">lets</del> <ins style="--d:1.05s">let&rsquo;s</ins>
+            <del style="--d:1.25s">get it done soon</del> <ins style="--d:1.65s">finish it this week</ins><span class="caret" aria-hidden="true"></span>
           </p>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <!-- Option A -->
-            <div class="bg-surface-container rounded-2xl p-5">
-              <p class="font-bold text-sm text-primary mb-3 flex items-center gap-2">
-                <span class="material-symbols-outlined text-sm">mouse</span>
-                Option A — Right-click method (easiest)
-              </p>
-              <ol class="space-y-2 text-sm text-on-surface-variant list-none">
-                <li class="flex items-start gap-2"><span class="text-primary font-bold mt-0.5">1.</span>Go to <strong>Applications</strong> in Finder</li>
-                <li class="flex items-start gap-2"><span class="text-primary font-bold mt-0.5">2.</span><strong>Right-click</strong> ScribeAI → choose <strong>Open</strong></li>
-                <li class="flex items-start gap-2"><span class="text-primary font-bold mt-0.5">3.</span>Click <strong>Open</strong> in the dialog that appears</li>
-                <li class="flex items-start gap-2"><span class="text-tertiary font-bold mt-0.5">✓</span>Done — opens normally every time after this</li>
-              </ol>
-            </div>
-            <!-- Option B -->
-            <div class="bg-surface-container rounded-2xl p-5">
-              <p class="font-bold text-sm text-primary mb-3 flex items-center gap-2">
-                <span class="material-symbols-outlined text-sm">terminal</span>
-                Option B — Terminal command
-              </p>
-              <p class="text-sm text-on-surface-variant mb-3">Paste this once in Terminal after dragging to Applications:</p>
-              <div class="relative">
-                <pre id="quarantine-cmd" class="bg-black/50 rounded-xl p-4 text-xs text-tertiary font-mono overflow-x-auto whitespace-pre-wrap break-all">xattr -dr com.apple.quarantine /Applications/ScribeAI.app</pre>
-                <button id="copy-cmd-btn" onclick="copyCmd()" class="absolute top-2 right-2 px-2 py-1 bg-surface-container-high rounded-lg text-[10px] font-bold text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1">
-                  <span class="material-symbols-outlined text-xs">content_copy</span>
-                  <span id="copy-label">Copy</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- System Requirements -->
-    <div class="glass-card rounded-3xl p-8">
-      <h3 class="font-bold text-lg mb-6 flex items-center gap-3">
-        <span class="material-symbols-outlined text-primary">computer</span>
-        System Requirements
-      </h3>
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-        <div class="flex items-center gap-4">
-          <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
-            <span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">laptop_mac</span>
-          </div>
-          <div>
-            <p class="font-bold text-sm">macOS Monterey+</p>
-            <p class="text-on-surface-variant text-xs">macOS 12.0 or later</p>
-          </div>
-        </div>
-        <div class="flex items-center gap-4">
-          <div class="w-10 h-10 rounded-xl bg-secondary/10 flex items-center justify-center flex-shrink-0">
-            <span class="material-symbols-outlined text-secondary text-sm" style="font-variation-settings: 'FILL' 1;">memory</span>
-          </div>
-          <div>
-            <p class="font-bold text-sm">Apple Silicon</p>
-            <p class="text-on-surface-variant text-xs">M1, M2, M3 or later</p>
-          </div>
-        </div>
-        <div class="flex items-center gap-4">
-          <div class="w-10 h-10 rounded-xl bg-tertiary/10 flex items-center justify-center flex-shrink-0">
-            <span class="material-symbols-outlined text-tertiary text-sm" style="font-variation-settings: 'FILL' 1;">wifi</span>
-          </div>
-          <div>
-            <p class="font-bold text-sm">Internet (Built-in AI)</p>
-            <p class="text-on-surface-variant text-xs">Offline mode: 8GB RAM min</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- Privacy Section -->
-  <section class="mb-section-gap" id="privacy">
-    <div class="max-w-container-max mx-auto px-gutter">
-      <div class="glass-card rounded-[40px] p-12 lg:p-20 overflow-hidden relative">
-        <div class="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-tertiary/5 to-transparent"></div>
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <div class="flex justify-center order-2 lg:order-1">
-            <div class="relative">
-              <div class="w-64 h-64 rounded-full border border-tertiary/20 flex items-center justify-center">
-                <div class="w-48 h-48 rounded-full border border-tertiary/40 flex items-center justify-center">
-                  <div class="w-32 h-32 rounded-full bg-tertiary/10 flex items-center justify-center animate-pulse">
-                    <span class="material-symbols-outlined text-tertiary text-6xl" style="font-variation-settings: 'FILL' 1;">shield_with_heart</span>
-                  </div>
-                </div>
-              </div>
-              <div class="absolute -top-4 -right-4 px-4 py-2 bg-tertiary text-on-tertiary font-bold rounded-lg text-sm shadow-xl shadow-tertiary/20">
-                100% SECURE
-              </div>
-            </div>
-          </div>
-          <div class="order-1 lg:order-2">
-            <span class="px-4 py-1.5 rounded-full bg-tertiary/10 text-tertiary font-label-sm text-[10px] uppercase tracking-widest mb-6 inline-block">Privacy First</span>
-            <h2 class="font-headline-lg text-headline-lg mb-8">Zero Data Harvesting. Period.</h2>
-            <p class="font-body-md text-body-md text-on-surface-variant mb-8">
-              Traditional writing tools send every single letter you type to corporate servers. ScribeAI operates locally via WebGPU. Your text stays on your machine, in your GPU memory, preserving sensitive business contracts, client files, and confidential passwords.
-            </p>
-            <ul class="space-y-4">
-              <li class="flex items-center gap-4">
-                <span class="material-symbols-outlined text-tertiary">check_circle</span>
-                <span class="font-body-md text-on-surface">Local hardware execution—no central databases.</span>
-              </li>
-              <li class="flex items-center gap-4">
-                <span class="material-symbols-outlined text-tertiary">check_circle</span>
-                <span class="font-body-md text-on-surface">No telemetry tracking or data log scraping.</span>
-              </li>
-              <li class="flex items-center gap-4">
-                <span class="material-symbols-outlined text-tertiary">check_circle</span>
-                <span class="font-body-md text-on-surface">Direct P2P connections for Gemini API mode.</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- Playground Section -->
-  <section class="max-w-container-max mx-auto px-gutter mb-section-gap" id="sandbox">
-    <div class="grid grid-cols-1 lg:grid-cols-5 gap-12 items-center">
-      <div class="lg:col-span-2">
-        <span class="px-4 py-1.5 rounded-full bg-primary/10 text-primary font-label-sm text-[10px] uppercase tracking-widest mb-6 inline-block">Live Playground</span>
-        <h2 class="font-headline-lg text-headline-lg mb-6">See ScribeAI in action</h2>
-        <p class="font-body-md text-body-md text-on-surface-variant mb-10">
-          Test our parsing engine below. Choose one of our draft templates, select a tone chip, and watch ScribeAI polish it without adding conversation filler or explanations.
-        </p>
-        <div class="space-y-4" id="preset-selectors">
-          <button id="preset-proper-name" class="preset-btn w-full p-4 glass-card rounded-2xl text-left hover:bg-white/5 transition-colors border-l-4 border-l-primary" data-preset="Proper Name Spelling">
-            <span class="font-bold">Proper Name Spelling</span>
-          </button>
-          <button id="preset-messy-message" class="preset-btn w-full p-4 glass-card rounded-2xl text-left hover:bg-white/5 transition-colors" data-preset="Messy Team Message">
-            <span class="font-bold">Messy Team Message</span>
-          </button>
-          <button id="preset-wordy-proposal" class="preset-btn w-full p-4 glass-card rounded-2xl text-left hover:bg-white/5 transition-colors" data-preset="Wordy Business Proposal">
-            <span class="font-bold">Wordy Business Proposal</span>
-          </button>
-        </div>
-      </div>
-      <div class="lg:col-span-3">
-        <div class="bg-[#0e0e10] border border-outline-variant/20 rounded-[32px] p-8 shadow-2xl relative">
-          <div class="flex items-center justify-between mb-6">
-            <span class="font-label-sm text-xs text-on-surface-variant/40 uppercase tracking-widest">YOUR DRAFT</span>
-            <span class="px-2 py-0.5 rounded bg-surface-container-highest text-[10px] text-on-surface-variant font-bold">INPUT</span>
-          </div>
-          <textarea class="w-full bg-black/40 border border-outline-variant/10 rounded-2xl p-6 font-mono text-primary min-h-[160px] mb-8 focus:ring-1 focus:ring-primary focus:border-primary transition-all" id="draft-input" placeholder="Type or paste something messy here...">i write rohit but ai write rihoy</textarea>
-          <div class="flex flex-wrap items-center justify-between gap-4 mb-8">
-            <div class="flex gap-2 p-1 bg-surface-container-low rounded-xl border border-white/5" id="tone-selector">
-              <button id="tone-chip-refine" class="tone-chip px-4 py-2 bg-primary text-on-primary rounded-lg text-sm font-bold" data-tone="improve">Refine</button>
-              <button id="tone-chip-business" class="tone-chip px-4 py-2 hover:bg-white/5 rounded-lg text-sm font-medium transition-colors" data-tone="professional">Business</button>
-              <button id="tone-chip-casual" class="tone-chip px-4 py-2 hover:bg-white/5 rounded-lg text-sm font-medium transition-colors" data-tone="casual">Casual</button>
-              <button id="tone-chip-shorten" class="tone-chip px-4 py-2 hover:bg-white/5 rounded-lg text-sm font-medium transition-colors" data-tone="concise">Shorten</button>
-            </div>
-            <button class="px-8 py-3 bg-gradient-to-r from-primary-container to-secondary-container text-white rounded-full font-bold flex items-center gap-2 shadow-lg shadow-primary/20 hover:scale-105 active:scale-95 transition-transform" id="polish-btn">
-              <span class="run-btn-text">Polish Text</span>
-              <span class="material-symbols-outlined text-sm run-icon">autorenew</span>
-            </button>
-          </div>
-          <div class="flex items-center justify-between mb-6">
-            <span class="font-label-sm text-xs text-on-surface-variant/40 uppercase tracking-widest">SCRIBEAI REFINED VERSION</span>
-            <span class="px-2 py-0.5 rounded bg-tertiary-container/20 text-tertiary text-[10px] font-bold uppercase">Clean Output</span>
-          </div>
-          <div class="w-full bg-black/40 border border-outline-variant/10 rounded-2xl p-6 font-mono text-tertiary min-h-[160px] relative overflow-hidden" id="refined-output">
-            <div class="hidden absolute inset-0 shimmer pointer-events-none" id="shimmer-overlay"></div>
-            <p id="output-text" class="result-text">I write Rohit, but the AI writes Rihoy.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- FAQ Section -->
-  <section class="max-w-3xl mx-auto px-gutter mb-section-gap" id="faq">
-    <div class="text-center mb-16">
-      <span class="font-label-sm text-label-sm text-primary uppercase tracking-widest mb-4 block">Common Questions</span>
-      <h2 class="font-headline-lg text-headline-lg">Everything you need to know</h2>
-    </div>
-    <div class="space-y-4">
-      <details id="faq-shortcut" class="group glass-card rounded-2xl p-2 transition-all open:bg-primary/5">
-        <summary class="flex items-center justify-between p-6 cursor-pointer list-none font-bold text-lg text-on-surface">
-          How does the global macOS shortcut work?
-          <span class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
-        </summary>
-        <div class="px-6 pb-6 text-on-surface-variant leading-relaxed">
-          ScribeAI runs as a lightweight accessibility agent. When you highlight text and press the hotkey, it captures the selection via macOS APIs, processes it locally using the embedded LLM, and offers to replace it or copy the result to your clipboard.
-        </div>
-      </details>
-      <details id="faq-requirements" class="group glass-card rounded-2xl p-2 transition-all open:bg-primary/5">
-        <summary class="flex items-center justify-between p-6 cursor-pointer list-none font-bold text-lg text-on-surface">
-          What are the system requirements for offline WebGPU models?
-          <span class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
-        </summary>
-        <div class="px-6 pb-6 text-on-surface-variant leading-relaxed">
-          For the best experience, we recommend an Apple Silicon Mac (M1/M2/M3) with at least 8GB of RAM. The WebGPU implementation works in Chrome 113+ and Safari 17+. If your hardware is older, you can toggle on "API Mode" to use cloud models.
-        </div>
-      </details>
-      <details id="faq-free" class="group glass-card rounded-2xl p-2 transition-all open:bg-primary/5">
-        <summary class="flex items-center justify-between p-6 cursor-pointer list-none font-bold text-lg text-on-surface">
-          Is ScribeAI completely free?
-          <span class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
-        </summary>
-        <div class="px-6 pb-6 text-on-surface-variant leading-relaxed">
-          Yes, the core ScribeAI client is free and open-source. Since the AI runs on your own hardware, there are no server costs for us to pass on to you. If you choose to use third-party APIs (like OpenAI), you pay only for your own usage directly to them.
-        </div>
-      </details>
-      <details id="faq-identity" class="group glass-card rounded-2xl p-2 transition-all open:bg-primary/5">
-        <summary class="flex items-center justify-between p-6 cursor-pointer list-none font-bold text-lg text-on-surface">
-          Why doesn't the AI change proper names or spelling of names?
-          <span class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
-        </summary>
-        <div class="px-6 pb-6 text-on-surface-variant leading-relaxed">
-          We've implemented a custom "Identity Lock" layer. Before the AI processes your text, we index proper nouns and names. After processing, we run a verification pass to ensure the AI hasn't accidentally regularized unique spellings or changed cultural names.
-        </div>
-      </details>
-      <details id="faq-1984" class="group glass-card rounded-2xl p-2 transition-all open:bg-primary/5">
-        <summary class="flex items-center justify-between p-6 cursor-pointer list-none font-bold text-lg text-on-surface">
-          Why does the downloaded DMG file group under the year 1984 in my Downloads folder?
-          <span class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
-        </summary>
-        <div class="px-6 pb-6 text-on-surface-variant leading-relaxed">
-          This is a harmless macOS / Safari quirk. When downloading files via GitHub Releases and S3 redirects, Safari occasionally does not receive a standard <code>Last-Modified</code> date header. If no date is found, macOS Safari defaults the file creation timestamp to **January 24, 1984**—the launch date of the original Apple Macintosh computer! The file is completely intact and safe to open.
-        </div>
-      </details>
-    </div>
-  </section>
-
-  <!-- Technical Specifications & Trust Section -->
-  <section class="max-w-container-max mx-auto px-gutter mb-section-gap">
-    <div class="glass-card rounded-[40px] p-12 lg:p-20 relative overflow-hidden">
-      <div class="absolute inset-0 bg-secondary/5 blur-[100px] pointer-events-none"></div>
-      <div class="max-w-3xl mx-auto text-center mb-16">
-        <span class="px-4 py-1.5 rounded-full bg-secondary/10 text-secondary font-label-sm text-[10px] uppercase tracking-widest mb-6 inline-block">Architecture & Trust</span>
-        <h2 class="font-headline-lg text-headline-lg mb-6">Built Open Source & Verifiable</h2>
-        <p class="font-body-md text-body-md text-on-surface-variant">
-          ScribeAI is committed to full transparency. As an independent developer utility, our client-side source code is fully open-source and audited by the community. Here are the core specifications of the client engine:
-        </p>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
-        <div class="p-6 bg-surface-container rounded-2xl border border-outline-variant/10">
-          <span class="material-symbols-outlined text-primary text-3xl mb-4">memory</span>
-          <h3 class="font-bold text-lg mb-2">WebGPU Execution</h3>
-          <p class="text-on-surface-variant text-sm leading-relaxed">
-            Utilizes the WebLLM runtime framework to run local parameters on Apple Silicon GPUs, supporting quantized Qwen-1.5B weights with 1.6GB VRAM peak footprint.
+          <p class="proof-text" id="proof-clean" hidden>
+            Just wanted to follow up about the report. Let&rsquo;s finish it this week.
           </p>
         </div>
-        <div class="p-6 bg-surface-container rounded-2xl border border-outline-variant/10">
-          <span class="material-symbols-outlined text-secondary text-3xl mb-4">security</span>
-          <h3 class="font-bold text-lg mb-2">Independent Auditing</h3>
-          <p class="text-on-surface-variant text-sm leading-relaxed">
-            The code has no telemetry tracker scripts, tracking cookies, or analytics servers. Review or fork our build scripts directly in our public repository.
-          </p>
-        </div>
-        <div class="p-6 bg-surface-container rounded-2xl border border-outline-variant/10">
-          <span class="material-symbols-outlined text-tertiary text-3xl mb-4">account_circle</span>
-          <h3 class="font-bold text-lg mb-2">Developer Transparency</h3>
-          <p class="text-on-surface-variant text-sm leading-relaxed">
-            Created and maintained by Anirudh Bhardwaj (ScribeAI Project Lead). Feel free to verify our builds or contact support at support@scribeai.shop.
-          </p>
+        <div class="proof-legend">
+          <span class="legend-key out"><i></i> removed</span>
+          <span class="legend-key in"><i></i> inserted</span>
+          <span>Nothing is uploaded to do this.</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Final CTA -->
-  <section class="max-w-container-max mx-auto px-gutter mb-section-gap">
-    <div class="glass-card rounded-[40px] py-24 px-8 text-center relative overflow-hidden">
-      <div class="absolute inset-0 bg-primary/5 blur-[100px]"></div>
-      <h2 class="font-display-lg text-5xl md:text-7xl mb-8 relative z-10">Take control of your<br><span class="text-gradient">writing workflow</span></h2>
-      <p class="font-body-md text-body-md text-on-surface-variant max-w-2xl mx-auto mb-12 relative z-10">
-        Get started with the global macOS app or install the Chrome Extension to write cleaner, more professional content everywhere.
+  <!-- Features -->
+  <section class="section shell" id="features">
+    <div class="section-head">
+      <h2 class="section-title">What can ScribeAI do?</h2>
+      <p class="lede">
+        One shortcut, five tones, and a model that lives on your Mac. ScribeAI handles the
+        sentence you are stuck on and puts it back where you were typing.
       </p>
-      <div class="flex flex-wrap justify-center gap-4 relative z-10">
-        <a id="final-download-btn" href="https://github.com/Anirudh3434/scribeai/releases/download/v1.0.2/ScribeAI-1.0.2-arm64.dmg" download class="px-10 py-5 bg-gradient-to-r from-primary-container to-secondary-container text-white rounded-2xl font-bold flex items-center gap-3 shadow-2xl shadow-primary/20 hover:scale-105 active:scale-95">
-          <span class="material-symbols-outlined">download</span>
-          <span class="">Download macOS App (.dmg)</span>
-        </a>
-        <div id="final-chrome-btn" class="px-8 py-5 border border-outline-variant/30 rounded-2xl font-medium text-on-surface hover:bg-white/5 transition-colors flex items-center gap-3 opacity-60 cursor-not-allowed">
-          <span class="material-symbols-outlined">extension</span>
-          <span class="">Chrome Extension</span>
-          <span class="px-1.5 py-0.5 rounded bg-surface-container-highest text-[10px] font-bold">SOON</span>
+    </div>
+
+    <ul class="rows">
+      <li>
+        <h3>Runs offline</h3>
+        <p>WebGPU executes a quantized Qwen 1.5B model on your own GPU, peaking around 1.6GB of VRAM. Typed text stays on the machine.</p>
+      </li>
+      <li>
+        <h3>Works in every app</h3>
+        <p>Highlight a passage in Slack, Notes, Mail or a browser, press <code>⌥⌘S</code> and the overlay appears over whatever you were doing.</p>
+      </li>
+      <li>
+        <h3>Keeps your names</h3>
+        <p>Proper nouns are indexed before rewriting and checked afterwards, so Rohith does not quietly become Rohit.</p>
+      </li>
+      <li>
+        <h3>Five tones, one custom line</h3>
+        <p>Professional, casual, improved, concise or expanded, plus a free-text instruction for anything the presets do not cover.</p>
+      </li>
+      <li>
+        <h3>Bring your own key</h3>
+        <p>No WebGPU on your machine? Add a Gemini or OpenAI key and requests go straight to that provider, billed at their rates.</p>
+      </li>
+      <li>
+        <h3>Updates itself</h3>
+        <p>New builds arrive quietly through GitHub Releases. No account, no subscription, no prompt to upgrade.</p>
+      </li>
+    </ul>
+
+    <figure class="figure">
+      <img src="assets/hero_mockup.webp" alt="The ScribeAI overlay floating above a macOS desktop, showing a rewritten paragraph ready to insert." width="1024" height="768" loading="lazy">
+      <figcaption>
+        The overlay lands above the app you are in. Insert the rewrite with a click, or copy it
+        and keep typing.
+      </figcaption>
+    </figure>
+  </section>
+
+  <!-- Privacy -->
+  <section class="section shell" id="privacy">
+    <div class="privacy-grid">
+      <div>
+        <h2 class="statement">Nothing you write leaves this computer.</h2>
+        <p class="lede">
+          Most writing tools forward every keystroke to a server. ScribeAI does the work in GPU
+          memory on your Mac, which keeps contracts, client notes and anything else you paste
+          exactly where you put it.
+        </p>
+      </div>
+      <ul class="proof-list">
+        <li>
+          <span class="mark" aria-hidden="true">&#8224;</span>
+          <span><strong>Local execution.</strong> The default path uses your own hardware and no central database.</span>
+        </li>
+        <li>
+          <span class="mark" aria-hidden="true">&#8224;</span>
+          <span><strong>No telemetry.</strong> The client ships without trackers, tracking cookies or analytics servers.</span>
+        </li>
+        <li>
+          <span class="mark" aria-hidden="true">&#8224;</span>
+          <span><strong>Direct API calls.</strong> If you add a provider key, the request travels from your Mac to that provider and back.</span>
+        </li>
+        <li>
+          <span class="mark" aria-hidden="true">&#8224;</span>
+          <span><strong>Auditable.</strong> The source is public. Read it, fork it, build it yourself.</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Sandbox -->
+  <section class="section shell" id="sandbox">
+    <div class="section-head">
+      <h2 class="section-title">Try the rewriter</h2>
+      <p class="lede">
+        Pick a draft, choose a tone, and watch the edit. This runs in your browser with a small
+        demo vocabulary; the desktop app runs the real model.
+      </p>
+    </div>
+
+    <div class="sandbox-grid">
+      <ul class="presets" id="preset-selectors">
+        <li>
+          <button type="button" class="preset-btn is-active" data-preset="Proper Name Spelling" id="preset-proper-name">
+            Proper name spelling
+            <small>Identity Lock keeps spellings intact</small>
+          </button>
+        </li>
+        <li>
+          <button type="button" class="preset-btn" data-preset="Messy Team Message" id="preset-messy-message">
+            Messy team message
+            <small>One run-on line, four ideas</small>
+          </button>
+        </li>
+        <li>
+          <button type="button" class="preset-btn" data-preset="Wordy Business Proposal" id="preset-wordy-proposal">
+            Wordy proposal
+            <small>Cut the hedging, keep the meaning</small>
+          </button>
+        </li>
+      </ul>
+
+      <div class="tool">
+        <div class="tool-label">
+          <span>your draft</span>
         </div>
-        <div id="final-windows-btn" class="px-8 py-5 border border-outline-variant/30 rounded-2xl font-medium text-on-surface hover:bg-white/5 transition-colors flex items-center gap-3 opacity-60 cursor-not-allowed">
-          <span class="material-symbols-outlined">desktop_windows</span>
-          <span class="">Windows App</span>
-          <span class="px-1.5 py-0.5 rounded bg-surface-container-highest text-[10px] font-bold">SOON</span>
+        <textarea id="draft-input" spellcheck="false" aria-label="Your draft">i write rohit but ai write rihoy</textarea>
+
+        <div class="tool-controls">
+          <div class="tones" id="tone-selector" role="group" aria-label="Tone">
+            <button type="button" class="tone-chip is-active" data-tone="improve" id="tone-chip-refine">Refine</button>
+            <button type="button" class="tone-chip" data-tone="professional" id="tone-chip-business">Business</button>
+            <button type="button" class="tone-chip" data-tone="casual" id="tone-chip-casual">Casual</button>
+            <button type="button" class="tone-chip" data-tone="concise" id="tone-chip-shorten">Shorten</button>
+          </div>
+          <button type="button" class="btn btn-primary" id="polish-btn">
+            <span class="run-btn-text">Rewrite</span>
+            <span class="run-icon" aria-hidden="true">&#8635;</span>
+          </button>
+        </div>
+
+        <div class="tool-label">
+          <span>rewritten</span>
+        </div>
+        <div class="output-box" id="refined-output" aria-live="polite">
+          <div class="shimmer hidden" id="shimmer-overlay"></div>
+          <p id="output-text" class="result-text">I write Rohit, but the AI writes Rihoy.</p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- Install -->
+  <section class="section shell" id="install">
+    <div class="section-head">
+      <h2 class="section-title">How to install ScribeAI on your Mac</h2>
+      <p class="lede">No account and nothing to configure. From download to first rewrite takes about a minute.</p>
+    </div>
+
+    <ol class="steps">
+      <li>
+        <span class="num" aria-hidden="true">1</span>
+        <h3>Download the disk image</h3>
+        <p>The <code>.dmg</code> is roughly 90MB and runs on Apple silicon Macs.</p>
+      </li>
+      <li>
+        <span class="num" aria-hidden="true">2</span>
+        <h3>Drag it to Applications</h3>
+        <p>Open the downloaded image and move <strong>ScribeAI</strong> into Applications, then eject.</p>
+      </li>
+      <li>
+        <span class="num" aria-hidden="true">3</span>
+        <h3>Approve the first launch</h3>
+        <p>Right-click the app, choose <strong>Open</strong>, then confirm. You only do this once.</p>
+      </li>
+      <li>
+        <span class="num" aria-hidden="true">4</span>
+        <h3>Select text and write</h3>
+        <p>Highlight anything, press <kbd>⌥⌘S</kbd> and the overlay opens.</p>
+      </li>
+    </ol>
+
+    <div class="aside">
+      <h3>First launch on macOS</h3>
+      <p>
+        Because ScribeAI is distributed outside the App Store, macOS shows a security warning the
+        first time you open it. That is normal for independent apps. Either method clears it once
+        and never asks again.
+      </p>
+      <div class="aside-options">
+        <div>
+          <h4>Right-click method</h4>
+          <ol>
+            <li>Open <strong>Applications</strong> in Finder</li>
+            <li>Right-click <strong>ScribeAI</strong> and choose <strong>Open</strong></li>
+            <li>Click <strong>Open</strong> in the dialog</li>
+          </ol>
+        </div>
+        <div>
+          <h4>Terminal method</h4>
+          <p class="note" style="margin-bottom:10px;">Paste this once after moving the app to Applications.</p>
+          <div class="cmd">
+            <code id="quarantine-cmd">xattr -dr com.apple.quarantine /Applications/ScribeAI.app</code>
+            <button type="button" id="copy-cmd-btn" onclick="copyCmd()"><span id="copy-label">Copy</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="specs" style="margin-top:clamp(40px,5vw,64px);">
+      <div>
+        <h3>System requirements</h3>
+        <dl>
+          <div><dt>macOS</dt><dd>12.0 or later</dd></div>
+          <div><dt>Chip</dt><dd>M1 or newer</dd></div>
+          <div><dt>Memory</dt><dd>8GB minimum</dd></div>
+        </dl>
+      </div>
+      <div>
+        <h3>Offline model</h3>
+        <dl>
+          <div><dt>Weights</dt><dd>Qwen2.5 1.5B Instruct, 4-bit</dd></div>
+          <div><dt>Runtime</dt><dd><a href="https://github.com/mlc-ai/web-llm" target="_blank" rel="noopener noreferrer">WebLLM</a> over <a href="https://www.w3.org/TR/webgpu/" target="_blank" rel="noopener noreferrer">WebGPU</a></dd></div>
+          <div><dt>Peak VRAM</dt><dd>1.6GB</dd></div>
+        </dl>
+        <p class="fineprint" style="margin-top:12px;">
+          Model: <a href="https://huggingface.co/Qwen/Qwen2.5-1.5B-Instruct" target="_blank" rel="noopener noreferrer">Qwen2.5-1.5B-Instruct</a>
+          (Apache-2.0), quantized to 4-bit by <a href="https://github.com/mlc-ai/web-llm" target="_blank" rel="noopener noreferrer">MLC WebLLM</a>.
+          Weights download once (~390MB) and are cached on your Mac.
+        </p>
+      </div>
+      <div>
+        <h3>Licence</h3>
+        <dl>
+          <div><dt>Price</dt><dd>Free</dd></div>
+          <div><dt>Source</dt><dd>MIT, public repo</dd></div>
+          <div><dt>Version</dt><dd>1.0.1</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <!-- Author / E-E-A-T -->
+    <div class="byline">
+      <div class="byline-text">
+        <h3>Built and maintained by Anirudh Bhardwaj</h3>
+        <p>
+          ScribeAI is an independent, open-source project — not a company. Every line of the
+          <a href="https://github.com/Anirudh3434/scribeai" target="_blank" rel="noopener noreferrer">source</a>
+          is public, and issues and pull requests go straight to the maintainer.
+          Questions or bug reports: <a href="mailto:support@scribeai.shop">support@scribeai.shop</a>.
+        </p>
+      </div>
+      <p class="fineprint byline-date">Last updated <time datetime="2026-10-13">13 October 2026</time> · Version 1.0.1</p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section shell" id="faq">
+    <div class="section-head">
+      <h2 class="section-title">Frequently asked questions</h2>
+      <p class="lede">The things people ask before downloading.</p>
+    </div>
+
+    <div class="faq-wrap">
+      <details class="faq" id="faq-offline" open>
+        <summary><h3>Does ScribeAI work offline?</h3></summary>
+        <div class="answer">
+          Yes. The default mode downloads a roughly 390MB model once, then rewrites with the network
+          switched off: the model runs on your Mac's own GPU through WebGPU, and nothing is sent to a
+          server. Only two things need internet — that one-time model download, and API mode, which
+          you opt into with your own Gemini or OpenAI key.
+        </div>
+      </details>
+
+      <details class="faq" id="faq-shortcut">
+        <summary><h3>How does the global shortcut work?</h3></summary>
+        <div class="answer">
+          ScribeAI runs as a lightweight accessibility agent. When you highlight text and press
+          ⌥⌘S, it reads the selection through macOS APIs, processes it locally, then replaces the
+          selection or copies the result to your clipboard.
+        </div>
+      </details>
+
+      <details class="faq" id="faq-requirements">
+        <summary><h3>What does the offline model need from my Mac?</h3></summary>
+        <div class="answer">
+          An Apple silicon Mac with at least 8GB of memory gives the best result — the default model
+          peaks around 1.6GB of VRAM, so an 8GB machine stays comfortable. If your hardware is older,
+          switch on API mode in settings and the same rewrite runs on a cloud model instead.
+        </div>
+      </details>
+
+      <details class="faq" id="faq-free">
+        <summary><h3>Is ScribeAI free?</h3></summary>
+        <div class="answer">
+          The client is free and open source, and the built-in model costs nothing because it runs
+          on your hardware. If you add a third-party key such as OpenAI, you pay that provider
+          directly for what you use.
+        </div>
+      </details>
+
+      <details class="faq" id="faq-comparison">
+        <summary><h3>How is ScribeAI different from Grammarly or other cloud assistants?</h3></summary>
+        <div class="answer">
+          <p style="margin-bottom:16px;">
+            Cloud assistants such as Grammarly or QuillBot send every checked passage to their
+            servers and charge a subscription. ScribeAI runs the model on your own GPU, costs
+            nothing, works system-wide in any Mac app from one keystroke, and keeps working offline.
+          </p>
+          <table class="compare">
+            <caption class="visually-hidden">ScribeAI compared with cloud writing assistants</caption>
+            <thead>
+              <tr>
+                <th scope="col">How they differ</th>
+                <th scope="col">ScribeAI</th>
+                <th scope="col">Cloud assistants</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Where the model runs</th>
+                <td data-label="ScribeAI">Your Mac (WebGPU)</td>
+                <td data-label="Cloud assistants">Their servers</td>
+              </tr>
+              <tr>
+                <th scope="row">Price</th>
+                <td data-label="ScribeAI">Free, MIT open source</td>
+                <td data-label="Cloud assistants">Paid subscription</td>
+              </tr>
+              <tr>
+                <th scope="row">Text leaves your device</th>
+                <td data-label="ScribeAI">No</td>
+                <td data-label="Cloud assistants">Yes, on every check</td>
+              </tr>
+              <tr>
+                <th scope="row">Works in any Mac app</th>
+                <td data-label="ScribeAI">Yes, system-wide ⌥⌘S</td>
+                <td data-label="Cloud assistants">Usually browser or editor plugins</td>
+              </tr>
+              <tr>
+                <th scope="row">Works offline</th>
+                <td data-label="ScribeAI">Yes</td>
+                <td data-label="Cloud assistants">No</td>
+              </tr>
+              <tr>
+                <th scope="row">Account required</th>
+                <td data-label="ScribeAI">No</td>
+                <td data-label="Cloud assistants">Usually</td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="fineprint" style="margin-top:14px;">
+            Comparison reflects how Grammarly, QuillBot and similar services were typically
+            architected as of October 2026. Check each vendor's current privacy policy before you
+            decide.
+          </p>
+        </div>
+      </details>
+
+      <details class="faq" id="faq-identity">
+        <summary><h3>Why does the rewrite leave names alone?</h3></summary>
+        <div class="answer">
+          The Identity Lock layer indexes proper nouns before the model runs and checks the result
+          afterwards, so unusual spellings and cultural names come back untouched.
+        </div>
+      </details>
+
+      <details class="faq" id="faq-1984">
+        <summary><h3>Why does the downloaded file sort under 1984 in Downloads?</h3></summary>
+        <div class="answer">
+          A harmless Safari quirk. When a download travels through GitHub Releases and S3 redirects,
+          Safari occasionally receives no <code>Last-Modified</code> header and falls back to
+          <strong>24 January 1984</strong>, the launch date of the original Macintosh. The file
+          itself is intact.
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- Closing -->
+  <section class="section shell closing">
+    <h2>Take the first draft off your plate.</h2>
+    <p class="lede">
+      Download the Mac app, press <kbd>⌥⌘S</kbd> on something you were about to rewrite by
+      hand, and see what comes back.
+    </p>
+    <div class="closing-actions">
+      <a id="final-download-btn" class="btn btn-primary" href="https://github.com/Anirudh3434/scribeai/releases/latest">Download for macOS</a>
+      <a class="btn btn-quiet" href="https://github.com/Anirudh3434/scribeai" target="_blank" rel="noopener noreferrer">View the source</a>
+      <span class="btn btn-quiet" aria-disabled="true" role="button" tabindex="-1" id="final-chrome-btn">Chrome extension <span class="tag">Soon</span></span>
+      <span class="btn btn-quiet" aria-disabled="true" role="button" tabindex="-1" id="final-windows-btn">Windows app <span class="tag">Soon</span></span>
     </div>
   </section>
 </main>
-<!-- Footer -->
-<footer class="bg-gradient-to-b from-[#131315] to-[#0a0a0c] border-t border-outline-variant/10 pt-24 pb-12 relative overflow-hidden">
-  <!-- Subtle background glow -->
-  <div class="absolute bottom-0 right-0 w-96 h-96 bg-primary/5 blur-[150px] rounded-full pointer-events-none"></div>
-  <div class="absolute top-0 left-0 w-96 h-96 bg-secondary/5 blur-[150px] rounded-full pointer-events-none"></div>
 
-  <div class="max-w-container-max mx-auto px-gutter relative z-10">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 pb-16 border-b border-outline-variant/10">
-      
-      <!-- Brand column -->
-      <div class="lg:col-span-4 flex flex-col justify-between">
-        <div>
-          <div class="flex items-center gap-3 mb-6">
-            <img class="logo-image w-8 h-8 object-contain" src="assets/icon.webp" alt="ScribeAI Logo">
-            <span class="text-2xl font-display-lg font-bold text-on-surface tracking-tight">ScribeAI</span>
-          </div>
-          <p class="text-on-surface-variant font-body-md text-sm leading-relaxed mb-6 max-w-xs">
-            Global writing refinement client. Privacy by design, powered by local hardware WebGPU execution.
-          </p>
-          <!-- Status Badge -->
-          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-tertiary/10 border border-tertiary/20 text-xs font-semibold text-tertiary">
-            <span class="relative flex h-2 w-2">
-              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary opacity-75"></span>
-              <span class="relative inline-flex rounded-full h-2 w-2 bg-tertiary"></span>
-            </span>
-            All Systems Operational
-          </div>
-        </div>
-
-        <!-- Social Icons -->
-        <div class="flex items-center gap-4 mt-8">
-          <!-- Github -->
-          <a href="https://github.com/Anirudh3434/scribeai" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-on-surface-variant hover:text-primary hover:border-primary/30 transition-all duration-300 hover:-translate-y-1" aria-label="GitHub Repository">
-            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
-              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.11.82-.26.82-.577v-2.234c-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.43.372.82 1.102.82 2.222v3.293c0 .319.22.694.825.576C20.565 21.795 24 17.3 24 12c0-6.63-5.37-12-12-12z"/>
-            </svg>
+<footer class="site-footer">
+  <div class="shell">
+    <div class="footer-grid">
+      <div class="footer-about">
+        <a class="brand" href="./" style="font-size:1.25rem;">
+          <img src="assets/icon.webp" alt="" width="24" height="24">
+          ScribeAI
+        </a>
+        <p>A global rewriting tool for macOS, built to run on your own hardware.</p>
+        <div class="socials">
+          <a href="https://github.com/Anirudh3434/scribeai" target="_blank" rel="noopener noreferrer" aria-label="ScribeAI on GitHub">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.11.82-.26.82-.577v-2.234c-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23a11.5 11.5 0 0 1 3-.405c1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.43.372.82 1.102.82 2.222v3.293c0 .319.22.694.825.576C20.565 21.795 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
           </a>
-          <!-- Twitter/X -->
-          <a href="https://x.com/1scribe_ai" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-on-surface-variant hover:text-primary hover:border-primary/30 transition-all duration-300 hover:-translate-y-1" aria-label="Twitter Page">
-            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
-              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-            </svg>
+          <a href="https://x.com/1scribe_ai" target="_blank" rel="noopener noreferrer" aria-label="ScribeAI on X">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
           </a>
-          <!-- Instagram -->
-          <a href="https://www.instagram.com/scribe_.ai?igsh=YzdyNHRteWliOGxv" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-on-surface-variant hover:text-primary hover:border-primary/30 transition-all duration-300 hover:-translate-y-1" aria-label="Instagram Profile">
-            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
-              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051c-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
-            </svg>
+          <a href="https://www.instagram.com/scribe_.ai?igsh=YzdyNHRteWliOGxv" target="_blank" rel="noopener noreferrer" aria-label="ScribeAI on Instagram">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051c-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.358-.2 6.78-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
           </a>
-          <!-- Support Email -->
-          <a href="mailto:support@scribeai.shop" class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-on-surface-variant hover:text-primary hover:border-primary/30 transition-all duration-300 hover:-translate-y-1" aria-label="Support Email">
-            <svg class="w-5 h-5 fill-none stroke-current" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-              <polyline points="22,6 12,13 2,6"/>
-            </svg>
+          <a href="mailto:support@scribeai.shop" aria-label="Email ScribeAI support">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
           </a>
         </div>
       </div>
 
-      <!-- Links Column 1: Product -->
-      <div class="lg:col-span-2 lg:col-start-6">
-        <h4 class="text-sm font-semibold uppercase tracking-wider text-on-surface mb-6">Product</h4>
-        <ul class="space-y-4">
-          <li>
-            <a class="text-sm text-on-surface-variant hover:text-primary transition-all duration-300 hover:translate-x-1 inline-block" href="#features">Features</a>
-          </li>
-          <li>
-            <a class="text-sm text-on-surface-variant hover:text-primary transition-all duration-300 hover:translate-x-1 inline-block" href="#sandbox">Interactive Sandbox</a>
-          </li>
-          <li>
-            <a class="text-sm text-on-surface-variant hover:text-primary transition-all duration-300 hover:translate-x-1 inline-block" href="#privacy">Privacy First</a>
-          </li>
-          <li>
-            <a class="text-sm text-on-surface-variant hover:text-primary transition-all duration-300 hover:translate-x-1 inline-block" href="#faq">FAQ</a>
-          </li>
+      <div>
+        <h3>Product</h3>
+        <ul>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#sandbox">Demo</a></li>
+          <li><a href="#privacy">Privacy</a></li>
+          <li><a href="#faq">Questions</a></li>
         </ul>
       </div>
 
-      <!-- Links Column 2: Downloads & Dev -->
-      <div class="lg:col-span-2">
-        <h4 class="text-sm font-semibold uppercase tracking-wider text-on-surface mb-6">Download</h4>
-        <ul class="space-y-4">
-          <li>
-            <a class="text-sm text-on-surface-variant hover:text-primary transition-all duration-300 hover:translate-x-1 inline-block" href="https://github.com/Anirudh3434/scribeai/releases/download/v1.0.2/ScribeAI-1.0.2-arm64.dmg" download>macOS Client (.dmg)</a>
-          </li>
-          <li>
-            <span class="text-sm text-on-surface-variant/40 cursor-not-allowed flex items-center gap-2">
-              Chrome Extension
-              <span class="px-1.5 py-0.5 rounded bg-surface-container-highest text-[9px] font-bold text-on-surface-variant/60 uppercase tracking-tighter">Soon</span>
-            </span>
-          </li>
-          <li>
-            <span class="text-sm text-on-surface-variant/40 cursor-not-allowed flex items-center gap-2">
-              Windows App
-              <span class="px-1.5 py-0.5 rounded bg-surface-container-highest text-[9px] font-bold text-on-surface-variant/60 uppercase tracking-tighter">Soon</span>
-            </span>
-          </li>
-          <li>
-            <a class="text-sm text-on-surface-variant hover:text-primary transition-all duration-300 hover:translate-x-1 inline-block" href="https://github.com/Anirudh3434/scribeai/releases" target="_blank" rel="noopener noreferrer">All Releases</a>
-          </li>
+      <div>
+        <h3>Download</h3>
+        <ul>
+          <li><a href="https://github.com/Anirudh3434/scribeai/releases/latest">macOS app</a></li>
+          <li><a href="https://github.com/Anirudh3434/scribeai/releases" target="_blank" rel="noopener noreferrer">All releases</a></li>
+          <li><span style="color:var(--graphite);">Chrome extension, coming soon</span></li>
+          <li><span style="color:var(--graphite);">Windows app, coming soon</span></li>
         </ul>
       </div>
 
-      <!-- Column 4: Newsletter / Stay Updated -->
-      <div class="lg:col-span-3">
-        <h4 class="text-sm font-semibold uppercase tracking-wider text-on-surface mb-6">Stay Updated</h4>
-        <p class="text-sm text-on-surface-variant mb-6 leading-relaxed">
-          Subscribe to get notified about new releases, offline models, and feature announcements.
-        </p>
-        <form id="newsletter-form" class="space-y-3" onsubmit="event.preventDefault(); alert('Subscribed!');">
-          <div class="relative">
-            <input type="email" placeholder="Enter your email" required class="w-full bg-black/40 border border-outline-variant/20 rounded-xl px-4 py-3 text-sm text-on-surface placeholder-on-surface-variant/40 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all duration-300 pr-12">
-            <button type="submit" class="absolute right-2 top-2 bottom-2 w-8 h-8 rounded-lg bg-primary hover:bg-primary-container text-on-primary flex items-center justify-center transition-all duration-300 active:scale-95" aria-label="Subscribe">
-              <span class="material-symbols-outlined text-sm">arrow_forward</span>
-            </button>
-          </div>
+      <div>
+        <h3>Release notes</h3>
+        <p>Get an email when a new build, offline model or platform lands.</p>
+        <form id="newsletter-form" class="footer-form" onsubmit="event.preventDefault(); alert('Subscribed!');">
+          <label class="skip" for="newsletter-email">Email address</label>
+          <input id="newsletter-email" type="email" placeholder="you@example.com" required>
+          <button class="btn btn-primary btn-sm" type="submit">Subscribe</button>
         </form>
       </div>
-
     </div>
 
-    <!-- Bottom footer row -->
-    <div class="mt-12 flex flex-col sm:flex-row justify-between items-center gap-6">
-      <div class="flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left">
-        <p class="font-label-sm text-xs text-on-surface-variant/40">
-          © 2026 ScribeAI. Released under the MIT License.
-        </p>
-        <span class="hidden sm:inline text-on-surface-variant/20">|</span>
-        <div class="flex gap-4">
-          <a id="footer-privacy" class="font-label-sm text-xs text-on-surface-variant/60 hover:text-primary transition-colors duration-300" href="privacy.html">Privacy Policy</a>
-          <a id="footer-terms" class="font-label-sm text-xs text-on-surface-variant/60 hover:text-primary transition-colors duration-300" href="terms.html">Terms of Service</a>
-        </div>
-      </div>
-
-      <!-- Version & Scroll to Top -->
-      <div class="flex items-center gap-6">
-        <div class="flex items-center gap-2">
-          <div class="w-1.5 h-1.5 rounded-full bg-tertiary"></div>
-          <span class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant/60">v2.4.0 Stable</span>
-        </div>
-        
-        <!-- Back to top button -->
-        <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="w-8 h-8 rounded-lg bg-surface-container hover:bg-surface-container-high border border-outline-variant/10 text-on-surface-variant hover:text-primary flex items-center justify-center transition-all duration-300 hover:-translate-y-0.5" aria-label="Scroll to top">
-          <span class="material-symbols-outlined text-sm">arrow_upward</span>
-        </button>
-      </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 ScribeAI. Released under the MIT licence.</p>
+      <nav aria-label="Legal">
+        <a id="footer-privacy" href="privacy.html">Privacy policy</a>
+        <a id="footer-terms" href="terms.html">Terms of service</a>
+        <a href="https://github.com/Anirudh3434/scribeai" target="_blank" rel="noopener noreferrer">Source</a>
+        <a href="llms.txt" title="Site summary for AI assistants">For AI assistants</a>
+      </nav>
+      <button type="button" class="to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">Back to top</button>
     </div>
   </div>
 </footer>
 
 <script>
+    // Hero markup / rewritten toggle
+    const viewMarks = document.getElementById('view-marks');
+    const viewClean = document.getElementById('view-clean');
+    const proofMarks = document.getElementById('proof-marks');
+    const proofClean = document.getElementById('proof-clean');
+
+    function showProof(mode) {
+      const showMarks = mode === 'marks';
+      proofMarks.hidden = !showMarks;
+      proofClean.hidden = showMarks;
+      viewMarks.setAttribute('aria-pressed', String(showMarks));
+      viewClean.setAttribute('aria-pressed', String(!showMarks));
+      if (showMarks && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        // restart the mark-in sequence
+        proofMarks.classList.remove('play');
+        void proofMarks.offsetWidth;
+        proofMarks.classList.add('play');
+      }
+    }
+    viewMarks.addEventListener('click', () => showProof('marks'));
+    viewClean.addEventListener('click', () => showProof('clean'));
+
     function copyCmd() {
       const cmd = document.getElementById('quarantine-cmd').textContent.trim();
       navigator.clipboard.writeText(cmd).then(() => {
         const label = document.getElementById('copy-label');
-        label.textContent = 'Copied!';
+        label.textContent = 'Copied';
         setTimeout(() => { label.textContent = 'Copy'; }, 2000);
       });
     }
@@ -840,9 +1736,9 @@
         },
         'Messy Team Message': {
             improve: "Hello team, I just wanted to let you know that the meeting is at 5:00. Please be on time, otherwise we will lose the slot. Thank you.",
-            professional: "Dear Team, Please be advised that our upcoming meeting is scheduled for 5:00 PM. It is imperative that all members arrive promptly to ensure we retain our reserved time slot. Thank you.",
+            professional: "Dear Team, please be advised that our upcoming meeting is scheduled for 5:00 PM. It is imperative that all members arrive promptly to ensure we retain our reserved time slot. Thank you.",
             casual: "Hey guys, just a heads-up that our sync is at 5. Try to be on time so we don't lose the room! Thanks!",
-            concise: "Team: Meeting is at 5 PM. Please arrive on time so we don't lose the slot."
+            concise: "Team: meeting is at 5 PM. Please arrive on time so we don't lose the slot."
         },
         'Wordy Business Proposal': {
             improve: 'We are currently investigating the possibility of postponing the product delivery deadline.',
@@ -855,30 +1751,26 @@
     let currentPreset = 'Proper Name Spelling';
     let currentTone = 'improve';
 
-    // Preset Selection Event Listeners
     const presetButtons = document.querySelectorAll('#preset-selectors .preset-btn');
     presetButtons.forEach(btn => {
         btn.addEventListener('click', () => {
-            presetButtons.forEach(b => b.classList.remove('border-l-4', 'border-l-primary'));
-            btn.classList.add('border-l-4', 'border-l-primary');
-            
+            presetButtons.forEach(b => b.classList.remove('is-active'));
+            btn.classList.add('is-active');
             currentPreset = btn.getAttribute('data-preset');
             document.getElementById('draft-input').value = presets[currentPreset];
             triggerPolish();
         });
     });
 
-    // Tone Selection Event Listeners
     const toneChips = document.querySelectorAll('#tone-selector .tone-chip');
     toneChips.forEach(chip => {
         chip.addEventListener('click', () => {
             toneChips.forEach(c => {
-                c.classList.remove('bg-primary', 'text-on-primary', 'font-bold');
-                c.classList.add('hover:bg-white/5', 'font-medium', 'transition-colors');
+                c.classList.remove('is-active');
+                c.setAttribute('aria-pressed', 'false');
             });
-            chip.classList.add('bg-primary', 'text-on-primary', 'font-bold');
-            chip.classList.remove('hover:bg-white/5', 'font-medium', 'transition-colors');
-            
+            chip.classList.add('is-active');
+            chip.setAttribute('aria-pressed', 'true');
             currentTone = chip.getAttribute('data-tone');
             triggerPolish();
         });
@@ -889,7 +1781,6 @@
     const runIcon = polishBtn.querySelector('.run-icon');
 
     polishBtn.addEventListener('click', () => {
-        // Clear preset border highlight if user edits input manually
         const inputVal = document.getElementById('draft-input').value;
         let isPreset = false;
         for (let key in presets) {
@@ -900,7 +1791,7 @@
         }
         if (!isPreset) {
             currentPreset = null;
-            presetButtons.forEach(b => b.classList.remove('border-l-4', 'border-l-primary'));
+            presetButtons.forEach(b => b.classList.remove('is-active'));
         }
         triggerPolish();
     });
@@ -910,8 +1801,12 @@
     function typeEffect(element, text, speed = 12, onComplete) {
         clearInterval(typeInterval);
         element.textContent = "";
-        element.classList.add('typing');
-        
+        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (reduce) {
+            element.textContent = text;
+            if (onComplete) onComplete();
+            return;
+        }
         let idx = 0;
         typeInterval = setInterval(() => {
             if (idx < text.length) {
@@ -919,7 +1814,6 @@
                 idx++;
             } else {
                 clearInterval(typeInterval);
-                element.classList.remove('typing');
                 if (onComplete) onComplete();
             }
         }, speed);
@@ -929,50 +1823,48 @@
         const input = document.getElementById('draft-input').value;
         const outputText = document.getElementById('output-text');
         const shimmer = document.getElementById('shimmer-overlay');
-        
+
         if (!input) return;
 
         polishBtn.disabled = true;
         shimmer.classList.remove('hidden');
-        runBtnText.textContent = 'Polishing...';
-        runIcon.classList.add('animate-spin');
-        
+        runBtnText.textContent = 'Rewriting';
+        runIcon.classList.add('is-spinning');
+
         setTimeout(() => {
             let matchText = '';
-            
-            // Check preset match
+
             if (currentPreset && outputs[currentPreset] && outputs[currentPreset][currentTone]) {
                 matchText = outputs[currentPreset][currentTone];
             } else {
-                // Basic client-side grammar fixer rule
                 let fixed = input.trim();
                 fixed = fixed.replace(/\bpls\b/gi, 'please')
                              .replace(/\bthx\b/gi, 'thank you')
                              .replace(/\bu\b/gi, 'you')
                              .replace(/\br\b/gi, 'are');
-                
+
                 if (fixed.length > 0) {
                     fixed = fixed.charAt(0).toUpperCase() + fixed.slice(1);
                 }
                 if (fixed.length > 0 && !/[.!?]$/.test(fixed)) {
                     fixed += '.';
                 }
-                
+
                 if (currentTone === 'professional') {
                     matchText = "Please be advised that " + fixed.charAt(0).toLowerCase() + fixed.slice(1);
                 } else if (currentTone === 'casual') {
                     matchText = "Hey! Just wanted to share: " + fixed;
                 } else if (currentTone === 'concise') {
-                    matchText = fixed.length > 40 ? fixed.slice(0, Math.floor(fixed.length * 0.7)) + '...' : fixed;
+                    matchText = fixed.length > 40 ? fixed.slice(0, Math.floor(fixed.length * 0.7)) + '…' : fixed;
                 } else {
                     matchText = fixed;
                 }
             }
-            
+
             typeEffect(outputText, matchText, 10, () => {
                 shimmer.classList.add('hidden');
-                runBtnText.textContent = 'Polish Text';
-                runIcon.classList.remove('animate-spin');
+                runBtnText.textContent = 'Rewrite';
+                runIcon.classList.remove('is-spinning');
                 polishBtn.disabled = false;
             });
         }, 600);
@@ -983,7 +1875,7 @@
         if (typeof gtag === 'function') {
             gtag('event', 'download_click', {
                 'button_id': buttonId,
-                'file_name': 'ScribeAI-1.0.2-arm64.dmg'
+                'target': 'github-releases-latest'
             });
         }
     }
@@ -991,9 +1883,8 @@
     document.getElementById('nav-download-btn')?.addEventListener('click', () => trackDownload('nav-download'));
     document.getElementById('hero-download-btn')?.addEventListener('click', () => trackDownload('hero-download'));
     document.getElementById('final-download-btn')?.addEventListener('click', () => trackDownload('final-download'));
-    
-    // Track footer download link clicks
-    document.querySelectorAll('a[href*="arm64.dmg"]').forEach(link => {
+
+    document.querySelectorAll('a[href*="/releases/latest"]').forEach(link => {
         link.addEventListener('click', (e) => {
             if (e.currentTarget.closest('footer')) {
                 trackDownload('footer-download');
@@ -1001,13 +1892,6 @@
         });
     });
 
-    // Track extension / app coming soon clicks
-    document.getElementById('hero-chrome-btn')?.addEventListener('click', () => {
-        if (typeof gtag === 'function') gtag('event', 'extension_click_soon', { 'platform': 'chrome' });
-    });
-    document.getElementById('hero-windows-btn')?.addEventListener('click', () => {
-        if (typeof gtag === 'function') gtag('event', 'app_click_soon', { 'platform': 'windows' });
-    });
     document.getElementById('final-chrome-btn')?.addEventListener('click', () => {
         if (typeof gtag === 'function') gtag('event', 'extension_click_soon', { 'platform': 'chrome' });
     });

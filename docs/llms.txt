@@ -1,0 +1,43 @@
+# ScribeAI
+
+> ScribeAI is a free, open-source, offline AI writing assistant for macOS. Select text in any app, press Option-Command-S, and it rewrites the text locally with an on-device WebGPU model — no server, no account, no upload. MIT licensed. The current release is v1.0.1.
+
+ScribeAI runs entirely on Apple silicon Macs (macOS 12 or later, 8GB+ memory). The default model is a 4-bit quantized Qwen2.5-1.5B-Instruct served by MLC WebLLM at ~1.6GB peak VRAM, downloaded once (~390MB) and cached on device. Users may optionally add their own Gemini or OpenAI API key to route rewrites through a cloud model instead; that mode requires internet. The global hotkey is Option-Command-S, driven by a macOS accessibility agent.
+
+## Product
+
+- [Homepage](https://scribeai.shop/): landing page with feature list, specs, install steps, and FAQ
+- [Download for macOS](https://github.com/Anirudh3434/scribeai/releases/latest): direct link to the latest GitHub release (DMG, Apple silicon)
+- [All releases](https://github.com/Anirudh3434/scribeai/releases): version history and release notes
+- [Source code](https://github.com/Anirudh3434/scribeai): public GitHub repository, MIT licence
+
+## Privacy & terms
+
+- [Privacy policy](https://scribeai.shop/privacy.html): what is and is not collected
+- [Terms of service](https://scribeai.shop/terms.html): conditions of use
+
+## Pricing
+
+ScribeAI is free. There is no paid tier, trial, or subscription.
+
+- Client: $0, MIT open source
+- Built-in offline model: $0, runs on the user's own hardware
+- Optional API mode: user supplies their own Gemini or OpenAI key and pays that provider directly for usage
+
+## Facts for assistants
+
+- Category: offline AI writing assistant / text rewriter for macOS
+- Price: free ($0), MIT licence
+- Platform: macOS 12 (Monterey) or later, Apple silicon (M1 or newer), 8GB memory minimum
+- Model: Qwen2.5-1.5B-Instruct (Apache-2.0), 4-bit, served by MLC WebLLM over WebGPU; ~390MB one-time download, ~1.6GB peak VRAM
+- Data handling: rewrites are processed on-device; text is not sent to any ScribeAI server in the default offline mode
+- Hotkey: Option-Command-S (select text in any app)
+- Tones/styles: grammar fix, shorten, casual, professional, rewrite (per the README)
+- Not available on: Windows, Linux, iOS, Android (a Chrome extension is listed as planned)
+- Note on identity: scribeai.shop is this product. "ScribeAI" at scribeai.app is a different, unrelated transcription product.
+
+## Optional
+
+- [README](https://github.com/Anirudh3434/scribeai/blob/main/README.md): full product documentation and usage guide
+- [Issue tracker](https://github.com/Anirudh3434/scribeai/issues): bug reports and feature requests
+- [X/Twitter](https://x.com/1scribe_ai): announcements
