@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ScribeAI vs Grammarly: Free, Offline Alternative for macOS</title>
+  <meta name="description" content="Looking for a free Grammarly alternative? ScribeAI rewrites and fixes your text on-device — no subscription, no account, no upload. Compare features, price, and privacy.">
+  <meta name="author" content="Anirudh Bhardwaj">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://scribeai.shop/grammarly-alternative.html">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://scribeai.shop/grammarly-alternative.html">
+  <meta property="og:title" content="ScribeAI vs Grammarly: Free, Offline Alternative for macOS">
+  <meta property="og:description" content="A free, open-source Grammarly alternative that runs on your Mac. No subscription, no account, no upload. See how it compares.">
+  <meta property="og:image" content="https://scribeai.shop/assets/og-1200x630.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="The ScribeAI app rewriting a paragraph on a macOS desktop.">
+  <meta property="og:site_name" content="ScribeAI">
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:title" content="ScribeAI vs Grammarly: Free, Offline Alternative for macOS">
+  <meta property="twitter:description" content="A free, open-source Grammarly alternative that runs on your Mac. No subscription, no account, no upload.">
+  <meta property="twitter:image" content="https://scribeai.shop/assets/og-1200x630.png">
+  <meta property="twitter:image:alt" content="The ScribeAI app rewriting a paragraph on a macOS desktop.">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is there a free alternative to Grammarly?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. ScribeAI is a free, open-source writing assistant for macOS. There is no subscription, no trial, and no account — the built-in model runs on your own hardware, so it costs nothing to use."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can ScribeAI work offline like Grammarly does not?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. ScribeAI's default mode runs a quantized Qwen2.5-1.5B model on your Mac's GPU through WebGPU. After a one-time ~390MB model download, it rewrites text with the network switched off. Grammarly requires an internet connection because it processes text on its servers."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does ScribeAI check grammar and spelling?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "ScribeAI rewrites and cleans up selected text in place, including grammar and spelling fixes, through its tone modes. It is a rewriter rather than a dedicated grammar database, so it is strongest at improving clarity and flow rather than exhaustive rule-by-rule error flagging."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does my text leave my device with ScribeAI?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Not in the default offline mode. Text is processed on your Mac and is never sent to a ScribeAI server. If you enable API mode with your own Gemini or OpenAI key, text is sent only to that provider — and only when you opt in."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which is better for me, ScribeAI or Grammarly?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Choose Grammarly if you want a large grammar rule database, browser-based checking across the web, and don't mind a subscription or sending text to their servers. Choose ScribeAI if you want a free, offline, privacy-first tool that works system-wide on your Mac in any app from a single keystroke."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What are ScribeAI's system requirements?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "An Apple silicon Mac (M1 or newer) with at least 8GB of memory, running macOS 12 or later. If your hardware is older, you can switch on API mode and the same rewrite runs on a cloud model instead."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "ScribeAI", "item": "https://scribeai.shop/" },
+      { "@type": "ListItem", "position": 2, "name": "Grammarly alternative", "item": "https://scribeai.shop/grammarly-alternative.html" }
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --paper: #FBFBF9;
+      --paper-inset: #F1F1EC;
+      --ink: #17181B;
+      --graphite: #5F6368;
+      --proof: #D33A2C;
+      --proof-deep: #B32B1F;
+      --insert: #6D3BD7;
+      --rule: #DEDED7;
+      --rule-strong: #C4C4BA;
+      --shell: 1160px;
+      --gutter: clamp(20px, 4vw, 40px);
+      --serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+      --sans: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+      --mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+      --t-xs: 0.8125rem;
+      --t-sm: 0.9375rem;
+      --t-base: 1.0625rem;
+      --t-h3: clamp(1.125rem, 1.6vw, 1.375rem);
+      --t-h2: clamp(1.9rem, 3.4vw, 2.75rem);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+    body {
+      margin: 0; background: var(--paper); color: var(--ink);
+      font-family: var(--sans); font-size: var(--t-base); line-height: 1.6;
+      -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; overflow-x: hidden;
+    }
+    ::selection { background: rgba(109, 59, 215, 0.16); }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; }
+    h1, h2, h3, h4 { font-family: var(--serif); font-weight: 500; letter-spacing: -0.015em; line-height: 1.12; margin: 0; }
+    p { margin: 0; }
+    :focus-visible { outline: 2px solid var(--insert); outline-offset: 3px; border-radius: 2px; }
+    .skip { position: absolute; left: -9999px; top: 0; background: var(--ink); color: var(--paper); padding: 10px 16px; z-index: 200; font-size: var(--t-sm); }
+    .skip:focus { left: 8px; top: 8px; }
+    .shell { max-width: var(--shell); margin: 0 auto; padding-inline: var(--gutter); }
+    .section { border-top: 1px solid var(--rule); padding-block: clamp(56px, 7vw, 96px); }
+    .lede { color: var(--graphite); max-width: 62ch; font-size: var(--t-base); }
+    .fineprint { font-size: 0.8125rem; color: var(--graphite); line-height: 1.55; }
+    .visually-hidden { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+    /* Header */
+    .site-header { position: sticky; top: 0; z-index: 60; background: rgba(251,251,249,0.92); backdrop-filter: saturate(180%) blur(12px); border-bottom: 1px solid var(--rule); }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-block: 16px; }
+    .brand { display: inline-flex; align-items: center; gap: 10px; font-family: var(--serif); font-size: 1.375rem; font-weight: 500; text-decoration: none; letter-spacing: -0.01em; }
+    .brand img { width: 26px; height: 26px; border-radius: 5px; }
+    .header-nav { display: flex; align-items: center; gap: 26px; }
+    .header-nav a { font-size: var(--t-sm); color: var(--graphite); text-decoration: none; }
+    .header-nav a:hover { color: var(--ink); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: var(--sans); font-size: var(--t-sm); font-weight: 500; padding: 11px 20px; border-radius: 3px; text-decoration: none; border: 1px solid transparent; cursor: pointer; }
+    .btn-primary { background: var(--ink); color: var(--paper); }
+    .btn-primary:hover { background: #000; }
+    .btn-ghost { border-color: var(--rule-strong); color: var(--ink); background: transparent; }
+    .btn-ghost:hover { border-color: var(--ink); }
+
+    /* Breadcrumb */
+    .crumbs { padding-block: 20px 0; font-size: var(--t-xs); color: var(--graphite); }
+    .crumbs a { color: var(--graphite); text-decoration: none; }
+    .crumbs a:hover { color: var(--ink); }
+    .crumbs span { margin-inline: 8px; color: var(--rule-strong); }
+
+    /* Hero */
+    .page-hero { padding-block: clamp(32px, 5vw, 56px) clamp(48px, 6vw, 80px); }
+    .page-hero h1 { font-size: clamp(2.25rem, 5.5vw, 3.75rem); line-height: 1.05; letter-spacing: -0.03em; max-width: 18ch; margin-bottom: 20px; }
+    .page-hero .lede { font-size: var(--t-md); line-height: 1.5; color: var(--graphite); max-width: 56ch; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+
+    /* Comparison table */
+    .compare { width: 100%; border-collapse: collapse; font-size: var(--t-sm); margin-top: 8px; }
+    .compare caption { text-align: left; font-size: var(--t-xs); color: var(--graphite); padding-bottom: 12px; }
+    .compare th, .compare td { text-align: left; padding: 14px 16px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+    .compare thead th { font-size: var(--t-xs); font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--graphite); border-bottom: 1px solid var(--ink); }
+    .compare thead th.hl { color: var(--ink); }
+    .compare tbody th { font-weight: 500; color: var(--ink); }
+    .compare tbody td { color: var(--graphite); }
+    .compare tbody td.hl { color: var(--ink); font-weight: 500; }
+    .compare tbody tr:last-child th, .compare tbody tr:last-child td { border-bottom: 0; }
+
+    /* Content */
+    .prose { max-width: 68ch; }
+    .prose h2 { font-size: var(--t-h2); margin-bottom: 16px; max-width: 20ch; }
+    .prose h3 { font-size: var(--t-h3); margin-bottom: 8px; }
+    .prose p { color: var(--graphite); margin-bottom: 18px; }
+    .prose p strong, .prose li strong { color: var(--ink); font-weight: 500; }
+    .prose ul { color: var(--graphite); padding-left: 20px; margin: 0 0 18px; }
+    .prose li { margin-bottom: 8px; }
+    .split { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 4vw, 56px); align-items: start; }
+
+    /* Callout */
+    .callout { border-left: 2px solid var(--proof); padding: 4px 0 4px 20px; margin: 28px 0; }
+    .callout p { color: var(--ink); margin: 0; }
+
+    /* FAQ */
+    .faq { border-top: 1px solid var(--rule); }
+    .faq:last-of-type { border-bottom: 1px solid var(--rule); }
+    .faq summary { list-style: none; cursor: pointer; display: flex; align-items: baseline; justify-content: space-between; gap: 24px; padding-block: 22px; font-size: 1.0625rem; font-weight: 500; transition: color 0.15s ease; }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary:hover { color: var(--proof-deep); }
+    .faq summary h3 { font-size: inherit; font-weight: inherit; margin: 0; letter-spacing: 0; line-height: inherit; }
+    .faq summary::after { content: "+"; font-family: var(--serif); font-size: 1.5rem; line-height: 1; color: var(--proof); flex-shrink: 0; transition: transform 0.2s ease; }
+    .faq[open] summary::after { transform: rotate(45deg); }
+    .faq .answer { padding-bottom: 24px; color: var(--graphite); max-width: 68ch; font-size: var(--t-sm); }
+
+    /* CTA */
+    .cta { text-align: left; }
+    .cta h2 { font-size: clamp(1.75rem, 4vw, 2.5rem); margin-bottom: 16px; max-width: 20ch; }
+
+    /* Footer */
+    .site-footer { border-top: 1px solid var(--rule); background: var(--paper-inset); padding-block: clamp(48px, 6vw, 72px) 28px; font-size: var(--t-sm); }
+    .footer-bottom { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; margin-top: clamp(32px, 4vw, 48px); padding-top: 22px; border-top: 1px solid var(--rule); font-size: var(--t-xs); }
+    .footer-bottom nav { display: flex; gap: 18px; flex-wrap: wrap; }
+    .footer-bottom a { text-decoration: none; }
+    .footer-bottom a:hover { color: var(--ink); }
+
+    @media (max-width: 780px) {
+      .header-nav { display: none; }
+      .split { grid-template-columns: 1fr; }
+      .compare, .compare tbody, .compare tr, .compare th, .compare td { display: block; }
+      .compare thead { display: none; }
+      .compare tbody tr { border: 1px solid var(--rule); border-radius: 6px; padding: 8px 12px; margin-bottom: 12px; background: var(--paper-inset); }
+      .compare tbody th, .compare tbody td { border: 0; padding: 6px 0; }
+      .compare tbody td::before { content: attr(data-label); font-weight: 500; color: var(--ink); display: block; font-size: var(--t-xs); text-transform: uppercase; letter-spacing: 0.05em; }
+      .compare tbody td.hl::before { color: var(--proof-deep); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      * { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="brand" href="./">
+        <img src="assets/icon.webp" alt="" width="26" height="26">
+        ScribeAI
+      </a>
+      <nav class="header-nav" aria-label="Primary">
+        <a href="./#features">Features</a>
+        <a href="./#sandbox">Demo</a>
+        <a href="./#faq">Questions</a>
+        <a href="./">Home</a>
+        <a class="btn btn-primary" href="https://github.com/Anirudh3434/scribeai/releases/latest">Download</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="shell crumbs">
+      <a href="./">ScribeAI</a><span aria-hidden="true">/</span>Grammarly alternative
+    </div>
+
+    <section class="shell page-hero">
+      <h1>A free, offline Grammarly alternative for macOS</h1>
+      <p class="lede">
+        ScribeAI is a free, open-source writing assistant that fixes and rewrites selected text
+        directly on your Mac. No subscription, no account, and nothing sent to a server —
+        it works with the network switched off.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="https://github.com/Anirudh3434/scribeai/releases/latest">Download for macOS</a>
+        <a class="btn btn-ghost" href="./">See how it works</a>
+      </div>
+    </section>
+
+    <section class="section shell">
+      <h2 class="visually-hidden">ScribeAI compared with Grammarly</h2>
+      <table class="compare">
+        <caption>ScribeAI and Grammarly compared, as of October 2026.</caption>
+        <thead>
+          <tr>
+            <th scope="col">How they differ</th>
+            <th scope="col" class="hl">ScribeAI</th>
+            <th scope="col">Grammarly</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Price</th>
+            <td class="hl" data-label="ScribeAI">Free, MIT open source</td>
+            <td data-label="Grammarly">Free tier, paid subscription for full features</td>
+          </tr>
+          <tr>
+            <th scope="row">Where the model runs</th>
+            <td class="hl" data-label="ScribeAI">Your Mac (WebGPU)</td>
+            <td data-label="Grammarly">Their servers</td>
+          </tr>
+          <tr>
+            <th scope="row">Text leaves your device</th>
+            <td class="hl" data-label="ScribeAI">No</td>
+            <td data-label="Grammarly">Yes, on every check</td>
+          </tr>
+          <tr>
+            <th scope="row">Works offline</th>
+            <td class="hl" data-label="ScribeAI">Yes</td>
+            <td data-label="Grammarly">No</td>
+          </tr>
+          <tr>
+            <th scope="row">Account required</th>
+            <td class="hl" data-label="ScribeAI">No</td>
+            <td data-label="Grammarly">Yes</td>
+          </tr>
+          <tr>
+            <th scope="row">Works in any Mac app</th>
+            <td class="hl" data-label="ScribeAI">Yes, system-wide ⌥⌘S</td>
+            <td data-label="Grammarly">Mainly browser and supported editors</td>
+          </tr>
+          <tr>
+            <th scope="row">Platform</th>
+            <td class="hl" data-label="ScribeAI">macOS 12+, Apple silicon</td>
+            <td data-label="Grammarly">Web, browser extensions, desktop app</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="fineprint" style="margin-top:16px;">
+        Comparison reflects how Grammarly and similar cloud services were typically architected as
+        of October 2026. Check Grammarly's current pricing and privacy policy before deciding.
+        Grammarly is a trademark of its respective owner; this page is an independent comparison.
+      </p>
+    </section>
+
+    <section class="section shell">
+      <div class="split">
+        <div class="prose">
+          <h2>What's the difference?</h2>
+          <p>
+            <strong>Grammarly</strong> is a cloud service. Every sentence you check is sent to
+            Grammarly's servers, processed there, and returned. That gives it a very large,
+            well-tuned grammar database — but it needs an internet connection, an account, and it
+            means your writing leaves your machine each time.
+          </p>
+          <p>
+            <strong>ScribeAI</strong> takes the opposite approach. The model runs on your own
+            GPU through WebGPU, so the rewrite happens locally and nothing is uploaded. You select
+            text in any Mac app, press <strong>⌥⌘S</strong>, and the cleaned-up version comes
+            back in place.
+          </p>
+          <div class="callout">
+            <p>
+              The trade-off is honest: a 1.5B local model is fast and private, but it is not a
+              dedicated grammar rule database. ScribeAI is strongest at clarity, flow, and tone —
+              not exhaustive rule-by-rule error flagging.
+            </p>
+          </div>
+        </div>
+        <div class="prose">
+          <h2>Who should pick which?</h2>
+          <p><strong>Pick Grammarly if you</strong></p>
+          <ul>
+            <li>Want the deepest possible grammar and spelling rule coverage</li>
+            <li>Write mostly in a browser and don't mind a subscription</li>
+            <li>Are comfortable sending text to a third-party server</li>
+          </ul>
+          <p><strong>Pick ScribeAI if you</strong></p>
+          <ul>
+            <li>Want a tool that is free forever, with no account</li>
+            <li>Handle sensitive text and need it to stay on your Mac</li>
+            <li>Want one keystroke that works in every Mac app</li>
+            <li>Prefer an open-source tool you can read and fork</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section shell">
+      <div class="prose">
+        <h2>Does it fix spelling mistakes?</h2>
+        <p>
+          Yes. ScribeAI cleans up the text you select, including spelling and grammar corrections,
+          as part of its rewrite. It also leaves proper nouns and unusual names untouched — an
+          Identity Lock layer indexes them before the model runs and checks the result afterwards,
+          so cultural names and uncommon spellings come back intact.
+        </p>
+        <p>
+          Because it runs locally, it also works in apps where a browser extension never could:
+          Mail, Notes, Slack, Word, or any other native Mac app. Highlight, press
+          <strong>⌥⌘S</strong>, and the result replaces your selection.
+        </p>
+      </div>
+    </section>
+
+    <section class="section shell" id="faq">
+      <h2 style="font-size:var(--t-h2); margin-bottom:8px;">Frequently asked questions</h2>
+      <p class="lede" style="margin-bottom:32px;">Switching from a cloud checker, answered.</p>
+
+      <div>
+        <details class="faq" open>
+          <summary><h3>Is there a free alternative to Grammarly?</h3></summary>
+          <div class="answer">
+            Yes. ScribeAI is free and open source under the MIT licence. There is no subscription,
+            no trial, and no paid tier — the built-in model runs on your own hardware, so it costs
+            nothing to use.
+          </div>
+        </details>
+        <details class="faq">
+          <summary><h3>Can it work offline?</h3></summary>
+          <div class="answer">
+            Yes. The default mode downloads a roughly 390MB model once, then rewrites with the
+            network switched off: the model runs on your Mac's own GPU through WebGPU, and nothing
+            is sent to a server. Only two things need internet — that one-time model download, and
+            API mode, which you opt into with your own Gemini or OpenAI key.
+          </div>
+        </details>
+        <details class="faq">
+          <summary><h3>Does ScribeAI check grammar and spelling?</h3></summary>
+          <div class="answer">
+            It rewrites and cleans up selected text in place, including grammar and spelling fixes,
+            through its tone modes. It is a rewriter rather than a dedicated grammar database, so
+            it is strongest at improving clarity and flow rather than exhaustive rule-by-rule
+            error flagging.
+          </div>
+        </details>
+        <details class="faq">
+          <summary><h3>Does my text leave my device?</h3></summary>
+          <div class="answer">
+            Not in the default offline mode — text is processed on your Mac and is never sent to a
+            ScribeAI server. If you enable API mode with your own key, text goes only to that
+            provider, and only when you opt in.
+          </div>
+        </details>
+        <details class="faq">
+          <summary><h3>What are the system requirements?</h3></summary>
+          <div class="answer">
+            An Apple silicon Mac (M1 or newer) with at least 8GB of memory, running macOS 12 or
+            later. If your hardware is older, switch on API mode in settings and the same rewrite
+            runs on a cloud model instead.
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section class="section shell cta">
+      <h2>Try a free Grammarly alternative.</h2>
+      <p class="lede">
+        Download the Mac app, press <kbd style="font-family:var(--mono); font-size:0.9em;">⌥⌘S</kbd>
+        on something you were about to check by hand, and see what comes back.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="https://github.com/Anirudh3434/scribeai/releases/latest">Download for macOS</a>
+        <a class="btn btn-ghost" href="https://github.com/Anirudh3434/scribeai" target="_blank" rel="noopener noreferrer">View the source</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell">
+      <p style="max-width:52ch; color:var(--graphite);">
+        A global rewriting tool for macOS, built to run on your own hardware.
+      </p>
+      <div class="footer-bottom">
+        <p>&copy; 2026 ScribeAI. Released under the MIT licence.</p>
+        <nav aria-label="Legal">
+          <a href="./">Home</a>
+          <a href="privacy.html">Privacy policy</a>
+          <a href="terms.html">Terms of service</a>
+          <a href="https://github.com/Anirudh3434/scribeai" target="_blank" rel="noopener noreferrer">Source</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
