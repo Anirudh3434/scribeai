@@ -10,29 +10,27 @@ const SELECTED_MODEL = "Qwen2.5-1.5B-Instruct-q4f16_1-MLC";
 let isDownloadCancelled = false;
 
 let scifiInterval = null;
-const scifiPhrases = [
-  "INITIALIZING COGNITIVE INTERFACE...",
-  "CALIBRATING SYNAPSE PATHWAYS...",
-  "ESTABLISHING VECTOR ENVELOPE...",
-  "SYNTHESIZING MATRIX STRATA...",
-  "OPTIMIZING SYNTACTIC WEIGHTS...",
-  "RECONSTRUCTING LEXICAL FABRIC...",
-  "ALIGNING GLYPH CODES..."
+const statusPhrases = [
+  "Polishing your text...",
+  "Refining tone & flow...",
+  "Enhancing vocabulary...",
+  "Checking clarity & nuance...",
+  "Finalizing improvements..."
 ];
 
 function startScifiLoading() {
   if (scifiInterval) clearInterval(scifiInterval);
   const loadingStatus = document.getElementById('loading-status');
   if (loadingStatus) {
-    loadingStatus.textContent = scifiPhrases[0];
+    loadingStatus.textContent = statusPhrases[0];
   }
   let index = 1;
   scifiInterval = setInterval(() => {
     if (loadingStatus) {
-      loadingStatus.textContent = scifiPhrases[index];
-      index = (index + 1) % scifiPhrases.length;
+      loadingStatus.textContent = statusPhrases[index];
+      index = (index + 1) % statusPhrases.length;
     }
-  }, 900);
+  }, 800);
 }
 
 function stopScifiLoading() {
@@ -73,72 +71,105 @@ const resultBox = document.getElementById('result-box');
 const errorMessage = document.getElementById('error-message');
 const welcomeBtn = document.getElementById('welcome-btn');
 
-// Onboarding Wizard DOM Elements
-let currentOnboardingStep = 1;
-const onboardingStep1 = document.getElementById('onboarding-step-1');
-const onboardingStep2 = document.getElementById('onboarding-step-2');
-const onboardingStep3 = document.getElementById('onboarding-step-3');
+const sourceText = document.getElementById('source-text');
+const sourceCharCount = document.getElementById('source-char-count');
+const diffOutputBox = document.getElementById('diff-output-box');
+const toggleDiffBtn = document.getElementById('toggle-diff-btn');
+const toggleRawBtn = document.getElementById('toggle-raw-btn');
+const copyBtn = document.getElementById('copy-btn');
+const retryResultBtn = document.getElementById('retry-result-btn');
 
-const onboardingStartBtn = document.getElementById('onboarding-start-btn');
-const welcomeSliderTrack = document.getElementById('welcome-slider-track');
-const welcomeSliderDots = document.getElementById('welcome-slider-dots');
-let currentWelcomeSlide = 0;
+function updateSourceWordCount() {
+  if (!sourceText || !sourceCharCount) return;
+  const val = sourceText.value.trim();
+  const words = val ? val.split(/\s+/).length : 0;
+  sourceCharCount.textContent = `${words} word${words === 1 ? '' : 's'}`;
+}
 
-const onboardingProviderSelect = document.getElementById('onboarding-provider');
-const onboardingGeminiCustomGroup = document.getElementById('onboarding-gemini-custom-group');
-const onboardingGeminiKeyInput = document.getElementById('onboarding-gemini-key');
-const onboardingGeminiModelInput = document.getElementById('onboarding-gemini-model');
-const configSaveBtn = document.getElementById('config-save-btn');
+if (sourceText) {
+  sourceText.addEventListener('input', updateSourceWordCount);
+  sourceText.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) {
+      e.preventDefault();
+      triggerRefinement();
+    }
+  });
+}
 
-// Onboarding Step 3 Download elements
-const onboardingReadyIcon = document.getElementById('onboarding-ready-icon');
-const onboardingReadyTitle = document.getElementById('onboarding-ready-title');
-const onboardingReadyDesc = document.getElementById('onboarding-ready-desc');
-const onboardingDownloadContainer = document.getElementById('onboarding-download-container');
-const onboardingDownloadStatus = document.getElementById('onboarding-download-status');
-const onboardingDownloadBar = document.getElementById('onboarding-download-bar');
-const onboardingDownloadBtn = document.getElementById('onboarding-download-btn');
-const onboardingCancelDownloadBtn = document.getElementById('onboarding-cancel-download-btn');
-const onboardingDownloadPct = document.getElementById('onboarding-download-pct');
+// Lightweight word-level LCS diff
+function renderWordDiff(original, modified) {
+  const origWords = (original || "").trim().split(/\s+/).filter(Boolean);
+  const modWords = (modified || "").trim().split(/\s+/).filter(Boolean);
+  
+  const m = origWords.length;
+  const n = modWords.length;
+  if (m === 0) {
+    return modWords.map(w => `<span class="diff-add">${escapeHtml(w)}</span>`).join(' ');
+  }
 
-const toneChips = document.querySelectorAll('.tone-chip');
-const submitBtn = document.getElementById('submit-btn');
-const insertBtn = document.getElementById('insert-btn');
-const cancelBtn = document.getElementById('cancel-btn');
-const retryBtn = document.getElementById('retry-btn');
-const winCloseBtn = document.getElementById('win-close-btn');
-const winSettingsBtn = document.getElementById('win-settings-btn');
+  const dp = Array.from({ length: m + 1 }, () => new Array(n + 1).fill(0));
+  for (let i = 0; i < m; i++) {
+    for (let j = 0; j < n; j++) {
+      if (origWords[i].toLowerCase() === modWords[j].toLowerCase()) {
+        dp[i + 1][j + 1] = dp[i][j] + 1;
+      } else {
+        dp[i + 1][j + 1] = Math.max(dp[i + 1][j], dp[i][j + 1]);
+      }
+    }
+  }
 
-// Local Settings Elements
-const localProviderSelect = document.getElementById('local-provider');
-const localGeminiCustomGroup = document.getElementById('local-gemini-custom-group');
-const localGeminiKeyInput = document.getElementById('local-gemini-key');
-const localGeminiModelInput = document.getElementById('local-gemini-model');
-const saveLocalSettingsBtn = document.getElementById('save-local-settings-btn');
-const cancelLocalSettingsBtn = document.getElementById('cancel-local-settings-btn');
+  let i = m, j = n;
+  const diff = [];
+  while (i > 0 || j > 0) {
+    if (i > 0 && j > 0 && origWords[i - 1].toLowerCase() === modWords[j - 1].toLowerCase()) {
+      diff.unshift({ type: 'same', word: modWords[j - 1] });
+      i--;
+      j--;
+    } else if (j > 0 && (i === 0 || dp[i][j - 1] >= dp[i - 1][j])) {
+      diff.unshift({ type: 'add', word: modWords[j - 1] });
+      j--;
+    } else if (i > 0 && (j === 0 || dp[i][j - 1] < dp[i - 1][j])) {
+      diff.unshift({ type: 'del', word: origWords[i - 1] });
+      i--;
+    }
+  }
 
-const localWebgpuGroup = document.getElementById('local-webgpu-group');
-const settingsDownloadBtn = document.getElementById('settings-download-btn');
-const settingsDownloadContainer = document.getElementById('settings-download-container');
-const settingsDownloadStatus = document.getElementById('settings-download-status');
-const settingsDownloadBar = document.getElementById('settings-download-bar');
-const settingsCancelDownloadBtn = document.getElementById('settings-cancel-download-btn');
-const settingsDownloadPct = document.getElementById('settings-download-pct');
+  return diff.map(item => {
+    const escaped = escapeHtml(item.word);
+    if (item.type === 'add') return `<span class="diff-add">${escaped}</span>`;
+    if (item.type === 'del') return `<span class="diff-del">${escaped}</span>`;
+    return `<span class="diff-same">${escaped}</span>`;
+  }).join(' ');
+}
 
+function escapeHtml(str) {
+  return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
 
 // Start by requesting the initial text from the main process
 window.electronAPI.send('get-init-text');
 
 window.electronAPI.on('init-text', (text) => {
-  initialText = text;
-  if (initialText.trim() === "") {
+  initialText = text || "";
+  if (sourceText) {
+    sourceText.value = initialText;
+    updateSourceWordCount();
+  }
+
+  const hasSeenOnboarding = localStorage.getItem('scribeai_onboarding_completed') === 'true';
+
+  if (initialText.trim() === "" && !hasSeenOnboarding) {
     window.electronAPI.send('resize-window', 960, 680);
     setOnboardingStep(1);
     showView('welcome-view');
   } else {
-    window.electronAPI.send('resize-window', 380, 350);
+    window.electronAPI.send('resize-window', 380, 420);
     showView('input-view');
-    customPrompt.focus();
+    if (initialText.trim() === "") {
+      if (sourceText) sourceText.focus();
+    } else {
+      if (customPrompt) customPrompt.focus();
+    }
   }
 });
 
@@ -248,9 +279,14 @@ cancelLocalSettingsBtn.addEventListener('click', () => {
 const welcomeSkipBtn = document.getElementById('welcome-skip-btn');
 
 const startApp = () => {
-  window.electronAPI.send('resize-window', 380, 350);
+  localStorage.setItem('scribeai_onboarding_completed', 'true');
+  window.electronAPI.send('resize-window', 380, 420);
   showView('input-view');
-  customPrompt.focus();
+  if (sourceText && sourceText.value.trim() === "") {
+    sourceText.focus();
+  } else if (customPrompt) {
+    customPrompt.focus();
+  }
 };
 
 welcomeBtn.addEventListener('click', startApp);
@@ -626,13 +662,22 @@ customPrompt.addEventListener('keydown', (e) => {
 });
 
 function triggerRefinement() {
+  const currentSource = (sourceText ? sourceText.value : initialText).trim();
+  if (!currentSource) {
+    if (sourceText) {
+      sourceText.focus();
+      sourceText.placeholder = "Please enter or paste text to refine first!";
+    }
+    return;
+  }
+  initialText = currentSource;
   const customInst = customPrompt.value.trim();
   
-  // Resize to loading size (280x200) and show view
-  window.electronAPI.send('resize-window', 280, 200);
+  // Resize to loading size and show view
+  window.electronAPI.send('resize-window', 360, 220);
   showView('loading-view');
 
-  // Start sci-fi loading phrase cycling
+  // Start status phrase cycling
   startScifiLoading();
 
   // Trigger background API call
@@ -730,11 +775,21 @@ function handleSuccess() {
   showView('success-view');
 
   setTimeout(() => {
-    window.electronAPI.send('resize-window', 380, 380);
+    window.electronAPI.send('resize-window', 380, 430);
     resultBox.value = refinedText;
+    if (diffOutputBox) {
+      diffOutputBox.innerHTML = renderWordDiff(initialText, refinedText);
+      diffOutputBox.classList.remove('hidden');
+    }
+    if (resultBox) {
+      resultBox.classList.add('hidden');
+    }
+    if (toggleDiffBtn && toggleRawBtn) {
+      toggleDiffBtn.classList.add('active');
+      toggleRawBtn.classList.remove('active');
+    }
     showView('result-view');
-    resultBox.focus();
-  }, 1200);
+  }, 150);
 }
 
 function handleError(error) {
@@ -973,37 +1028,95 @@ function cleanOutput(text) {
   return cleaned;
 }
 
-// Result insert / cancel actions
-insertBtn.addEventListener('click', () => {
-  const finalInsertedText = resultBox.value;
-  window.electronAPI.send('insert-text', finalInsertedText);
-});
-
-cancelBtn.addEventListener('click', () => {
-  window.electronAPI.send('close-app');
-});
-
-// Key listener for results box (Cmd+Enter to insert)
-resultBox.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) {
-    e.preventDefault();
+// Result insert / copy / toggle actions
+if (insertBtn) {
+  insertBtn.addEventListener('click', () => {
     const finalInsertedText = resultBox.value;
     window.electronAPI.send('insert-text', finalInsertedText);
-  }
-});
+  });
+}
 
-// Global key listener (Escape to cancel/quit)
+if (copyBtn) {
+  copyBtn.addEventListener('click', () => {
+    const textToCopy = resultBox.value;
+    window.electronAPI.send('copy-text', textToCopy);
+    const prevText = copyBtn.textContent;
+    copyBtn.textContent = "Copied!";
+    setTimeout(() => {
+      copyBtn.textContent = prevText;
+    }, 1200);
+  });
+}
+
+if (retryResultBtn) {
+  retryResultBtn.addEventListener('click', () => {
+    window.electronAPI.send('resize-window', 380, 420);
+    showView('input-view');
+    if (customPrompt) customPrompt.focus();
+  });
+}
+
+if (toggleDiffBtn && toggleRawBtn) {
+  toggleDiffBtn.addEventListener('click', () => {
+    toggleDiffBtn.classList.add('active');
+    toggleRawBtn.classList.remove('active');
+    if (diffOutputBox) diffOutputBox.classList.remove('hidden');
+    if (resultBox) resultBox.classList.add('hidden');
+  });
+
+  toggleRawBtn.addEventListener('click', () => {
+    toggleRawBtn.classList.add('active');
+    toggleDiffBtn.classList.remove('active');
+    if (diffOutputBox) diffOutputBox.classList.add('hidden');
+    if (resultBox) {
+      resultBox.classList.remove('hidden');
+      resultBox.focus();
+    }
+  });
+}
+
+if (cancelBtn) {
+  cancelBtn.addEventListener('click', () => {
+    window.electronAPI.send('close-app');
+  });
+}
+
+// Key listener for results box (Cmd+Enter to insert)
+if (resultBox) {
+  resultBox.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) {
+      e.preventDefault();
+      const finalInsertedText = resultBox.value;
+      window.electronAPI.send('insert-text', finalInsertedText);
+    }
+  });
+}
+
+// Global key listener (Escape to cancel/quit, Cmd+C on result view)
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') {
     window.electronAPI.send('close-app');
+  }
+  if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'c') {
+    if (resultView && resultView.classList.contains('active') && document.activeElement !== resultBox) {
+      const textToCopy = resultBox.value;
+      if (textToCopy) {
+        window.electronAPI.send('copy-text', textToCopy);
+        if (copyBtn) {
+          const prevText = copyBtn.textContent;
+          copyBtn.textContent = "Copied!";
+          setTimeout(() => { copyBtn.textContent = prevText; }, 1200);
+        }
+      }
+    }
   }
 });
 
 // Error retry
 retryBtn.addEventListener('click', () => {
-  window.electronAPI.send('resize-window', 380, 350);
+  window.electronAPI.send('resize-window', 380, 420);
   showView('input-view');
-  customPrompt.focus();
+  if (customPrompt) customPrompt.focus();
 });
 
 // Manual updates check button

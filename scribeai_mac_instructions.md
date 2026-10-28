@@ -16,7 +16,7 @@ You can use ScribeAI in **every native macOS application** (Notion, Slack, Notes
 3. Check the checkbox for **Use as Quick Action**.
 4. **Important**: Under the Quick Action settings, make sure **Provide Output** is **CHECKED**. This lets Shortcuts replace the selected text with ScribeAI's refined output without using blocked simulated keystrokes.
 5. In the checklist under it, make sure **Services Menu** is checked.
-6. (Optional but recommended) Click **Add Keyboard Shortcut** and press your desired global key combination, such as **Command + Shift + G** (`⌘⇧G`).
+6. (Optional but recommended) Click **Add Keyboard Shortcut** and press your desired global key combination, such as **Option + Command + S** (`⌥⌘S`).
 
 ---
 
@@ -43,7 +43,7 @@ In the main workflow builder area, configure the following block sequence:
      fi
      date +%s > "$LOCKFILE"
 
-     /Users/anirudhbhardwaj/Desktop/extension/desktop/node_modules/.bin/electron /Users/anirudhbhardwaj/Desktop/extension/desktop "$1"
+     /Users/anirudhbhardwaj/Desktop/scribeai/desktop/node_modules/.bin/electron /Users/anirudhbhardwaj/Desktop/scribeai/desktop "$1"
      if [ $? -eq 0 ]; then
        date +%s > "$LOCKFILE"
      fi

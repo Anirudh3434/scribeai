@@ -279,6 +279,14 @@
       <!-- 1. INPUT VIEW -->
       <div id="input-view" class="view">
         <div class="form-container">
+          <div class="source-text-section">
+            <div class="section-header-row">
+              <span class="section-label">Source Text</span>
+              <span class="char-count" id="source-char-count">0 words</span>
+            </div>
+            <textarea id="source-text" rows="3" placeholder="Highlight text in any app, or paste/type here to rewrite..."></textarea>
+          </div>
+
           <div class="tone-section">
             <span class="section-label">Tone</span>
             <div class="chips-container">
@@ -291,17 +299,19 @@
           </div>
 
           <div class="custom-prompt-container">
-            <textarea id="custom-prompt" rows="3" placeholder="Add instructions, such as translate to French or use bullet points"></textarea>
+            <div class="section-header-row">
+              <span class="section-label">Custom Instruction</span>
+              <span class="subtle-hint">Optional</span>
+            </div>
+            <textarea id="custom-prompt" rows="2" placeholder="e.g. Translate to French, make into bullet points..."></textarea>
           </div>
-
-
 
           <button id="submit-btn" class="action-btn primary">
             <span>Refine Text</span>
           </button>
 
           <div class="shortcut-tip">
-            Press <kbd>⌘</kbd> + <kbd>Enter</kbd> to refine &bull; <kbd>Esc</kbd> to cancel
+            Press <kbd>⌘</kbd> + <kbd>Enter</kbd> to refine &bull; <kbd>Esc</kbd> to close
           </div>
         </div>
       </div>
@@ -309,12 +319,10 @@
       <!-- 2. LOADING VIEW -->
       <div id="loading-view" class="view">
         <div class="loading-container">
-          <div class="scifi-loader-wrapper">
-            <div class="scifi-radar"></div>
-            <div class="scifi-reticle"></div>
-            <div class="scifi-dot"></div>
+          <div class="mac-loader-wrapper">
+            <div class="mac-spinner"></div>
           </div>
-          <p class="status-text" id="loading-status">INITIALIZING COGNITIVE INTERFACE...</p>
+          <p class="status-text" id="loading-status">Polishing text...</p>
           <div id="loading-progress-container" class="hidden" style="width: 100%; background: rgba(0, 0, 0, 0.08); border: 1px solid rgba(0, 0, 0, 0.1); height: 6px; border-radius: 3px; margin-top: 10px; overflow: hidden; position: relative;">
             <div id="loading-progress-bar" style="width: 0%; height: 100%; background: var(--accent); border-radius: 3px; transition: width 0.2s;"></div>
           </div>
@@ -335,16 +343,33 @@
       <!-- 4. RESULT VIEW -->
       <div id="result-view" class="view">
         <div class="result-container">
-          <span class="section-label">Suggested version</span>
-          <textarea id="result-box" rows="8"></textarea>
+          <div class="section-header-row">
+            <span class="section-label">Refined Output</span>
+            <div class="view-toggles">
+              <button id="toggle-diff-btn" class="toggle-pill-btn active" title="Show changes compared to original">Diff</button>
+              <button id="toggle-raw-btn" class="toggle-pill-btn" title="View editable text">Raw</button>
+            </div>
+          </div>
+
+          <!-- Highlighted Diff container -->
+          <div id="diff-output-box" class="diff-box"></div>
+
+          <!-- Editable Raw Output container -->
+          <textarea id="result-box" class="hidden" rows="7"></textarea>
           
           <div class="actions-row">
-            <button id="insert-btn" class="action-btn success flex-1">Insert Text</button>
-            <button id="cancel-btn" class="action-btn secondary flex-1">Cancel</button>
+            <button id="insert-btn" class="action-btn success flex-1" title="Insert replacement into active application">Insert Text</button>
+            <button id="copy-btn" class="action-btn secondary flex-1" title="Copy output to clipboard">Copy</button>
+            <button id="retry-result-btn" class="action-btn secondary icon-btn" title="Back to edit prompt or tone">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+                <path d="M3 3v5h5"/>
+              </svg>
+            </button>
           </div>
 
           <div class="shortcut-tip">
-            Press <kbd>⌘</kbd> + <kbd>Enter</kbd> to insert
+            Press <kbd>⌘</kbd> + <kbd>Enter</kbd> to insert &bull; <kbd>⌘</kbd> + <kbd>C</kbd> to copy &bull; <kbd>Esc</kbd> to close
           </div>
         </div>
       </div>

@@ -2,7 +2,7 @@ const { contextBridge, ipcRenderer } = require('electron');
 
 contextBridge.exposeInMainWorld('electronAPI', {
   send: (channel, ...args) => {
-    const validChannels = ['resize-window', 'insert-text', 'close-app', 'get-init-text', 'check-for-updates-manual', 'quit-and-install'];
+    const validChannels = ['resize-window', 'insert-text', 'copy-text', 'close-app', 'get-init-text', 'check-for-updates-manual', 'quit-and-install'];
     if (validChannels.includes(channel)) {
       ipcRenderer.send(channel, ...args);
     }
