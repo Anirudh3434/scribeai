@@ -226,16 +226,24 @@ ipcMain.on('quit-and-install', () => {
 
 // IPC communication channels
 ipcMain.on('resize-window', (event, width, height) => {
-  if (mainWindow) {
+  if (mainWindow && !mainWindow.isDestroyed()) {
     const bounds = mainWindow.getBounds();
     const w = parseInt(width, 10) || bounds.width;
     const h = parseInt(height, 10) || bounds.height;
 
     const display = screen.getDisplayMatching(bounds);
-    const area = display.bounds;
+    const workArea = display.workArea;
 
-    const x = Math.round(area.x + (area.width - w) / 2);
-    const y = Math.round(area.y + (area.height - h) / 2);
+    // Anchor resize on current window center to prevent disorienting jumps
+    const currentCenterX = bounds.x + Math.round(bounds.width / 2);
+    const currentCenterY = bounds.y + Math.round(bounds.height / 2);
+
+    let x = currentCenterX - Math.round(w / 2);
+    let y = currentCenterY - Math.round(h / 2);
+
+    // Keep comfortably inside visible screen bounds
+    x = Math.max(workArea.x + 12, Math.min(x, workArea.x + workArea.width - w - 12));
+    y = Math.max(workArea.y + 12, Math.min(y, workArea.y + workArea.height - h - 12));
 
     mainWindow.setBounds({
       x: x,
@@ -244,6 +252,10 @@ ipcMain.on('resize-window', (event, width, height) => {
       height: h
     }, true); // Smooth animation on macOS
   }
+});
+
+ipcMain.on('copy-text', (event, text) => {
+  clipboard.writeText(text);
 });
 
 ipcMain.on('insert-text', (event, text) => {
